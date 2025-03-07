@@ -10,6 +10,49 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-black-light: rgba(0,0,0,0.2);
+  --animate-fadeIn: fadeIn 0.5s ease-in-out forwards;
+  --animate-fadeOut: fadeOut 0.5s ease-in-out forwards;
+  --animate-toLeft: toLeft 1s ease-in-out forwards;
+  --animate-toRight: toRight 1s ease-in-out forwards; 
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+}
+
+@keyframes toRight {
+  from {
+    transform: skew(-10deg);
+  } to {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes toLeft {
+  0%{
+    transform: translateX(200%);
+  }
+  80%{
+    transform: skew(10deg);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0%{
+    opacity:0;
+  }
+  100%{
+    opacity: 100;
+  }
 }
 
 body {
@@ -39,14 +82,13 @@ body {
   margin:auto;
   bottom:-29px;
   top:0;
-  background: #000;
+  background: rgba(0,0,0,0.2);
   opacity: 1;
   height: 1.5px;
   overflow:auto;
   max-width: 70%;
   width: 100%;
   border-radius: 100%;
-  box-shadow: 0 0 10px var(--color-blue-light);
 }
 
 .navbar-links::before {
@@ -76,4 +118,24 @@ body {
 .navbar-links:hover::before {
   opacity: 1;
   transform:  translateY(100%);
+}
+
+.text-underline{
+  position:relative;
+}
+.text-underline:hover::after{
+  width: 100%;
+}
+.text-underline::after{
+  content: "";
+  position:absolute;
+  width:0;
+  height: 1px;
+  background: rgba(0,0,0,0.2);
+  bottom:0;
+  left:0;
+  left:0;
+  margin:auto;
+  display:flex;
+  transition: all ease-in-out .5s;
 }

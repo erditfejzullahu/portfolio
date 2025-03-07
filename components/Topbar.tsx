@@ -1,15 +1,14 @@
 "use client"
-
-import { images } from "@/constants"
-import { links } from "@/data/navigations"
-import Image from "next/image"
-import Link from "next/link"
-import { RxHamburgerMenu } from "react-icons/rx"
+import Hamburger from "hamburger-react"
+import { useState } from "react"
+import FullscreenMenu from "./FullscreenMenu"
 
 const Topbar = () => {
+    const [isOpened, setIsOpened] = useState(true)
+    
   return (
     <header className="shadow-lg shadow-blue-light">
-        <nav className="topbar-bg h-20 relative overflow-hidden">
+        <nav className="topbar-bg before:shadow-xl before:shadow-black h-20 relative overflow-hidden">
             <div className="mx-auto h-full px-6">
                 <ul className="flex flex-row items-center justify-between relative z-20 h-full">
                 <li>
@@ -19,11 +18,12 @@ const Topbar = () => {
                     </Link> */}
                 </li>
                 <li className="cursor-pointer">
-                    <RxHamburgerMenu className="size-8"/>
+                    <Hamburger toggle={setIsOpened} toggled={isOpened} size={20}/>
                 </li>
                 </ul>
             </div>
         </nav>
+        <FullscreenMenu isOpened={isOpened}/>
     </header>
   )
 }

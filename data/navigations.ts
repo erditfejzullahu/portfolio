@@ -3,10 +3,21 @@ interface Link {
     url: string;
 }
 
-export const links: Link[] = [
+export const menu: Link[] = [
     {label: "Home", url: "/"},
     {label: "Projects", url: "/projects"},
-    {label: "Erdit Fejzullahu", url: "/linkedin"},
     {label: "Contact", url: "/contact-me"},
     {label: "Ideas", url: "/ideas"}
+]
+
+export const social: Link[] = [
+    {label: "LinkedIn", url: "/"},
+    {label: "Instagram", url: "/"},
+    {label: "GitHub", url: "/"},
+    {label: "Meta", url: "/"},
+    {label: "Murrizi", url: "/"}
+]
+
+export const footer: Link[] = [
+
 ]
