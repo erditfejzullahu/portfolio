@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fff;
+  --background: rgba(0,0,0,0.05);
   --foreground: #000;
 }
 
@@ -15,6 +15,8 @@
   --animate-fadeOut: fadeOut 0.5s ease-in-out forwards;
   --animate-toLeft: toLeft 1s ease-in-out forwards;
   --animate-toRight: toRight 1s ease-in-out forwards; 
+  --animate-fadeOutLeft: fadeOutLeft .5s ease-in-out forwards;
+  --animate-fadeInRight: fadeInRight .5s ease-in-out forwards;
 }
 
 @keyframes fadeOut {
@@ -26,10 +28,39 @@
   }
 }
 
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    transform: skew(10deg) translateX(20%);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutLeft {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    transform: skew(-10deg) translateX(20%);
+  }
+  100% {
+    transform: skew(0) translateX(0);
+    opacity: 0;
+  }
+}
+
 @keyframes toRight {
-  from {
-    transform: skew(-10deg);
-  } to {
+  0% {
+    transform: skew(0);
+  } 
+  50% {
+    transform: translateX(50%) skew(-10deg);
+  }
+  100%{
     transform: translateX(200%);
   }
 }
