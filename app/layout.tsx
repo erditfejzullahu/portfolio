@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Topbar from "@/components/Topbar";
 import {Montserrat} from "next/font/google";
+import SideProjects from "@/components/SideProjects";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,6 +23,7 @@ export default function RootLayout({
         cz-shortcut-listen="true"
       >
         <Topbar />
+        <SideProjects />
         {children}
       </body>
     </html>
