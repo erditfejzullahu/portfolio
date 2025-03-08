@@ -13,7 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 const Slider = () => {
     return (
-      <div className="flex flex-row items-center border-t border-gray-200 border-b">
+      <div className="flex flex-row items-center border-t border-gray-200 border-b" id='about'>
         {/* First Column: Image */}
         <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 relative border-r border-gray-200">
             <div className="absolute -right-30 top-10 bottom-0 z-20">

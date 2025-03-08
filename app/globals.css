@@ -20,6 +20,20 @@
   --animate-fadeInRight: fadeInRight .5s ease-in-out forwards;
   --animate-heroImg: heroImg 2s ease-in-out infinite;
   --animate-heroImg2: heroImg2 2s ease-in-out infinite;
+  --animate-mouseScroll: mouseScroll 2s ease-in-out infinite;
+}
+
+@keyframes mouseScroll {
+  0%{
+    opacity:1;
+  }
+  50%{
+    opacity:0.5;
+    top:24px;
+  }
+  100%{
+    opacity:1;
+  }
 }
 
 @keyframes heroImg {
@@ -138,6 +152,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior:smooth;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .topbar-bg::after {

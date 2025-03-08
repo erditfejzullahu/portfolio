@@ -11,6 +11,7 @@ import { BsArrow90DegUp, BsArrowDown } from 'react-icons/bs'
 import { BiArrowFromTop, BiArrowToTop } from 'react-icons/bi'
 import { CgArrowTopRight } from 'react-icons/cg'
 import Link from 'next/link'
+import ScrollMouse from './ScrollMouse'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,7 +76,8 @@ const Hero = () => {
 
   return (
     <>
-    <div className="min-h-screen w-screen flex items-center justify-center">
+    <div className="min-h-screen w-screen flex items-center justify-center relative">
+    <ScrollMouse />
         <div className="container mx-auto flex p-4 flex-row gap-10 items-center justify-center relative">
             <div className="flex-1">
                 <div className="flex items-end justify-end">
@@ -116,6 +118,7 @@ const Hero = () => {
                 <h2 className="text-black font-semibold text-xl">Email</h2>
                 <a className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</a>
             </div>
+
         </div>
     </div>
     </>

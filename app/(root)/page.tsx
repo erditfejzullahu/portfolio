@@ -1,5 +1,6 @@
 import About from '@/components/About'
 import Hero from '@/components/Hero'
+import ScrollToTop from '@/components/ScrollToTop'
 import Slider from '@/components/Slider'
 import React from 'react'
 
@@ -15,6 +16,7 @@ const page = () => {
     <section>
       <About />
     </section>
+    <ScrollToTop />
     </>
   )
 }
