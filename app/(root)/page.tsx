@@ -3,7 +3,7 @@ import React from 'react'
 
 const page = () => {
   return (
-    <section className="container mx-auto">
+    <section className="">
       <Hero />
     </section>
   )

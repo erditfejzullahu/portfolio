@@ -11,6 +11,12 @@ interface Project {
     description: string;
 }
 
+interface HeroInformation {
+    image: any;
+    description: string;
+    title: string;
+}
+
 export const menu: Link[] = [
     {label: "Home", url: "/"},
     {label: "Projects", url: "/projects"},
@@ -36,6 +42,13 @@ export const projects: Project[] = [
     {id: 7, title: "Lorem Ipsum", image: images.testimage, description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"},
     {id: 8, title: "Lorem Ipsum", image: images.testimage, description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"},
     {id: 9, title: "Lorem Ipsum", image: images.testimage, description: "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"},
+]
+
+export const heroInformations: HeroInformation[] = [
+    {title: "Web Development", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Mobile Development", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Maintenance", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "SEO", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
 ]
 
 export const footer: Link[] = [

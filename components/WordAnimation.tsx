@@ -3,7 +3,7 @@ import React from 'react'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
-const WordAnimation = ({text, textClasses, spanTextClasses}: {text: string, textClasses?: string, spanTextClasses?: string}) => {
+const WordAnimation = ({text, textClasses, spanTextClasses, stagger = 0.2}: {text: string, textClasses?: string, spanTextClasses?: string, stagger?: number}) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const WordAnimation = ({text, textClasses, spanTextClasses}: {text: string, text
                 opacity: 1,
                 y: 0,
                 duration: 0.3,
-                stagger: 0.2,
+                stagger: stagger,
                 ease: "power3.out"
             }
         )
