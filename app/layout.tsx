@@ -3,6 +3,7 @@ import "./globals.css";
 import Topbar from "@/components/Topbar";
 import {Montserrat} from "next/font/google";
 import SideProjects from "@/components/SideProjects";
+import Cursor from "@/components/Cursor";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,12 +17,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`${montserrat.className} antialiased`}
         cz-shortcut-listen="true"
       >
+        <Cursor />
         <Topbar />
         <SideProjects />
         {children}

@@ -27,7 +27,7 @@ const FullscreenMenu = ({isOpened = false}: {isOpened: boolean}) => {
                     <ul className="flex flex-col gap-6 h-full">
                         {social.map((link) => (
                            <li key={link.label}>
-                                <Link href={link.url} className={`text-xl font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
+                                <Link href={link.url} className={`text-xl link-element font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
                            </li> 
                         ))}
                     </ul>
@@ -37,7 +37,7 @@ const FullscreenMenu = ({isOpened = false}: {isOpened: boolean}) => {
                     <ul className="flex flex-col gap-2 justify-between h-full">
                         {menu.map((link) => (
                             <li key={link.label} className="text-right">
-                                <Link href={link.url} className="text-6xl font-light hover:text-8xl transition-all text-underline">{link.label}</Link>
+                                <Link href={link.url} className="text-6xl link-element font-light hover:text-8xl transition-all text-underline">{link.label}</Link>
                             </li>
                         ))}
                     </ul>
