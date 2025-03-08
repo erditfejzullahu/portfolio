@@ -14,7 +14,7 @@ const Cursor = () => {
     let mouseY = 0;
     let dotX = 0;
     let dotY = 0;
-    const ease = 0.1; // Smoothing factor
+    const ease = 0.5; // Smoothing factor
 
     const animate = () => {
       const dx = mouseX - dotX;
@@ -43,6 +43,32 @@ const Cursor = () => {
     // Add hover effects for specific elements
     const interactiveElements = document.querySelectorAll(".interactive");
     const linksElements = document.querySelectorAll(".link-element")
+    const wordElements = document.querySelectorAll(".word-element")
+
+    wordElements.forEach((element) => {
+        element.addEventListener("mouseenter", () => {
+          if (cursorDot) {
+            cursorDot.style.width = "15px"; // Increase size
+            cursorDot.style.height = "15px";
+            cursorDot.style.backgroundColor = "#fff";
+            cursorDot.style.border = "1px solid #fff";
+            cursorDot.style.boxShadow = "0 0 20px #000"
+            cursorDot.style.zIndex = "0"
+            // cursorDot.style.border = "2px solid black"; // Add border
+          }
+        });
+  
+        element.addEventListener("mouseleave", () => {
+          if (cursorDot) {
+            cursorDot.style.width = "15px"; // Reset size
+            cursorDot.style.height = "15px";
+            cursorDot.style.backgroundColor = "black"; // Reset color
+            cursorDot.style.border = "none"; // Remove border
+            cursorDot.style.boxShadow = "none";
+            cursorDot.style.zIndex = "200"
+          }
+        });
+      });
 
     linksElements.forEach((element) => {
         element.addEventListener("mouseenter", () => {
@@ -105,6 +131,7 @@ const Cursor = () => {
         height: "15px",
         backgroundColor: "black",
         borderRadius: "50%",
+        zIndex: 999,
         pointerEvents: "none",
         transform: "translate(-50%, -50%)",
         transition: "all 0.2s ease-out", // Smooth transition for style changes

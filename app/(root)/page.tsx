@@ -1,8 +1,11 @@
+import Hero from '@/components/Hero'
 import React from 'react'
 
 const page = () => {
   return (
-    <div>page</div>
+    <section className="container mx-auto">
+      <Hero />
+    </section>
   )
 }
 
