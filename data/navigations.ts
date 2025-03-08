@@ -17,6 +17,10 @@ interface HeroInformation {
     title: string;
 }
 
+interface Slider {
+    image: any;
+}
+
 export const menu: Link[] = [
     {label: "Home", url: "/"},
     {label: "Projects", url: "/projects"},
@@ -53,4 +57,29 @@ export const heroInformations: HeroInformation[] = [
 
 export const footer: Link[] = [
 
+]
+
+export const professionalSlider: Slider[] = [
+    {image: images.docker},
+    {image: images.figma},
+    {image: images.jquery},
+    {image: images.microsoftsql},
+    {image: images.mongodb},
+    {image: images.mysql},
+    {image: images.nestjs},
+    {image: images.net},
+    {image: images.nextjs},
+    {image: images.nodejsexpress},
+    {image: images.php},
+    {image: images.pinia},
+    {image: images.postgresql},
+    {image: images.react},
+    {image: images.reactnative},
+    {image: images.redis},
+    {image: images.redux},
+    {image: images.shopify},
+    {image: images.seo},
+    {image: images.tailwind},
+    {image: images.vuejs},
+    {image: images.wordpress},
 ]

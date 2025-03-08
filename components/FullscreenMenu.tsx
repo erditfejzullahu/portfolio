@@ -43,8 +43,8 @@ const FullscreenMenu = ({isOpened = false, sendAction}: {isOpened: boolean, send
                     <h3 className="text-gray-300 font-medium mb-2">Social Links</h3>
                     <ul className="flex flex-col gap-6 h-full">
                         {social.map((link) => (
-                           <li key={link.label}>
-                                <Link href={link.url} className={`text-xl link-element font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
+                           <li key={link.label} className="link-element">
+                                <Link href={link.url} className={`text-xl  font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
                            </li> 
                         ))}
                     </ul>

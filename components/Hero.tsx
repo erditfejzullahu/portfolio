@@ -7,6 +7,10 @@ import gsap from 'gsap'
 import { ScrollTrigger } from "gsap/all";
 import {useGSAP} from "@gsap/react"
 import { heroInformations } from '@/data/navigations'
+import { BsArrow90DegUp, BsArrowDown } from 'react-icons/bs'
+import { BiArrowFromTop, BiArrowToTop } from 'react-icons/bi'
+import { CgArrowTopRight } from 'react-icons/cg'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +76,7 @@ const Hero = () => {
   return (
     <>
     <div className="min-h-screen w-screen flex items-center justify-center">
-        <div className="container mx-auto flex p-4  flex-row gap-10 items-center justify-center relative">
+        <div className="container mx-auto flex p-4 flex-row gap-10 items-center justify-center relative">
             <div className="flex-1">
                 <div className="flex items-end justify-end">
                     <WordAnimation text='Software Engineer' textClasses='text-2xl! font-black' stagger={1}/>
@@ -82,10 +86,21 @@ const Hero = () => {
                     textClasses="text-4xl! font-normal! transition-all!"
                     spanTextClasses='hover:text-5xl! transition-all!'
                     />
-                <WordAnimation text='Mobile Dev.' textClasses='text-6xl! font-black' stagger={1.5}/>
+                <div className="flex flex-row justify-between items-end">
+                    <WordAnimation text='Mobile Dev.' textClasses='text-6xl! font-black' stagger={1.5}/>
+                    <Link href={"/contact-me"} className="flex flex-row items-center gap-2 cursor-pointer word-element">
+                        <span className="text-xl font-bold text-black">Get in touch.</span>
+                        <CgArrowTopRight size={30} className="border-2" />
+                    </Link>
+                </div>
 
-                <div className="mt-10 flex ml-auto text-right max-w-lg animate-fadeIn duration-1000">
-                    <span className="text-sm font-medium text-gray-600">I've completed multiple projects using Next.js, .NET, React Native Vue.js and other latest modern frameworks, building scalable web apps, mobile apps, and full-stack solutions.</span>
+                <div className="mt-10 flex flex-row gap-1 relative ml-auto text-right max-w-lg animate-fadeIn duration-1000">
+                    <div className="-ml-1">
+                        <button className="border border-black rounded-2xl py-6 px-2 cursor-pointer word-element">
+                            <BsArrowDown size={30}/>
+                        </button>
+                    </div>
+                    <span className="text-sm font-medium text-gray-600 word-element">I've completed multiple projects using Next.js, .NET, React Native Vue.js and other latest modern frameworks, building scalable web apps, mobile apps, and full-stack solutions.</span>
                 </div>
             </div>
             <div className="flex-[0.8] relative rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.2)]" style={{background: "rgba(0,0,0,0.05)"}}>
@@ -97,23 +112,11 @@ const Hero = () => {
                 </div>
                 <Image src={images.erditi} className="object-cover rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
             </div>
-        </div>
-        {/* <div id='section' className="w-screen shadow-[20px_0px_20px_rgba(0,0,0,0.2)]">
-            <div className="fullscreen-section flex flex-col gap-10 py-10 topbar-bg before:hidden! container mx-auto rounded-lg">
-                    {heroInformations.map((item, index) => (
-                        <div key={item.title} className={`transition-all bg-white rounded-lg hero-info-${index}`} style={{ zIndex: index }}>
-                            <div className=" rounded-xl shadow-lg p-4 test">
-                                <div>
-                                    <Image src={item.image} className="object-cover" alt={item.image}/>
-                                </div>
-                                <div>
-                                    {item.title}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+            <div className="absolute bottom-0 left-0">
+                <h2 className="text-black font-semibold text-xl">Email</h2>
+                <a className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</a>
             </div>
-        </div> */}
+        </div>
     </div>
     </>
   )
