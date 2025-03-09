@@ -2,6 +2,8 @@
 import React from 'react'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/all'
+gsap.registerPlugin(ScrollTrigger);
 
 const WordAnimation = ({text, textClasses, spanTextClasses, stagger = 0.2}: {text: string, textClasses?: string, spanTextClasses?: string, stagger?: number}) => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +20,12 @@ const WordAnimation = ({text, textClasses, spanTextClasses, stagger = 0.2}: {tex
                 y: 0,
                 duration: 0.3,
                 stagger: stagger,
-                ease: "power3.out"
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: containerRef.current,
+                  start: "top 80%",
+                  toggleActions: "play none none none"
+                }
             }
         )
       }

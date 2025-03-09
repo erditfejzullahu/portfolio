@@ -249,3 +249,25 @@ html {
   transition: transform 0.1s ease-out;
   z-index: 100;
 }
+
+.custom-shape {
+  position: relative;
+  z-index: 1;
+}
+
+.custom-shape::before {
+  content: "";
+  position: absolute;
+  display: flex;
+  left: 0;
+  top: -50%;
+  right: 0;
+  bottom: 0;
+  height: 150%;
+  width: 100%;
+  background: rgba(0,0,0,0.05);
+  transform: skewY(5deg) skewX(15deg);
+  border-radius: 10px;
+  z-index: -1;
+  box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}

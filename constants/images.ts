@@ -28,8 +28,16 @@ import seo from "../public/images/swo.png"
 import tailwind from "../public/images/tailwind.png"
 import vuejs from "../public/images/vue.png"
 import wordpress from "../public/images/wordpress.png"
+import seoHero from "../public/images/SEO-rafiki.svg"
+import maintenance from "../public/images/Computer troubleshooting-rafiki.svg"
+import javascript1 from "../public/images/JavaScript frameworks-cuate.svg"
+import javascript2 from "../public/images/JavaScript frameworks-rafiki.svg"
 
 export default {
+    javascript1,
+    javascript2,
+    seoHero,
+    maintenance,
     docker,
     figma,
     jquery,

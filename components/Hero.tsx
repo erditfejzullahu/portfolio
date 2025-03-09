@@ -89,18 +89,18 @@ const Hero = () => {
                     spanTextClasses='hover:text-5xl! transition-all!'
                     />
                 <div className="flex flex-row justify-between items-end">
-                    <WordAnimation text='Mobile Dev.' textClasses='text-6xl! font-black' stagger={1.5}/>
-                    <Link href={"/contact-me"} className="flex flex-row items-center gap-2 cursor-pointer word-element">
-                        <span className="text-xl font-bold text-black">Get in touch.</span>
-                        <CgArrowTopRight size={30} className="border-2" />
+                    <WordAnimation text='Mobile Dev.' textClasses='text-6xl!' stagger={1.5}/>
+                    <Link href={"#contact-me"} className="flex group flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
+                        <span className="text-xl font-bold text-black group-hover:text-2xl transition-all">Get in touch.</span>
+                        <CgArrowTopRight size={30} className="border-2 group-hover:size-10 transition-all" />
                     </Link>
                 </div>
 
                 <div className="mt-10 flex flex-row gap-1 relative ml-auto text-right max-w-lg animate-fadeIn duration-1000">
                     <div className="-ml-1">
-                        <button className="border border-black rounded-2xl py-6 px-2 cursor-pointer word-element">
+                        <Link href='#skills' className="border inline-block border-black rounded-2xl py-6 px-2 cursor-pointer word-element">
                             <BsArrowDown size={30}/>
-                        </button>
+                        </Link>
                     </div>
                     <span className="text-sm font-medium text-gray-600 word-element">I've completed multiple projects using Next.js, .NET, React Native Vue.js and other latest modern frameworks, building scalable web apps, mobile apps, and full-stack solutions.</span>
                 </div>
@@ -112,11 +112,18 @@ const Hero = () => {
                 <div className="absolute animate-heroImg -bottom-6 -right-6 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.broMobCoding} alt='web developer' className="size-28"/>
                 </div>
+
+                <div className="absolute animate-heroImg -bottom-12 -left-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
+                    <Image src={images.seoHero} alt='web developer' className="size-28"/>
+                </div>
+                <div className="absolute animate-heroImg -top-6 -right-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
+                    <Image src={images.maintenance} alt='web developer' className="size-28"/>
+                </div>
                 <Image src={images.erditi} className="object-cover rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
             </div>
             <div className="absolute bottom-0 left-0">
                 <h2 className="text-black font-semibold text-xl">Email</h2>
-                <a className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</a>
+                <Link className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</Link>
             </div>
 
         </div>
