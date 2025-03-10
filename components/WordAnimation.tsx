@@ -23,7 +23,7 @@ const WordAnimation = ({text, textClasses, spanTextClasses, stagger = 0.2}: {tex
                 ease: "power3.out",
                 scrollTrigger: {
                   trigger: containerRef.current,
-                  start: "top 80%",
+                  start: "top 95%",
                   toggleActions: "play none none none"
                 }
             }

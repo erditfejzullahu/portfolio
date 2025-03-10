@@ -21,10 +21,16 @@ interface Slider {
     image: any;
 }
 
-interface PortfolioSlider {
+export interface PortfolioSliderInterface {
     title: string;
     description: string;
+    content: string;
+    images: any[];
     image: any;
+    technologies: {
+        image: any;
+        name: string;
+    }[];
 }
 
 export const menu: Link[] = [
@@ -90,15 +96,415 @@ export const professionalSlider: Slider[] = [
     {image: images.wordpress},
 ]
 
-export const portfolioSlider: PortfolioSlider[] = [
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
-    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
+    {
+        title: "Lorem ipsum",
+        description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
+        image: images.testimage,
+        images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
+        content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        technologies: [
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+            {
+                image: images.testimage,
+                name: "React"
+            },
+        ]
+    },
 ]

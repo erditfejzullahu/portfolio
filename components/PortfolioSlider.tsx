@@ -6,21 +6,23 @@ import { images } from '@/constants'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination } from 'swiper/modules'
-import { portfolioSlider } from '@/data/navigations'
+import { PortfolioSliderInterface, PersonalPortfolioSlider } from '@/data/navigations'
 import {Swiper as SwiperType} from 'swiper'
 import { MdOpenInFull } from 'react-icons/md'
+import PortfoliosModal from './PortfoliosModal'
 
 const PortfolioSlider = () => {
 
-    const [showModal, setShowModal] = useState<boolean>(false)
-    const [showHoverDiv, setShowHoverDiv] = useState<number[]>([])
+    const [showModal, setShowModal] = useState<boolean>(true)
+    const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
+        index: [],
+        object: null
+    })
 
-    const openModal = (index: number) => {
-        setShowHoverDiv([index])
-    }
 
     const swiperRef = useRef<SwiperType | null>(null);
   return (
+    <>
     <div className="flex flex-row items-center border-t border-gray-200 border-b" id='skills'>
         {/* First Column: Image */}
         <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 relative border-r border-gray-200">
@@ -41,20 +43,28 @@ const PortfolioSlider = () => {
             <Swiper
             slidesPerView={3} // Adjust number of visible slides
             spaceBetween={10}
-            // autoplay={{ delay: 2000, disableOnInteraction: true }}
+            autoplay={{ delay: 2000, disableOnInteraction: true }}
             pagination={{ clickable: true }}
             onSwiper={(swiper) => swiperRef.current = swiper}
-            modules={[ Pagination]}
+            modules={[Autoplay, Pagination]}
             className="w-auto" // Ensuring controlled width
             >
-            {portfolioSlider.map((item, index) => (
+            {PersonalPortfolioSlider.map((item, index) => (
             <SwiperSlide key={index} className="">
                     <div 
                         className="portfolio-swiper p-2 h-full" 
-                        onMouseEnter={() => setShowHoverDiv([index])}
-                        onMouseLeave={() => setShowHoverDiv([])}
+                        onMouseEnter={() => setShowHoverDiv(prevValues => ({
+                            ...prevValues,
+                            index: [index],
+                            object: item
+                        }))}
+                        onMouseLeave={() => setShowHoverDiv(prevValues => ({
+                            ...prevValues,
+                            index: [],
+                            object: null
+                        }))}
                     >
-                        {!showHoverDiv.includes(index) && <div>
+                        {!showHoverDiv.index.includes(index) && <div>
                             <div>
                                 <Image src={item.image} alt={item.title} className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"/>
                             </div>
@@ -64,7 +74,7 @@ const PortfolioSlider = () => {
                             </div>
                         </div>}
 
-                        {showHoverDiv.includes(index) && <div className="flex items-center justify-center h-[160px] flex-1 animate-fadeIn border-r border-l border-white">
+                        {showHoverDiv.index.includes(index) && <div className="flex items-center justify-center h-[160px] flex-1 animate-fadeIn border-r border-l border-white">
                             <div className="h-full flex items-center">
                                 <button 
                                     className="hover:bg-gray-300 cursor-pointer font-normal flex flex-row items-center group gap-1 bg-white px-4 py-2 shadow-lg shadow-gray-400"
@@ -81,6 +91,9 @@ const PortfolioSlider = () => {
             </Swiper>
         </div>
     </div>
+
+    <PortfoliosModal object={PersonalPortfolioSlider[0]} opened={showModal}/>
+    </>
   )
 }
 
