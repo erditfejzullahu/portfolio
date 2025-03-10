@@ -21,6 +21,12 @@ interface Slider {
     image: any;
 }
 
+interface PortfolioSlider {
+    title: string;
+    description: string;
+    image: any;
+}
+
 export const menu: Link[] = [
     {label: "Home", url: "/"},
     {label: "Projects", url: "/projects"},
@@ -82,4 +88,17 @@ export const professionalSlider: Slider[] = [
     {image: images.tailwind},
     {image: images.vuejs},
     {image: images.wordpress},
+]
+
+export const portfolioSlider: PortfolioSlider[] = [
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
+    {title: "Lorem ipsum", description: "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ", image: images.testimage},
 ]

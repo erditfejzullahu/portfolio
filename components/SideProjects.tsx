@@ -71,7 +71,7 @@ const SideProjects = () => {
         ))}
       </div>
       {hoveredProject && (
-        <div onMouseMove={handleMouseMove} style={{transform: transformStyle}} ref={bottom} className={` flex flex-col justify-between absolute bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
+        <div onMouseMove={handleMouseMove} style={{transform: transformStyle}} ref={bottom} className={` flex flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
           <div onClick={handleCloser} className={`bg-gray-200 self-start absolute -top-2 -right-2 rounded-full p-1 border border-gray-200 shadow-xl shadow-gray-500 cursor-pointer ${transformStyle}`}>
             <CgClose size={24}/>
           </div>

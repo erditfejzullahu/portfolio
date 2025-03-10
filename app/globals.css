@@ -255,6 +255,11 @@ html {
   z-index: 1;
 }
 
+b {
+  font-weight: 600;
+  color: #000;
+}
+
 .custom-shape::before {
   content: "";
   position: absolute;
@@ -270,4 +275,18 @@ html {
   border-radius: 10px;
   z-index: -1;
   box-shadow: 0 0 10px 5px rgba(0,0,0,0.1);
+}
+
+.portfolio-swiper {
+  /* position: relative; */
+  /* display: inline-block; */
+  background-image: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05));
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  transition: all ease-in-out .5s;
+}
+
+.portfolio-swiper:hover {
+  background-size: 100% 100%;
 }

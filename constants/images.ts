@@ -32,8 +32,10 @@ import seoHero from "../public/images/SEO-rafiki.svg"
 import maintenance from "../public/images/Computer troubleshooting-rafiki.svg"
 import javascript1 from "../public/images/JavaScript frameworks-cuate.svg"
 import javascript2 from "../public/images/JavaScript frameworks-rafiki.svg"
+import portfolio from "../public/images/Portfolio-amico.svg"
 
 export default {
+    portfolio,
     javascript1,
     javascript2,
     seoHero,
