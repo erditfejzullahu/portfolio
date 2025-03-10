@@ -1,5 +1,5 @@
 "use client"
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import WordAnimation from './WordAnimation'
 import { HiArrowTrendingDown } from 'react-icons/hi2'
 import { images } from '@/constants'
@@ -10,6 +10,9 @@ import { PortfolioSliderInterface, PersonalPortfolioSlider } from '@/data/naviga
 import {Swiper as SwiperType} from 'swiper'
 import { MdOpenInFull } from 'react-icons/md'
 import PortfoliosModal from './PortfoliosModal'
+import { RootState, useAppDispatch } from '@/store'
+import { setOverflowHidden } from '@/store/overflowSlice'
+import { useSelector } from 'react-redux'
 
 const PortfolioSlider = () => {
 
@@ -19,6 +22,19 @@ const PortfolioSlider = () => {
         object: null
     })
 
+    const isOverflowHidden = useSelector(
+     (state: RootState) => state.overflow.isOverflowHidden
+    )
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      if(showModal){
+        dispatch(setOverflowHidden(true))
+      }else{
+        dispatch(setOverflowHidden(false))
+      }
+    }, [showModal])
+    
 
     const swiperRef = useRef<SwiperType | null>(null);
   return (

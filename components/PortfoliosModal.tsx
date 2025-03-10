@@ -62,9 +62,7 @@ const PortfoliosModal = ({object, opened = false}: Props) => {
                     </div>
                     <div className="mt-8">
                         <h4 className="text-lg font-medium text-gray-600">Short description:</h4>
-                        <div className="flex-1">
-                            <p className="text-gray-500 text-base">{description}</p>
-                        </div>
+                        <p className="text-gray-500 text-base">{description}</p>
                     </div>
                 </div>
                 <div className="mt-8">
@@ -93,8 +91,9 @@ const PortfoliosModal = ({object, opened = false}: Props) => {
                         </div>
                 </div>
             </div>
-            <div className="flex-1 shadow-[0_0_10px] shadow-gray-400">
-                
+            <div className="flex-1 shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden overflow-y-scroll">
+                <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
+                <p className="text-gray-500 text-base">{content}</p>
             </div>
         </div>
 
