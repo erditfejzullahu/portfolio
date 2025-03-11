@@ -1,32 +1,81 @@
 "use client"
-import { PortfolioSliderInterface } from '@/data/navigations'
+import { PersonalPortfolioSlider, PortfolioSliderInterface } from '@/data/navigations'
 import Image from 'next/image';
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {Swiper as SwiperType} from "swiper"
 import WordAnimation from './WordAnimation';
-import { BsArrowsFullscreen } from 'react-icons/bs';
+import { BsArrowLeft, BsArrowLeftCircle, BsArrowsFullscreen, BsChevronLeft } from 'react-icons/bs';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaArrowLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ImageFullscreen from './ImageFullscreen';
+import { BiChevronLeft } from 'react-icons/bi';
+import { CgArrowLeft, CgArrowLeftO, CgChevronLeft, CgClose } from 'react-icons/cg';
+import { FiArrowLeft } from 'react-icons/fi';
+import { GoArrowLeft, GoChevronLeft, GoChevronRight } from 'react-icons/go';
 
 interface Props {
-    object: PortfolioSliderInterface;
-    opened: boolean
+    object: PortfolioSliderInterface | null;
+    opened: boolean;
+    hasBack: boolean;
+    hasNext: boolean;
+    close: () => void;
+    handleNextButton: (item: PortfolioSliderInterface | null) => void;
+    handleBackButton: (item: PortfolioSliderInterface | null) => void;
+    nextButtonTitle?: string;
+    backButtonTitle?: string;
 }
 
-const PortfoliosModal = ({object, opened = false}: Props) => {
+const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handleNextButton, handleBackButton, nextButtonTitle, backButtonTitle}: Props) => {
+    
+    if(opened === false || !object) return null;
+
     const {title, description, image, images, content, technologies} = object;
 
-    const swiperRef = useRef<SwiperType | null>(null);
+    const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
+    console.log(getNextObject, " obj tjeter");
+    
+    const getBackObject = backButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === backButtonTitle) || null : null;
 
-    if(opened === false) return null;
+    const swiperRef = useRef<SwiperType | null>(null);
+    const [closing, setClosing] = useState<boolean>(false)
+
+    const handleClose = () => {
+        setClosing(true)
+    }
+
+    useEffect(() => {
+      if(closing){
+        const timeout = setTimeout(() => {
+            close();
+        }, 400);
+        return () => clearTimeout(timeout);
+      }
+    }, [closing])
+    
+    
+    useEffect(() => {
+        return () => {
+            setClosing(false)
+        }
+    }, [])
+    
+
   return (
-    <div className="fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999]" style={{background: "rgba(0,0,0,0.5)"}}>
-        <div className="flex flex-row justify-between gap-10 h-[90%] w-[90%] relative bg-white shadow-[0_0_10px_rgba(0,0,0)]  custom-shape before:skew-30! before:-top-30!">
+    <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
+        <div className="flex flex-row justify-between gap-10 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0)]  custom-shape before:skew-30! before:-top-30!">
+
+            <div className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all" onClick={handleClose}>
+                <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">
+                    <CgClose size={25}/>
+                </div>
+            </div>
+
+
+            {/* two part content */}
             <div className="flex-1 flex h-full flex-col pb-30 justify-between px-4 overflow-hidden overflow-y-scroll shadow-[0_0_10px] shadow-gray-400">
 
                 <div className="flex-1">
@@ -95,6 +144,20 @@ const PortfoliosModal = ({object, opened = false}: Props) => {
                 <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
                 <p className="text-gray-500 text-base">{content}</p>
             </div>
+            {/* two part content */}
+
+            {/* next back buttons */}
+            <div className="absolute flex flex-row justify-between bottom-5 left-0 right-0 mx-4">
+                {hasBack && <div className="flex flex-row items-center cursor-pointer" onClick={() => handleBackButton(getBackObject)}>
+                    <GoChevronLeft size={50}/>
+                    <span className="font-normal text-lg">{backButtonTitle}</span>
+                </div> }
+                {hasNext && <div className="flex flex-row items-center cursor-pointer" onClick={() => handleNextButton(getNextObject)}>
+                    <span className="font-normal text-lg">{nextButtonTitle}</span>
+                    <GoChevronRight size={50}/>
+                </div>}
+            </div>
+            {/* next back buttons  */}
         </div>
 
     </div>

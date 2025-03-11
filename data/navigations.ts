@@ -98,7 +98,7 @@ export const professionalSlider: Slider[] = [
 
 export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum1",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -139,7 +139,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum2",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -180,7 +180,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum3",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -221,7 +221,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum4",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -262,7 +262,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum5",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -303,7 +303,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum6",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -344,7 +344,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum7",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -385,7 +385,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum8",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -426,7 +426,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum9",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
@@ -467,7 +467,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         ]
     },
     {
-        title: "Lorem ipsum",
+        title: "Lorem ipsum10",
         description: "Lorem ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ",
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
