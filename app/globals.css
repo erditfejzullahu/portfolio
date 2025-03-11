@@ -295,3 +295,23 @@ b {
 .portfolio-swiper:hover {
   background-size: 100% 100%;
 }
+
+.portfolio-switch_border {
+  position:relative;
+  transition:all ease-in-out .2s;
+}
+.portfolio-switch_border::after {
+  content: "";
+  position:absolute;
+  left:0;
+  right:0;
+  display:flex;
+  bottom:0;
+  width: 0;
+  height: 1px;
+  background-color: #000;
+  transition:all ease-in-out .2s;
+}
+.portfolio-switch_border:hover::after{
+  width: 100%;
+}

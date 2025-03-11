@@ -66,7 +66,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
 
   return (
     <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
-        <div className="flex flex-row justify-between gap-10 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0)]  custom-shape before:skew-30! before:-top-30!">
+        <div className="flex flex-row justify-between gap-10 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)]  custom-shape before:skew-30! before:-top-30!">
 
             <div className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all" onClick={handleClose}>
                 <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">

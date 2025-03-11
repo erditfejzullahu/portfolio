@@ -13,10 +13,13 @@ import PortfoliosModal from './PortfoliosModal'
 import { RootState, useAppDispatch } from '@/store'
 import { setOverflowHidden } from '@/store/overflowSlice'
 import { useSelector } from 'react-redux'
+import AllPortfoliosModal from './AllPortfoliosModal'
 
 const PortfolioSlider = () => {
 
     const [showModal, setShowModal] = useState<boolean>(false)
+    const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
+
     const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
         index: [],
         object: null
@@ -33,7 +36,7 @@ const PortfolioSlider = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-      if(showModal){
+      if(showModal || showAllProjsModal){
         dispatch(setOverflowHidden(true))
       }else{
         dispatch(setOverflowHidden(false))
@@ -41,6 +44,13 @@ const PortfolioSlider = () => {
     }, [showModal])
     
     type ModalType = "Next" | "Back" | "Default";
+
+    const handleOpenSpecificProject = (item: PortfolioSliderInterface) => {
+        setShowAllProjsModal(false);
+        setTimeout(() => {
+            handleOpenModal(item, "Default");
+        }, 50);
+    }
 
     const handleOpenModal = (item: PortfolioSliderInterface | null, type: ModalType) => {
 
@@ -107,7 +117,7 @@ const PortfolioSlider = () => {
         {/* First Column: Image */}
         <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 relative border-r border-gray-200">
             <div className="absolute -right-30 top-10 bottom-0 z-20">
-                <button className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300">
+                <button className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300" onClick={() => setShowAllProjsModal(true)}>
                     <WordAnimation text='Explore my expertise' textClasses='text-sm! font-normal!'/>
                     <HiArrowTrendingDown size={30} className="rotate-16"/>
                 </button>
@@ -182,7 +192,13 @@ const PortfolioSlider = () => {
         backButtonTitle={backPortfolioApp}
         handleNextButton={(item) => handleOpenModal(item, "Next")}
         handleBackButton={(item) => handleOpenModal(item, "Back")}
-        />
+    />
+
+    <AllPortfoliosModal 
+        opened={showAllProjsModal}
+        close={() => setShowAllProjsModal(false)}
+        openSpecificProject={(item) => handleOpenSpecificProject(item)}
+    />
     </>
   )
 }

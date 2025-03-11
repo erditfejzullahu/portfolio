@@ -27,6 +27,7 @@ export interface PortfolioSliderInterface {
     content: string;
     images: any[];
     image: any;
+    type: "Web" | "Mobile";
     technologies: {
         image: any;
         name: string;
@@ -103,6 +104,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -136,7 +138,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum2",
@@ -144,6 +146,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -177,7 +180,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum3",
@@ -185,6 +188,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -218,7 +222,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum4",
@@ -226,6 +230,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -259,7 +264,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum5",
@@ -267,6 +272,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -300,7 +306,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum6",
@@ -308,6 +314,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -341,7 +348,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum7",
@@ -349,6 +356,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Web",
         technologies: [
             {
                 image: images.testimage,
@@ -382,7 +390,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum8",
@@ -390,6 +398,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Mobile",
         technologies: [
             {
                 image: images.testimage,
@@ -423,7 +432,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum9",
@@ -431,6 +440,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Mobile",
         technologies: [
             {
                 image: images.testimage,
@@ -464,7 +474,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
+        ],
     },
     {
         title: "Lorem ipsum10",
@@ -472,6 +482,7 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: images.testimage,
         images: [images.testimage, images.testimage, images.testimage, images.testimage, images.testimage, images.testimage],
         content: "Lorem imsum dolor imsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolorimsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor ipsum dolor",
+        type: "Mobile",
         technologies: [
             {
                 image: images.testimage,
@@ -505,6 +516,6 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 image: images.testimage,
                 name: "React"
             },
-        ]
-    },
+        ],
+    }
 ]
