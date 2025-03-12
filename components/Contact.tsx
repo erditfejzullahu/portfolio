@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import WordAnimation from './WordAnimation'
 import Link from 'next/link'
 import { CgArrowBottomLeft } from 'react-icons/cg'
@@ -13,23 +13,64 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Button } from './ui/button'
 import { Input } from './ui/input'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
+import { toast } from 'sonner'
+import { countryPhoneCodes } from '@/utils/countryCodes'
 
 const Contact = () => {
+
+  const [flagEmoji, setFlagEmoji] = useState<string | null>(null)
+
+  const getFlagEmoji = (countryCode: string | null) => {
+    if(!countryCode) return null;
+    console.log(countryCode);
+    
+    return [...countryCode].map(char => String.fromCodePoint(char.charCodeAt(0) + 127397)).join('');
+  }
+
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
       fullName: "",
       email: "",
-      phoneNumber: 0o44-536-900,
+      phoneNumber: "",
       subject: "",
       message: "",
       contactReason: "Web Application Development"
     }
   })
 
-  const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
-    console.log(data);
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    const foundCode = Object.keys(countryPhoneCodes).find(code => input.startsWith(code));
+    const countryCode = foundCode ? countryPhoneCodes[foundCode] : null;
+    setFlagEmoji(countryCode ? getFlagEmoji(countryCode) : null);
+    form.setValue("phoneNumber", input);
   }
+
+  const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
+    try {
+      const response = await fetch("/api/email", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+      if(response.ok){
+        toast.success("Email sent successfully", {
+          description: "I will contact you ASAP!"
+        })
+      }else {
+        toast.error("Something went wrong", {
+          description: "Please try again!",
+        })
+      }
+    } catch (error) {
+      console.error(error);
+
+    }  
+  }
+
   return (
     <div className="relative my-20 w-screen before:hidden container mx-auto px-4 " id='contact-me'>
       <div className="flex flex-row items-end justify-between">
@@ -67,24 +108,23 @@ const Contact = () => {
       {/* form  */}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10">
-          <FormField 
-            control={form.control}
-            name="fullName"
-            render={({field}) => (
-              <FormItem>
-                <FormLabel>Full Name</FormLabel>
-                <FormControl>
-                  <Input placeholder='Enter your full name' {...field}/>
-                </FormControl>
-                <FormDescription>
-                  Here's how you'll be introduced to me.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           <div className="flex flex-row gap-2">
+            <FormField 
+              control={form.control}
+              name="fullName"
+              render={({field}) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Full Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Enter your full name' {...field}/>
+                  </FormControl>
+                  <FormDescription>
+                    Here's how you'll be introduced to me.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
@@ -101,15 +141,37 @@ const Contact = () => {
                 </FormItem>
               )}
             />
+          </div>
+
+          <div className="flex flex-row gap-2">
+            <FormField 
+              control={form.control}
+              name="subject"
+              render={({field}) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Subject</FormLabel>
+                  <FormControl>
+                    <Input placeholder='Enter your subject' {...field}/>
+                  </FormControl>
+                  <FormDescription>
+                    Briefly describe the reason for your contact.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField 
               control={form.control}
               name="phoneNumber"
               render={({field}) => (
                 <FormItem className='flex-1'>
                   <FormLabel>Phone Number</FormLabel>
+                  <div className="relative flex items-center">
+                    {flagEmoji && <div className="absolute left-2 text-2xl">{flagEmoji}</div>}
                   <FormControl>
-                    <Input type="tel" placeholder='Enter your phone number' {...field} />
+                    <Input className={`${flagEmoji ? "pl-9" : ""} transition-all duration-100`} type="tel" placeholder='Enter your full phone number' {...field} onChange={handlePhoneChange}/>
                   </FormControl>
+                  </div>
                   <FormDescription>
                     We will be contacting from this number.
                   </FormDescription>
@@ -131,7 +193,7 @@ const Contact = () => {
                     className="grid grid-cols-2 items-center mt-2"
                   >
                     {["Custom Software Development", "SaaS Development", "Web Application Development", "Mobile App Development", "UX/UI Design", "Legacy Software Modernization", "Maintenance and Support", "Consulting and Strategy"].map((option) => (
-                      <FormItem className="flex items-center space-x-3 space-y-0">
+                      <FormItem key={option} className="flex items-center space-x-3 space-y-0">
                         <FormControl>
                           <RadioGroupItem value={option}/>
                         </FormControl>

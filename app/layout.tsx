@@ -4,6 +4,7 @@ import Topbar from "@/components/Topbar";
 import {Montserrat} from "next/font/google";
 import SideProjects from "@/components/SideProjects";
 import Cursor from "@/components/Cursor";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <Topbar />
         <SideProjects />
         {children}
+        <Toaster />
       </body>
     </html>
   );
