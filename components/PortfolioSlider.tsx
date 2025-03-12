@@ -17,6 +17,7 @@ import AllPortfoliosModal from './AllPortfoliosModal'
 
 const PortfolioSlider = () => {
 
+    const dispatch = useAppDispatch();
     const [showModal, setShowModal] = useState<boolean>(false)
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
 
@@ -27,13 +28,12 @@ const PortfolioSlider = () => {
 
     const [hasBack, setHasBack] = useState<boolean>(false)
     const [hasNext, setHasNext] = useState<boolean>(false)
-    const [nextPortfolioApp, setNextPortfolioApp] = useState<string>("")
-    const [backPortfolioApp, setBackPortfolioApp] = useState<string>("")
+    const [nextPortfolioApp, setNextPortfolioApp] = useState<string | undefined>(undefined)
+    const [backPortfolioApp, setBackPortfolioApp] = useState<string | undefined>(undefined)
 
     const isOverflowHidden = useSelector(
      (state: RootState) => state.overflow.isOverflowHidden
     )
-    const dispatch = useAppDispatch();
 
     useEffect(() => {
       if(showModal || showAllProjsModal){
@@ -41,7 +41,7 @@ const PortfolioSlider = () => {
       }else{
         dispatch(setOverflowHidden(false))
       }
-    }, [showModal])
+    }, [showModal, showAllProjsModal])
     
     type ModalType = "Next" | "Back" | "Default";
 
@@ -53,7 +53,7 @@ const PortfolioSlider = () => {
     }
 
     const handleOpenModal = (item: PortfolioSliderInterface | null, type: ModalType) => {
-
+        if(!item) return;
         const findItem = PersonalPortfolioSlider.findIndex((idx) => idx.title === item?.title);        
         
         if(findItem > 0 && (findItem < (PersonalPortfolioSlider.length - 1))){
@@ -113,7 +113,7 @@ const PortfolioSlider = () => {
     const swiperRef = useRef<SwiperType | null>(null);
   return (
     <>
-    <div className="flex flex-row items-center border-t border-gray-200 border-b" id='skills'>
+    <div className="flex flex-row items-center border-t border-gray-200 border-b" id='projects'>
         {/* First Column: Image */}
         <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 relative border-r border-gray-200">
             <div className="absolute -right-30 top-10 bottom-0 z-20">

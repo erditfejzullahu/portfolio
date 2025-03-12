@@ -29,7 +29,7 @@ const About = () => {
         </div>
         <div>
           <Link href={"#projects"} className="flex group flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
-              <span className="text-xl font-bold text-black group-hover:text-2xl transition-all">Get in touch.</span>
+              <span className="text-xl font-bold text-black group-hover:text-2xl transition-all">Explore my work.</span>
               <CgArrowBottomLeft size={30} className="border-2 group-hover:size-10 transition-all" />
           </Link>
         </div>
