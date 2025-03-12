@@ -15,6 +15,7 @@ import { Input } from './ui/input'
 import { RadioGroup, RadioGroupItem } from './ui/radio-group'
 import { toast } from 'sonner'
 import { countryPhoneCodes } from '@/utils/countryCodes'
+import { Textarea } from './ui/textarea'
 
 const Contact = () => {
 
@@ -169,7 +170,7 @@ const Contact = () => {
                   <div className="relative flex items-center">
                     {flagEmoji && <div className="absolute left-2 text-2xl">{flagEmoji}</div>}
                   <FormControl>
-                    <Input className={`${flagEmoji ? "pl-9" : ""} transition-all duration-100`} type="tel" placeholder='Enter your full phone number' {...field} onChange={handlePhoneChange}/>
+                    <Input className={`${flagEmoji ? "pl-9" : ""} transition-all duration-100`} type="tel" placeholder='Enter your full phone number' {...field} onInput={handlePhoneChange}/>
                   </FormControl>
                   </div>
                   <FormDescription>
@@ -205,6 +206,21 @@ const Contact = () => {
                   </RadioGroup>
                 </FormControl>
                 <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField 
+            control={form.control}
+            name="message"
+            render={({field}) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                    <Textarea rows={5} placeholder='Tell me about your project, goals, and any specific requirements you have.' {...field}/>
+                </FormControl>
+                <FormDescription>
+                  Provide as many details as possible about your project, timeline, and expectations. This helps me understand your needs better and offer the best possible solution.
+                </FormDescription>
               </FormItem>
             )}
           />

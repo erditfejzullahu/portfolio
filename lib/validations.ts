@@ -15,6 +15,6 @@ export const contactFormSchema = z.object({
         return phoneNumber && phoneNumber.isValid();
     }, {message: "Invalid phone number format"}),
     subject: z.string({message: "Please enter a subject."}).min(10, {message: "Subject must be at least 10 characters long."}),
-    message: z.string({message: "Please provide a brief summary of your inquiry."}),
+    message: z.string({message: "Please provide a brief summary of your inquiry."}).min(20, {message: "Try to describe your idea in more detail—at least 20 characters."}),
     contactReason: z.enum(["Custom Software Development", "SaaS Development", "Web Application Development", "Mobile App Development", "UX/UI Design", "Legacy Software Modernization", "Maintenance and Support", "Consulting and Strategy"], {message: "Please select a reason for contact."})
 })
