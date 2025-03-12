@@ -79,7 +79,7 @@ const AllPortfoliosModal = ({opened = false, close, openSpecificProject}: {opene
                 </button>
             </div>
 
-            <div className="flex-1 grid grid-cols-3 gap-10 overflow-y-scroll">
+            <div className="flex-1 grid grid-cols-3 gap-10 overflow-y-auto">
                 {showWorks.map((item, idx) => (
                     <div key={idx} className="animate-fadeInRight group relative">
                         <div className="absolute group-hover:opacity-100 opacity-0 transition-all ease-in-out flex items-center justify-center w-full h-full left-0 top-0" style={{background: "rgba(0,0,0,0.7)"}}>

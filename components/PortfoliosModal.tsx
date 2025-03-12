@@ -32,7 +32,7 @@ interface Props {
 const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handleNextButton, handleBackButton, nextButtonTitle, backButtonTitle}: Props) => {
     if(opened === false || !object) return null;
     const {title, description, image, images, content, technologies} = object;
-    
+
     const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
     console.log(getNextObject, " obj tjeter");
     
@@ -73,7 +73,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
 
 
             {/* two part content */}
-            <div className="flex-1 flex h-full flex-col pb-30 justify-between px-4 overflow-hidden overflow-y-scroll shadow-[0_0_10px] shadow-gray-400">
+            <div className="flex-1 flex h-full flex-col pb-30 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
 
                 <div className="flex-1">
                     <div className="p-6 pb-5 flex items-center justify-center">
@@ -137,7 +137,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                         </div>
                 </div>
             </div>
-            <div className="flex-1 shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden overflow-y-scroll">
+            <div className="flex-1 shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden overflow-y-auto">
                 <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
                 <p className="text-gray-500 text-base">{content}</p>
             </div>

@@ -63,7 +63,7 @@ const SideProjects = () => {
 
   return (
     <>
-      <div style={{transform: transformStyle}} ref={top} className="fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-scroll my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center">
+      <div style={{transform: transformStyle}} ref={top} className="fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center">
         {projects.map((item) => (
           <div onMouseMove={handleMouseMove} ref={itemRef} onMouseEnter={() => mouseEnter(item)} onMouseLeave={() => {setUnHovered(true); setTransformStyle("")}} key={item.id} className={`cursor-pointer interactive relative flex items-center justify-center size-full rounded-lg hover:w-24 transition-all ease-linear shadow-[0_0_30px_rgba(0,0,0,0.2)] `}>
             <Image src={item.image} alt={"project"} className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 transition-all ${transformStyle}`} />
