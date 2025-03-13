@@ -90,8 +90,8 @@ const Hero = () => {
                     />
                 <div className="flex flex-row justify-between items-end flex-wrap max-sm:gap-6">
                     <WordAnimation text='Mobile Dev.' textClasses='text-2xl! xl:text-6xl! lg:text-4xl! max-lg:text-3xl! max-[400px]:text-xl! max-[400px]:mt-4!' stagger={1.5}/>
-                    <Link href={"#contact-me"} className="flex group flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
-                        <span className="text-xl font-bold text-black group-hover:text-2xl transition-all max-sm:mr-auto">Get in touch.</span>
+                    <Link href={"#contact-me"} className="flex group max-[384px]:ml-auto flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
+                        <span className="text-xl font-bold text-black max-md:text-base flex group-hover:text-2xl transition-all max-sm:mr-auto">Get in touch.</span>
                         <CgArrowBottomRight size={30} className="border-2 group-hover:size-10 transition-all" />
                     </Link>
                 </div>
@@ -104,7 +104,7 @@ const Hero = () => {
                     </div>
                     <span className="text-sm font-medium text-gray-600 word-element">I've completed multiple projects using Next.js, .NET, React Native Vue.js and other latest modern frameworks, building scalable web apps, mobile apps, and full-stack solutions.</span>
                 </div>
-                <div className=" bottom-0 left-4 my-10 max-[360px]:my-5">
+                <div className=" bottom-0 left-4 my-10 max-[500px]:my-6 max-[360px]:my-4">
                     <h2 className="text-black font-semibold text-xl">Email</h2>
                     <Link className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</Link>
                 </div>

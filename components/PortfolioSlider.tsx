@@ -115,7 +115,7 @@ const PortfolioSlider = () => {
     <>
     <div className="flex flex-row items-center border-t border-gray-200 border-b" id='projects'>
         {/* First Column: Image */}
-        <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 relative border-r border-gray-200">
+        <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 relative border-r border-gray-200">
             <div className="absolute -right-30 top-10 bottom-0 z-20">
                 <button className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300" onClick={() => setShowAllProjsModal(true)}>
                     <WordAnimation text='Explore my expertise' textClasses='text-sm! font-normal!'/>
@@ -135,6 +135,12 @@ const PortfolioSlider = () => {
             spaceBetween={10}
             autoplay={{ delay: 2000, disableOnInteraction: true }}
             // pagination={{ clickable: true }}
+            breakpoints={{
+                220: { slidesPerView: 1 }, // 1 slide on small screens (mobile)
+                640: { slidesPerView: 2 }, // 2 slides on tablets
+                1024: { slidesPerView: 3 }, // 3 slides on desktops
+                1280: { slidesPerView: 4 } 
+            }}
             onSwiper={(swiper) => swiperRef.current = swiper}
             modules={[Autoplay]}
             className="w-auto" // Ensuring controlled width
@@ -159,7 +165,7 @@ const PortfolioSlider = () => {
                                 <Image src={item.image} alt={item.title} className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"/>
                             </div>
                             <div className="flex flex-col items-center gap-1 mt-2">
-                                <h3 className="text-medium text-xl text-black">{item.title}</h3>
+                                <h3 className="text-medium text-xl text-black line-clamp-1">{item.title}</h3>
                                 <p className="text-light text-sm text-gray-500 line-clamp-2 text-center">{item.description}</p>
                             </div>
                         </div>}
