@@ -5,6 +5,7 @@ import {Montserrat} from "next/font/google";
 import SideProjects from "@/components/SideProjects";
 import Cursor from "@/components/Cursor";
 import { Toaster } from "sonner";
+import ClientProviderWrapper from "@/components/ClientProviderWrapper";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,11 +26,9 @@ export default function RootLayout({
         className={`${montserrat.className} antialiased`}
         cz-shortcut-listen="true"
       >
-        <Cursor />
-        <Topbar />
-        <SideProjects />
-        {children}
-        <Toaster />
+        <ClientProviderWrapper>
+          {children}
+        </ClientProviderWrapper>
       </body>
     </html>
   );

@@ -97,8 +97,11 @@ const Contact = () => {
       </div>
 
       <div className="mt-10  p-4 relative z-10 shadow-lg shadow-[rgba(0,0,0,0.15)] custom-shape before:skew-y-[-5deg]! before:skew-x-[-15deg]!">
-        <div className="absolute animate-heroImg -bottom-50 -right-30 z-20 rounded-lg rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2 " style={{background: "rgba(0,0,0,0.05)"}}>     
-            <Image src={images.javascript2} alt='about2' className="size-28"/>
+        <div className="absolute animate-heroImg -top-20 -right-32 z-20 rounded-lg rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2 " style={{background: "rgba(0,0,0,0.05)"}}>     
+            <Image src={images.contactus1} alt='about2' className="size-32"/>
+        </div>
+        <div className="absolute animate-heroImg top-0 -left-32 z-20 rounded-lg rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2 " style={{background: "rgba(0,0,0,0.05)"}}>     
+            <Image src={images.contactus2} alt='about2' className="size-32"/>
         </div>
         <p className="animate-fadeInRight text-base text-gray-600">
         Looking to build a cutting-edge website, a high-performance mobile app, or a custom software solution tailored to your needs? <br /> <br /> I'm here to turn your vision into reality with innovative development, seamless functionality, and expert guidance every step of the way. Reach out today and let's collaborate on creating something truly exceptional!

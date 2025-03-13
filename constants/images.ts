@@ -33,8 +33,12 @@ import maintenance from "../public/images/Computer troubleshooting-rafiki.svg"
 import javascript1 from "../public/images/JavaScript frameworks-cuate.svg"
 import javascript2 from "../public/images/JavaScript frameworks-rafiki.svg"
 import portfolio from "../public/images/Portfolio-amico.svg"
+import contactus1 from "../public/images/Miscommunication-bro.svg"
+import contactus2 from "../public/images/brand communication-bro.svg"
 
 export default {
+    contactus1,
+    contactus2,
     portfolio,
     javascript1,
     javascript2,

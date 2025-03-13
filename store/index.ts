@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import overflowReducer from "./overflowSlice"
+import overflowReducer from "./overflowSlice";
+import topbarReducer from "./topbarSlice";
 import { useDispatch } from "react-redux";
 
 export const store = configureStore({
     reducer: {
-        overflow: overflowReducer
+        overflow: overflowReducer,
+        topbar: topbarReducer
     }
 })
 

@@ -4,8 +4,12 @@ import { useEffect, useRef, useState } from "react"
 import FullscreenMenu from "./FullscreenMenu"
 import { useWindowScroll } from "react-use"
 import gsap from "gsap"
+import { useAppDispatch } from "@/store"
+import { setTopbarVisible } from "@/store/topbarSlice"
 
 const Topbar = () => {
+
+    const dispatch = useAppDispatch();
     const [isOpened, setIsOpened] = useState(false)
     const [isTopbarVisible, setIsTopbarVisible] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0);
@@ -18,14 +22,17 @@ const Topbar = () => {
     useEffect(() => {
         if(currentScrollY === 0){
             setIsTopbarVisible(true)
+            topbarContainerRef.current?.classList.remove('fixed');
             topbarContainerRef.current?.classList.remove('floating-nav');
             navBar.current?.classList.remove("floating-neccessary")
           }else if(currentScrollY > lastScrollY){
             setIsTopbarVisible(false);
+            topbarContainerRef.current?.classList.add('fixed');
             topbarContainerRef.current?.classList.add('floating-nav');
             navBar.current?.classList.remove("floating-neccessary")
           }else if(currentScrollY < lastScrollY){
             setIsTopbarVisible(true);
+            topbarContainerRef.current?.classList.add('fixed');
             topbarContainerRef.current?.classList.add('floating-nav');
             navBar.current?.classList.remove("floating-neccessary")
           }
@@ -38,13 +45,15 @@ const Topbar = () => {
         opacity: isTopbarVisible ? 1 : 0,
         duration: 0.2
       })
+
+      dispatch(setTopbarVisible(isTopbarVisible))
     }, [isTopbarVisible])
     
     
 
   return (
     <>
-    <header ref={topbarContainerRef} className="shadow-lg fixed top-0 w-full z-[100]">
+    <header ref={topbarContainerRef} className="shadow-lg fixed h-20 top-0 w-full z-[100] ">
         <nav ref={navBar} className="topbar-bg before:shadow-xl before:shadow-black h-20 relative overflow-hidden">
             <div className="mx-auto h-full px-6">
                 <ul className="flex flex-row items-center justify-between relative z-20 h-full">

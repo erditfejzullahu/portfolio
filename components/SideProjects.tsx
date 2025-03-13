@@ -3,8 +3,13 @@ import React, { MouseEvent as eventi, useEffect, useRef, useState } from 'react'
 import { projects } from '@/data/navigations'
 import Image from 'next/image'
 import { CgClose } from 'react-icons/cg'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store'
 
 const SideProjects = () => {
+
+  const isTopbarVisible = useSelector((state: RootState) => state.topbar.isTopbarVisible);
+  
   const [hoverProjects, setHoverProjects] = useState<number | null>(null)
   const [unHovered, setUnHovered] = useState(false)
   const hoveredProject = hoverProjects ? projects.find((item) => item.id === hoverProjects) : null
@@ -63,21 +68,21 @@ const SideProjects = () => {
 
   return (
     <>
-      <div style={{transform: transformStyle}} ref={top} className="fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center">
+      <div style={{transform: transformStyle}} ref={top} className={` max-sm:hidden! fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center   max-[1820px]:bottom-auto ${isTopbarVisible ? "max-[1820]:top-[100px]" : "max-[1820px]:top-[20px]"} transition-all ease-out duration-500 max-[1820]:left-0 max-[1820]:right-0 max-[1820]:flex-row max-[1820px]:max-w-[600px] max-[1820px]:mx-auto max-[1820px]:overflow-x-auto`}>
         {projects.map((item) => (
           <div onMouseMove={handleMouseMove} ref={itemRef} onMouseEnter={() => mouseEnter(item)} onMouseLeave={() => {setUnHovered(true); setTransformStyle("")}} key={item.id} className={`cursor-pointer interactive relative flex items-center justify-center size-full rounded-lg hover:w-24 transition-all ease-linear shadow-[0_0_30px_rgba(0,0,0,0.2)] `}>
-            <Image src={item.image} alt={"project"} className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 transition-all ${transformStyle}`} />
+            <Image src={item.image} alt={"project"} className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 border transition-all max-[1820px]:min-w-[80px] max-[1820px]:max-h-[80px] ${transformStyle}`} />
           </div>
         ))}
       </div>
       {hoveredProject && (
-        <div onMouseMove={handleMouseMove} style={{transform: transformStyle}} ref={bottom} className={` flex flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
+        <div onMouseMove={handleMouseMove} style={{transform: transformStyle}} ref={bottom} className={` flex flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} max-[1820px]:left-0 max-[1820px]:right-0 max-[1820px]:mx-auto max-[1820px]:max-w-[600px]  max-[1820px]:bottom-auto   ${isTopbarVisible ? "max-[1820]:top-[220px]" : "max-[1820px]:top-[140px]"}  transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
           <div onClick={handleCloser} className={`bg-gray-200 self-start absolute -top-2 -right-2 rounded-full p-1 border border-gray-200 shadow-xl shadow-gray-500 cursor-pointer ${transformStyle}`}>
             <CgClose size={24}/>
           </div>
           <div >
             <div>
-              <Image src={hoveredProject.image} alt="image" className="w-full h-36 rounded-lg shadow-lg shadow-gray-500" />
+              <Image src={hoveredProject.image} alt="image" className="w-full h-36 rounded-lg shadow-lg shadow-gray-500 max-[1820px]:object-cover" />
             </div>
             <div className="mt-2">
               <h2 className="text-lg font-semibold line-clamp-1">{hoveredProject.title}</h2>
