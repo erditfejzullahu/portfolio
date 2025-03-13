@@ -76,7 +76,7 @@ const Hero = () => {
 
   return (
     <>
-    <div className="h-[calc(100vh-80px)] max-sm:h-full w-screen border-black flex items-center justify-center relative">
+    <div className="h-[calc(100vh-80px)] max-lg:h-full w-screen border-black flex items-center justify-center relative">
     <ScrollMouse />
         <div className="container h-full mx-auto flex max-lg:gap-12 max-lg:flex-col-reverse p-4 flex-row gap-10 items-center justify-center relative">
             <div className="flex-1">

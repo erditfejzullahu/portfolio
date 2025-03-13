@@ -1,18 +1,20 @@
 "use client"
 import React, { MouseEvent as eventi, useEffect, useRef, useState } from 'react'
-import { projects } from '@/data/navigations'
+import { PersonalPortfolioSlider, PortfolioSliderInterface } from '@/data/navigations'
 import Image from 'next/image'
 import { CgClose } from 'react-icons/cg'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store'
+import { MdOpenInFull } from 'react-icons/md'
+import { setTriggerData } from '@/store/triggerModalSlice'
 
 const SideProjects = () => {
-
+  const dispatch = useDispatch();
   const isTopbarVisible = useSelector((state: RootState) => state.topbar.isTopbarVisible);
   
-  const [hoverProjects, setHoverProjects] = useState<number | null>(null)
+  const [hoverProjects, setHoverProjects] = useState<string | null>(null)
   const [unHovered, setUnHovered] = useState(false)
-  const hoveredProject = hoverProjects ? projects.find((item) => item.id === hoverProjects) : null
+  const hoveredProject = hoverProjects ? PersonalPortfolioSlider.find((item) => item.title === hoverProjects) : null
   const [addCloser, setAddCloser] = useState(false)
   const top = useRef<HTMLDivElement>(null)
   const bottom = useRef<HTMLDivElement>(null)
@@ -24,13 +26,17 @@ const SideProjects = () => {
     if(!itemRef.current) return;
 
     const {left, top, width, height} = itemRef.current.getBoundingClientRect();
-    const realtiveX = (e.clientX - left) / width;
+    const relativeX = (e.clientX - left) / width;
     const relativeY = (e.clientY - top) / height;
-    const tiltX = (relativeY - 0.5) * 0.6;
-    const tiltY = (realtiveX - 0.5) * -0.6
+    const tiltX = (relativeY - 0.5) * 1;
+    const tiltY = (relativeX - 0.5) * -1
 
-    const newTransform = `perspective(200px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`
+    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`
     setTransformStyle(newTransform)
+  }
+
+  const handleOpenModal = (object: PortfolioSliderInterface) => {
+    dispatch(setTriggerData(object));
   }
 
   const handleCloser = () => {
@@ -42,7 +48,7 @@ const SideProjects = () => {
   };
 
   const mouseEnter = (item: any) => {
-    setHoverProjects(item.id);
+    setHoverProjects(item.title);
     setUnHovered(true)
     setAddCloser(true)
     setTimeout(() => {
@@ -68,16 +74,16 @@ const SideProjects = () => {
 
   return (
     <>
-      <div style={{transform: transformStyle}} ref={top} className={` max-sm:hidden! fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center   max-[1820px]:bottom-auto ${isTopbarVisible ? "max-[1820]:top-[100px]" : "max-[1820px]:top-[20px]"} transition-all ease-out duration-500 max-[1820]:left-0 max-[1820]:right-0 max-[1820]:flex-row max-[1820px]:max-w-[600px] max-[1820px]:mx-auto max-[1820px]:overflow-x-auto`}>
-        {projects.map((item) => (
-          <div onMouseMove={handleMouseMove} ref={itemRef} onMouseEnter={() => mouseEnter(item)} onMouseLeave={() => {setUnHovered(true); setTransformStyle("")}} key={item.id} className={`cursor-pointer interactive relative flex items-center justify-center size-full rounded-lg hover:w-24 transition-all ease-linear shadow-[0_0_30px_rgba(0,0,0,0.2)] `}>
+      <div style={{transform: transformStyle}} ref={top} className={` max-sm:hidden! will-change-transform fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center   max-[1820px]:bottom-auto ${isTopbarVisible ? "max-[1820]:top-[100px]" : "max-[1820px]:top-[20px]"} transition-all ease-out duration-500 max-[1820]:left-0 max-[1820]:right-0 max-[1820]:flex-row max-[1820px]:max-w-[600px] max-[1820px]:mx-auto max-[1820px]:overflow-x-auto`}>
+        {PersonalPortfolioSlider.map((item) => (
+          <div onMouseMove={handleMouseMove} ref={itemRef} onMouseEnter={() => mouseEnter(item)} onMouseLeave={() => {setUnHovered(true); setTransformStyle("")}} key={`side-${item.title}`} className={`cursor-pointer interactive relative flex items-center justify-center size-full rounded-lg hover:w-24 transition-all ease-linear shadow-[0_0_30px_rgba(0,0,0,0.2)] `}>
             <Image src={item.image} alt={"project"} className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 border transition-all max-[1820px]:min-w-[80px] max-[1820px]:max-h-[80px] ${transformStyle}`} />
           </div>
         ))}
       </div>
       {hoveredProject && (
-        <div onMouseMove={handleMouseMove} style={{transform: transformStyle}} ref={bottom} className={` flex flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} max-[1820px]:left-0 max-[1820px]:right-0 max-[1820px]:mx-auto max-[1820px]:max-w-[600px]  max-[1820px]:bottom-auto   ${isTopbarVisible ? "max-[1820]:top-[220px]" : "max-[1820px]:top-[140px]"}  transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
-          <div onClick={handleCloser} className={`bg-gray-200 self-start absolute -top-2 -right-2 rounded-full p-1 border border-gray-200 shadow-xl shadow-gray-500 cursor-pointer ${transformStyle}`}>
+        <div onMouseMove={handleMouseMove} onMouseLeave={() => {setTransformStyle("")}} style={{transform: transformStyle}} ref={bottom} className={`flex will-change-transform flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} max-[1820px]:left-0 max-[1820px]:right-0 max-[1820px]:mx-auto max-[1820px]:max-w-[600px]  max-[1820px]:bottom-auto   ${isTopbarVisible ? "max-[1820]:top-[220px]" : "max-[1820px]:top-[140px]"}  transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
+          <div onClick={handleCloser} className={`bg-gray-200  self-start absolute -top-2 -right-2 rounded-full p-1 border border-gray-200 shadow-xl shadow-gray-500 cursor-pointer ${transformStyle}`}>
             <CgClose size={24}/>
           </div>
           <div >
@@ -90,7 +96,10 @@ const SideProjects = () => {
             </div>
           </div>
           <div className="link-element">
-            <button className="mr-auto bg-gray-200 px-3 py-1 rounded-lg border border-gray-200 shadow-xl link-element cursor-pointer">Details</button>
+            <button onClick={() => handleOpenModal(hoveredProject)} className="mr-auto hover:bg-gray-300 flex flex-row items-center gap-2 bg-white shadow-xl rounded-bl-md shadow-gray-400 px-3 py-1.5 border-gray-200 link-element cursor-pointer">
+              See Details
+              <MdOpenInFull size={22} className="shadow-lg shadow-gray-300"/>
+            </button>
           </div>
         </div>
       )}

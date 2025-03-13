@@ -14,10 +14,13 @@ import { RootState, useAppDispatch } from '@/store'
 import { setOverflowHidden } from '@/store/overflowSlice'
 import { useSelector } from 'react-redux'
 import AllPortfoliosModal from './AllPortfoliosModal'
+import { resetTrigger } from '@/store/triggerModalSlice'
 
 const PortfolioSlider = () => {
 
+    const {data, shouldTrigger} = useSelector((state: RootState) => state.trigger);
     const dispatch = useAppDispatch();
+
     const [showModal, setShowModal] = useState<boolean>(false)
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
 
@@ -34,6 +37,13 @@ const PortfolioSlider = () => {
     const isOverflowHidden = useSelector(
      (state: RootState) => state.overflow.isOverflowHidden
     )
+
+    useEffect(() => {
+      if(shouldTrigger && data) {
+        handleOpenModal(data, "Default");
+      }
+    }, [shouldTrigger, data, dispatch])
+    
 
     useEffect(() => {
       if(showModal || showAllProjsModal){
@@ -99,6 +109,9 @@ const PortfolioSlider = () => {
             index: [],
             object: null
         }))
+        if(shouldTrigger && data){
+            dispatch(resetTrigger())
+        }
     }
     
     useEffect(() => {

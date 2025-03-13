@@ -32,9 +32,8 @@ interface Props {
 const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handleNextButton, handleBackButton, nextButtonTitle, backButtonTitle}: Props) => {
     if(opened === false || !object) return null;
     const {title, description, image, images, content, technologies} = object;
-
+    
     const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
-    console.log(getNextObject, " obj tjeter");
     
     const getBackObject = backButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === backButtonTitle) || null : null;
 

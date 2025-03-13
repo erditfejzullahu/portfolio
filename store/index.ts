@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import overflowReducer from "./overflowSlice";
 import topbarReducer from "./topbarSlice";
 import { useDispatch } from "react-redux";
+import triggerReducer from "./triggerModalSlice"
 
 export const store = configureStore({
     reducer: {
         overflow: overflowReducer,
-        topbar: topbarReducer
+        topbar: topbarReducer,
+        trigger: triggerReducer
     }
 })
 

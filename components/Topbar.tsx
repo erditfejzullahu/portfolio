@@ -73,10 +73,10 @@ const Topbar = () => {
     <>
     <header ref={topbarContainerRef} className="shadow-lg fixed h-20 top-0 w-full z-[100] ">
         <nav ref={navBar} className="topbar-bg before:shadow-xl before:shadow-black h-20 relative overflow-hidden">
-            <div className="mx-auto h-full px-6">
+            <div className="mx-auto h-full px-6 max-md:px-4">
                 <ul className="flex flex-row items-center justify-between relative z-20 h-full">
                 <li>
-                    <h2 className="text-2xl font-medium uppercase pointer-events-none cursor-none">Erdit Fejzullahu</h2>
+                    <h2 className="text-2xl font-medium uppercase pointer-events-none cursor-none max-[370px]:text-xl max-[303px]:text-lg max-[283px]:text-base">Erdit Fejzullahu</h2>
                 </li>
                 <li className="cursor-pointer">
                     <div className={`${hamburgerVisibility ? "" : "animate-fadeOut"}`}><Hamburger toggled={isOpened} toggle={() => setIsOpened((prevData) => (!prevData))} size={20}/></div>
