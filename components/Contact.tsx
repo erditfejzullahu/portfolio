@@ -37,7 +37,7 @@ const Contact = () => {
       phoneNumber: "",
       subject: "",
       message: "",
-      contactReason: "Web Application Development"
+      contactReason: "Custom Software Development"
     }
   })
 
@@ -116,7 +116,7 @@ const Contact = () => {
 
       {/* form  */}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10" id='contact-form'>
           <div className="flex flex-row gap-2 max-md:flex-col max-md:gap-4">
             <FormField 
               control={form.control}
@@ -182,7 +182,7 @@ const Contact = () => {
                   </FormControl>
                   </div>
                   <FormDescription className='max-md:text-sm'>
-                    We will be contacting from this number.
+                    Enter full number with prefix. (eg. +383)
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

@@ -8,8 +8,14 @@ const OverflowControl = () => {
         (state: RootState) => state.overflow.isOverflowHidden
     );
 
-    useEffect(() => {
-        document.body.style.overflow = isOverflowHidden ? "hidden" : "auto";
+    useEffect(() => {      
+        document.body.style.overflowY = isOverflowHidden ? "hidden" : "auto";
+        var html = document.getElementsByTagName('html')[0]
+        if(isOverflowHidden){
+          html.classList.add("overflowHide")
+        }else{
+          html.classList.remove("overflowHide")
+        }
     }, [isOverflowHidden])
     
     return null;

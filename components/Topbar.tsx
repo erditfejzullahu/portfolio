@@ -6,11 +6,29 @@ import { useWindowScroll } from "react-use"
 import gsap from "gsap"
 import { useAppDispatch } from "@/store"
 import { setTopbarVisible } from "@/store/topbarSlice"
+import { setOverflowHidden } from "@/store/overflowSlice"
 
 const Topbar = () => {
 
     const dispatch = useAppDispatch();
     const [isOpened, setIsOpened] = useState(false)
+
+    const [hamburgerVisibility, setHamburgerVisibility] = useState<boolean>(true)
+
+    useEffect(() => {
+      if(isOpened){
+        dispatch(setOverflowHidden(true))
+        const timeout = setTimeout(() => {
+          setHamburgerVisibility(false)
+        }, 0);
+        return () => clearTimeout(timeout);
+      }else{
+        dispatch(setOverflowHidden(false))
+        setHamburgerVisibility(true)
+      }
+    }, [isOpened])
+    
+
     const [isTopbarVisible, setIsTopbarVisible] = useState(true)
     const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -61,7 +79,7 @@ const Topbar = () => {
                     <h2 className="text-2xl font-medium uppercase pointer-events-none cursor-none">Erdit Fejzullahu</h2>
                 </li>
                 <li className="cursor-pointer">
-                    <Hamburger toggled={isOpened} toggle={() => setIsOpened((prevData) => (!prevData))} size={20}/>
+                    <div className={`${hamburgerVisibility ? "" : "animate-fadeOut"}`}><Hamburger toggled={isOpened} toggle={() => setIsOpened((prevData) => (!prevData))} size={20}/></div>
                 </li>
                 </ul>
             </div>

@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { Autoplay, FreeMode, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import WordAnimation from './WordAnimation';
+import Link from 'next/link';
 
 const Slider = () => {
     return (
@@ -18,10 +19,10 @@ const Slider = () => {
         {/* First Column: Image */}
         <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 relative border-r border-gray-200">
             <div className="absolute -right-30 top-10 bottom-0 z-20">
-                <button className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300">
+                <Link href={"#contact-me"} className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300">
                     <WordAnimation text='Lets Build Something' textClasses='text-sm! font-normal!'/>
                     <HiArrowTrendingUp size={30} className="rotate-16"/>
-                </button>
+                </Link>
             </div>
           <Image src={images.team} alt="team" className="size-44"/>
         </div>

@@ -24,7 +24,7 @@ const ScrollToTop = () => {
   return (
     <>
         {scrollUpVisible && (
-            <div onClick={() => window.scrollTo({top: 0, behavior: "smooth"})} className='fixed bottom-20 right-20 transition-all ease-in z-[100] border-2 rounded-lg shadow-lg shadow-gray-300 hover:bg-gray-200 link-element cursor-pointer'>
+            <div onClick={() => window.scrollTo({top: 0, behavior: "smooth"})} className='fixed bg-white bottom-10 right-10 max-[600px]:right-4 transition-all ease-in z-[100] border-2 rounded-lg shadow-lg shadow-gray-300 hover:bg-gray-200 link-element cursor-pointer'>
                 <CgChevronUp size={40}/>
             </div>
         )}

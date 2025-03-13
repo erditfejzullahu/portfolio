@@ -63,7 +63,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
     
   return (
     <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
-        <div className="flex flex-row justify-between gap-10 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)]  custom-shape before:skew-30! before:-top-30!">
+        <div className="flex flex-row max-md:flex-col justify-between max-lg:gap-6 gap-10 max-md:gap-4 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] custom-shape overflow-hidden before:skew-30! before:-top-30!">
 
             <div className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all" onClick={handleClose}>
                 <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">
@@ -73,7 +73,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
 
 
             {/* two part content */}
-            <div className="flex-1 flex h-full flex-col pb-30 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
+            <div className="flex-1 flex h-full flex-col max-h-[calc(100%-70px)] max-md:max-h-full pb-6 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
 
                 <div className="flex-1">
                     <div className="p-6 pb-5 flex items-center justify-center">
@@ -97,7 +97,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                                 <SwiperSlide key={index}>
                                     <div className="w-fit relative mx-auto p-2 pb-4 cursor-pointer group transition-all"  onMouseEnter={() => swiperRef.current?.autoplay.stop()} onMouseLeave={() => swiperRef.current?.autoplay.start()}>
                                         <ImageFullscreen images={images}/>
-                                        <Image src={image} alt={title + "-" + index} className="object-cover mx-auto shadow-[0_0_10px] shadow-gray-400 max-h-[300px]"/>
+                                        <Image src={image} alt={title + "-" + index} className="object-cover mx-auto shadow-[0_0_10px] shadow-gray-400 max-h-[300px] max-md:max-h-[200px]"/>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -137,21 +137,23 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                         </div>
                 </div>
             </div>
-            <div className="flex-1 shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden overflow-y-auto">
-                <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
-                <p className="text-gray-500 text-base">{content}</p>
+            <div className="flex-1 h-full max-h-[calc(100%-70px)] max-md:max-h-full shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden min-md:overflow-y-auto">
+                <div className="max-md:h-full max-md:max-h-[calc(100%-100px)] max-md:overflow-y-auto">
+                    <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
+                    <p className="text-gray-500 text-base">{content}</p>
+                </div>
             </div>
             {/* two part content */}
 
             {/* next back buttons */}
-            <div className="absolute flex flex-row justify-between bottom-5 left-0 right-0 mx-4">
-                {hasBack && <div className="flex flex-row items-center cursor-pointer" onClick={() => handleBackButton(getBackObject)}>
-                    <GoChevronLeft size={50}/>
-                    <span className="font-normal text-lg">{backButtonTitle}</span>
+            <div className="absolute flex flex-row flex-wrap justify-between bottom-3 left-0 right-0 mx-4">
+                {hasBack && <div className="flex flex-row items-center cursor-pointer mr-auto" onClick={() => handleBackButton(getBackObject)}>
+                    <GoChevronLeft className="size-10"/>
+                    <span className="font-normal text-lg max-md:text-base">{backButtonTitle}</span>
                 </div> }
-                {hasNext && <div className="flex flex-row items-center cursor-pointer" onClick={() => handleNextButton(getNextObject)}>
-                    <span className="font-normal text-lg">{nextButtonTitle}</span>
-                    <GoChevronRight size={50}/>
+                {hasNext && <div className="flex flex-row items-center cursor-pointer ml-auto" onClick={() => handleNextButton(getNextObject)}>
+                    <span className="font-normal text-lg max-md:text-base">{nextButtonTitle}</span>
+                    <GoChevronRight className="size-10"/>
                 </div>}
             </div>
             {/* next back buttons  */}
