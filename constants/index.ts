@@ -9,5 +9,8 @@ import fleet from "./fleet";
 import financial from "./financial";
 import ren from "./ren"
 import pbca from "./pbca";
+import company from "./company"
+import amoremio from "./amoremio"
+import sauce from "./sauce";
 
-export { images, surveys, unviersity, xkstartup, studaflix , awwards, shokufluturimit, fleet, financial, ren, pbca };
+export { images, surveys, unviersity, xkstartup, studaflix , awwards, shokufluturimit, fleet, financial, ren, pbca, company, amoremio, sauce };

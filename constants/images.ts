@@ -42,8 +42,14 @@ import sanity from "../public/images/sanity.svg"
 import appwrite from "../public/images/appwrite.png"
 import gsap from "../public/images/gsap.png"
 import elementor from "../public/images/elementor-logo-freelogovectors.net_.png"
+import vanillajs from "../public/images/javascript.webp"
+import expo from "../public/images/expo.webp"
+import efcore from "../public/images/efcore.png"
 
 export default {
+    efcore,
+    expo,
+    vanillajs,
     gsap,
     elementor,
     appwrite,
