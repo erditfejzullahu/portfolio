@@ -126,9 +126,12 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                             >
                                 {technologies.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="group cursor-pointer">
+                                        <div className="group cursor-pointer border">
                                             <ImageFullscreen images={technologies}/>
-                                            <Image src={item.image} alt={item.name} className="object-cover max-h-[120px] shadow-[0_0_10px] shadow-gray-400"/>
+                                            <Image src={item.image} alt={item.name} className="object-contain min-h-[120px] max-h-[120px] p-4 shadow-[0_0_10px] shadow-gray-400"/>
+                                        </div>
+                                        <div>
+                                            <p className="text-center font-semibold mt-2">{item.name}</p>
                                         </div>
                                     </SwiperSlide>
                                 ))}
@@ -139,7 +142,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
             <div className="flex-1 h-full max-h-[calc(100%-70px)] max-md:max-h-full shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden min-md:overflow-y-auto">
                 <div className="max-md:h-full max-md:max-h-[calc(100%-100px)] max-md:overflow-y-auto">
                     <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
-                    <p className="text-gray-500 text-base">{content}</p>
+                    <p className="text-gray-500 text-base portfolio-content" dangerouslySetInnerHTML={{__html: content}}></p>
                 </div>
             </div>
             {/* two part content */}

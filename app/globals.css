@@ -323,6 +323,27 @@ b {
   color: #ffffff;            /* Text color */
 }
 
+.portfolio-content {
+  margin-bottom:10px;
+}
+
+.portfolio-content strong {
+  color:#000;
+}
+
+.portfolio-content h2, .portfolio-content h3 {
+  margin-bottom: 5px;
+  margin-top:15px;
+  font-weight:700;
+  color:#000;
+  font-size:20px;
+}
+
+.portfolio-content h4 {
+  font-weight:500;
+  color:#000;
+}
+
 .custom-shape::before {
   content: "";
   position: absolute;

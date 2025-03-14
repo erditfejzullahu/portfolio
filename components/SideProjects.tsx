@@ -25,13 +25,17 @@ const SideProjects = () => {
   const handleMouseMove = (e: eventi<HTMLDivElement>) => {
     if(!itemRef.current) return;
 
+    //check first if its working in mobile
+    // const isTouchDevice = "ontouchstart" in window || window.innerWidth <= 1024;
+    // if (isTouchDevice) return;
+
     const {left, top, width, height} = itemRef.current.getBoundingClientRect();
     const relativeX = (e.clientX - left) / width;
     const relativeY = (e.clientY - top) / height;
-    const tiltX = (relativeY - 0.5) * 1;
-    const tiltY = (relativeX - 0.5) * -1
+    const tiltX = (relativeY - 0.5) * 0.6;
+    const tiltY = (relativeX - 0.5) * 0.6;
 
-    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`
+    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.97, 0.97, 0.97)`
     setTransformStyle(newTransform)
   }
 
@@ -82,12 +86,14 @@ const SideProjects = () => {
         ))}
       </div>
       {hoveredProject && (
-        <div onMouseMove={handleMouseMove} onMouseLeave={() => {setTransformStyle("")}} style={{transform: transformStyle}} ref={bottom} className={`flex will-change-transform flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} max-[1820px]:left-0 max-[1820px]:right-0 max-[1820px]:mx-auto max-[1820px]:max-w-[600px]  max-[1820px]:bottom-auto   ${isTopbarVisible ? "max-[1820]:top-[220px]" : "max-[1820px]:top-[140px]"}  transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90]`}>
-          <div onClick={handleCloser} className={`bg-gray-200  self-start absolute -top-2 -right-2 rounded-full p-1 border border-gray-200 shadow-xl shadow-gray-500 cursor-pointer ${transformStyle}`}>
-            <CgClose size={24}/>
-          </div>
+        <div onMouseMove={handleMouseMove} onMouseLeave={() => {setTransformStyle("")}} style={{transform: transformStyle}} ref={bottom} className={`flex will-change-transform flex-col justify-between fixed bottom-0 my-auto top-0 ${unHovered ? "left-[120px]" : "left-[160px]"} max-[1820px]:left-0 max-[1820px]:right-0 max-[1820px]:mx-auto max-[1820px]:max-w-[600px]  max-[1820px]:bottom-auto   ${isTopbarVisible ? "max-[1820]:top-[220px]" : "max-[1820px]:top-[140px]"}  transition-all ease-in max-w-[300px] rounded-xl p-4 max-h-[32%] h-full bg-white shadow-lg shadow-gray-500 animate-fadeIn ${addCloser ? "animate-fadeOutLeft" : "animate-fadeInRight"} z-[90] overflow-y-auto overflow-x-hidden!`}>
+            <div className="absolute right-0 z-20 top-0 bg-white rounded-bl-md cursor-pointer hover:bg-gray-200 transition-all" onClick={handleCloser}>
+                <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 rounded-bl-md p-2">
+                    <CgClose size={25}/>
+                </div>
+            </div>
           <div >
-            <div>
+            <div className="relative z-0">
               <Image src={hoveredProject.image} alt="image" className="w-full h-36 rounded-lg shadow-lg shadow-gray-500 max-[1820px]:object-cover" />
             </div>
             <div className="mt-2">
@@ -96,7 +102,7 @@ const SideProjects = () => {
             </div>
           </div>
           <div className="link-element">
-            <button onClick={() => handleOpenModal(hoveredProject)} className="mr-auto hover:bg-gray-300 flex flex-row items-center gap-2 bg-white shadow-xl rounded-bl-md shadow-gray-400 px-3 py-1.5 border-gray-200 link-element cursor-pointer">
+            <button onClick={() => handleOpenModal(hoveredProject)} className="mr-auto mt-2 hover:bg-gray-300 flex flex-row items-center gap-2 bg-white shadow-xl rounded-bl-md shadow-gray-400 px-3 py-1.5 border-gray-200 link-element cursor-pointer">
               See Details
               <MdOpenInFull size={22} className="shadow-lg shadow-gray-300"/>
             </button>
