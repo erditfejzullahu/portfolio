@@ -30,36 +30,44 @@ interface Props {
 }
 
 const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handleNextButton, handleBackButton, nextButtonTitle, backButtonTitle}: Props) => {
-    if(opened === false || !object) return null;
-    const {title, description, image, images, content, technologies} = object;
     
-    const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
-    
-    const getBackObject = backButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === backButtonTitle) || null : null;
-
-    const swiperRef = useRef<SwiperType | null>(null);
     const [closing, setClosing] = useState<boolean>(false)
-
-    const handleClose = () => {
-        setClosing(true)
-    }
-
+    const swiperRef = useRef<SwiperType | null>(null);
     useEffect(() => {
-      if(closing){
-        const timeout = setTimeout(() => {
-            close();
+        if(closing){
+            const timeout = setTimeout(() => {
+                close();
         }, 400);
         return () => clearTimeout(timeout);
-      }
+    }
     }, [closing])
-    
-    
+
+
     useEffect(() => {
         return () => {
             setClosing(false)
         }
     }, [])
+
+    useEffect(() => {
+      if(opened){
+        setClosing(false)
+      }
+    }, [opened])
     
+
+    if(opened === false || !object) return null;
+    const {title, description, image, images, content, technologies} = object;
+
+    const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
+
+    const getBackObject = backButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === backButtonTitle) || null : null;
+
+
+    const handleClose = () => {
+        setClosing(true)
+    }
+
   return (
     <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
         <div className="flex flex-row max-md:flex-col justify-between max-lg:gap-6 gap-10 max-md:gap-4 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] custom-shape overflow-hidden before:skew-30! before:-top-30!">

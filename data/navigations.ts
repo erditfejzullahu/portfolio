@@ -1,4 +1,4 @@
-import { company, financial, fleet, images, pbca, ren, sauce, shokufluturimit, studaflix, surveys, xkstartup } from "@/constants";
+import { company, financial, fleet, images, kapepunen, pbca, ren, sauce, shokufluturimit, studaflix, surveys, xkstartup } from "@/constants";
 import amoremio from "@/constants/amoremio";
 import awwards from "@/constants/awwards";
 import newu from "@/constants/newu";
@@ -2257,6 +2257,129 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
                 name: "SEO"
             }
         ],
+    },
+    {
+        title: "Multifunctional Job Portal – Seamless Job Hunting & Recruitment",
+        description: "This Job Portal is a feature-rich, multilingual platform designed to connect job seekers with potential employers efficiently. Built using WordPress, Elementor, and various premium plugins, it offers a fully customizable experience with seamless UI and advanced functionalities.",
+        image: kapepunen.kapepunen1,
+        images: [kapepunen.kapepunen1, kapepunen.kapepunen2, kapepunen.kapepunen3, kapepunen.kapepunen4, kapepunen.kapepunen5, kapepunen.kapepunen6, kapepunen.kapepunen7, kapepunen.kapepunen8, kapepunen.kapepunen9, kapepunen.kapepunen10, kapepunen.kapepunen11, kapepunen.kapepunen12, kapepunen.kapepunen13, kapepunen.kapepunen14, kapepunen.kapepunen15, kapepunen.kapepunen16, kapepunen.kapepunen17 ],
+        content: `
+        <ul>
+        <li>🚀 <strong>Built with WordPress</strong> – Ensuring flexibility and scalability.</li>
+        <li>🎨 <strong>Elementor-powered</strong> – Custom design with a drag-and-drop interface.</li>
+        <li>🔌 <strong>Extensive Plugin Integrations</strong> – Advanced features for job listing, applications, and user management.</li>
+        <li>🌍 <strong>Multilingual Support</strong> – Accessible in multiple languages.</li>
+    </ul>
+
+    <p>The platform enables users to <strong>create profiles, browse job listings, apply for positions, and connect with employers</strong>, making it an all-in-one job recruitment solution.</p>
+
+    <h2>Key Features & Functionalities</h2>
+
+    <h3>👤 Job Seeker Features</h3>
+    <ul>
+        <li>📝 <strong>User Registration & Profiles</strong> – Candidates can create detailed profiles, upload resumes, and showcase skills.</li>
+        <li>🔎 <strong>Advanced Job Search</strong> – Search by <strong>job title, category, location, salary, remote/hybrid options</strong>, and more.</li>
+        <li>📄 <strong>Resume Upload</strong> – Support for various formats (PDF, DOCX, etc.).</li>
+        <li>📩 <strong>Apply for Jobs</strong> – Apply directly with a click, via email, or by attaching a resume.</li>
+        <li>⭐ <strong>Saved Jobs</strong> – Bookmark jobs for later review.</li>
+        <li>📆 <strong>Job Alerts</strong> – Get notifications for new job postings.</li>
+        <li>📝 <strong>Application Tracking</strong> – Monitor application status.</li>
+    </ul>
+
+    <h3>🏢 Employer & Company Features</h3>
+    <ul>
+        <li>🏢 <strong>Company Profiles</strong> – Employers can create a branded profile, showcasing company details, open positions, and team info.</li>
+        <li>📢 <strong>Job Listings</strong> – Post detailed job descriptions, requirements, salaries, and application options.</li>
+        <li>📑 <strong>Resume Database Access</strong> – Search and filter through candidate profiles and resumes.</li>
+        <li>🔍 <strong>Candidate Filtering</strong> – Sort applicants by skills, experience, and location.</li>
+        <li>💼 <strong>Direct Messaging</strong> – Communicate with applicants via integrated messaging.</li>
+        <li>🎯 <strong>Featured Job Listings</strong> – Premium job posts for extra visibility.</li>
+    </ul>
+
+    <h3>💬 Social & Community Features</h3>
+    <ul>
+        <li>🌐 <strong>Multilingual Support</strong> – Users can switch between multiple languages.</li>
+        <li>🤝 <strong>Networking & Connections</strong> – Connect job seekers and employers.</li>
+        <li>📜 <strong>Blog & Career Advice</strong> – Articles, tips, and insights for job seekers and employers.</li>
+        <li>🔔 <strong>Notifications System</strong> – Real-time alerts for job postings, applications, and messages.</li>
+    </ul>
+
+    <h3>📊 Advanced Search & Filtering</h3>
+    <ul>
+        <li>🔎 <strong>Smart Search System</strong> – Filter by:
+            <ul>
+                <li>💼 Job Type (Full-time, Part-time, Contract, Remote, Freelance).</li>
+                <li>📍 Location (City, Country, Remote).</li>
+                <li>📆 Date Posted.</li>
+                <li>💰 Salary Range.</li>
+                <li>📝 Skills & Experience.</li>
+            </ul>
+        </li>
+        <li>📊 <strong>AI-Powered Recommendations</strong> – Matches candidates with relevant jobs.</li>
+    </ul>
+
+    <h3>💳 Monetization & Premium Features</h3>
+    <ul>
+        <li>💰 <strong>Paid Job Listings</strong> – Employers can boost visibility with featured listings.</li>
+        <li>📢 <strong>Subscription Plans</strong> – Premium access for exclusive job postings.</li>
+        <li>🎯 <strong>Resume Highlighting</strong> – Candidates can pay to feature their resume.</li>
+        <li>💼 <strong>Company Branding</strong> – Employers can customize their company pages.</li>
+    </ul>
+
+    <h3>📊 Analytics & Insights</h3>
+    <ul>
+        <li>📈 <strong>User Dashboard</strong> – Tracks job applications, profile visits, and interactions.</li>
+        <li>👥 <strong>Employer Analytics</strong> – View applicant stats and job performance.</li>
+    </ul>
+
+    <h2>Tech Stack & Development Highlights</h2>
+
+    <h3>🔹 Core Platform</h3>
+    <ul>
+        <li>🔹 <strong>WordPress</strong> – Ensuring flexibility and scalability.</li>
+        <li>📐 <strong>Elementor</strong> – Custom UI with a drag-and-drop interface.</li>
+        <li>🔌 <strong>Premium Plugins</strong> – Extending functionality for job management, SEO, security, and performance.</li>
+    </ul>
+
+    <h3>🔹 Plugins & Integrations</h3>
+    <ul>
+        <li>📄 <strong>Job Board Plugin</strong> – Manages job postings, applications, and filtering.</li>
+        <li>🌍 <strong>WPML</strong> – Multilingual support.</li>
+        <li>📨 <strong>MailChimp / SMTP</strong> – Email notifications and job alerts.</li>
+        <li>📊 <strong>Google Analytics</strong> – Job post performance tracking.</li>
+        <li>⚡ <strong>SEO Optimized</strong> – Integrated with RankMath/Yoast for better search visibility.</li>
+    </ul>
+
+    <h3>🔹 Security & Performance</h3>
+    <ul>
+        <li>🔐 <strong>Secure User Authentication</strong> – Role-based access control.</li>
+        <li>⚡ <strong>Performance Optimization</strong> – Caching and image compression for fast loading.</li>
+        <li>🛡 <strong>SSL Encryption</strong> – Ensuring data security.</li>
+    </ul>
+
+    <h2>Why This Job Portal Stands Out?</h2>
+    <ul>
+        <li>🚀 <strong>All-in-One Platform</strong> – Designed for both <strong>job seekers and employers</strong>.</li>
+        <li>📈 <strong>Optimized for Engagement</strong> – Advanced search, analytics, and notifications.</li>
+        <li>🌍 <strong>Multilingual & Global</strong> – Supports multiple languages for worldwide accessibility.</li>
+        <li>🔍 <strong>AI & Smart Recommendations</strong> – Matching candidates with the right jobs.</li>
+        <li>💰 <strong>Revenue Streams</strong> – Monetization through premium job listings and subscriptions.</li>
+    </ul>
+
+    <h2>Final Thoughts</h2>
+    <p>This <strong>Multifunctional Job Portal</strong> is a <strong>powerful, scalable, and feature-rich solution</strong> designed to revolutionize the job market. Whether you're a job seeker looking for the perfect opportunity or an employer searching for top talent, this platform ensures a seamless and efficient experience.</p>
+        `,
+        type: "Web",
+        technologies: [
+            {image: images.wordpress, name: "WordPress"},
+            {image: images.ajax, name: "AJAX"},
+            {image: images.php, name: "PHP"},
+            {image: images.phpmyadmin, name: "phpMyAdmin"},
+            {image: images.mysql, name: "MySQL"},
+            {image: images.vanillajs, name: "Javascript"},
+            {image: images.elementor, name: "Elementor"},
+            {image: images.seo, name: "SEO"},
+        ]
     },
     
 ]

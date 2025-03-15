@@ -10,7 +10,6 @@ import { MdOpenInFull } from 'react-icons/md'
 import { CgClose } from 'react-icons/cg'
 
 const AllPortfoliosModal = ({opened = false, close, openSpecificProject}: {opened: boolean, close: () => void, openSpecificProject: (item: PortfolioSliderInterface) => void}) => {
-    if(opened === false) return null;
 
     type Selected = "All" | "Web" | "Mobile"
     const [typeSelected, setTypeSelected] = useState<Selected>("All")
@@ -28,16 +27,13 @@ const AllPortfoliosModal = ({opened = false, close, openSpecificProject}: {opene
     }, [typeSelected])
 
 
-    const handleClose = () => {
-        setClosing(true)
-    }
-
+    
     useEffect(() => {
-      if(closing){
-        const timeout = setTimeout(() => {
-            close();
-        }, 400);
-        return () => clearTimeout(timeout);
+        if(closing){
+            const timeout = setTimeout(() => {
+                close();
+            }, 400);
+            return () => clearTimeout(timeout);
       }
     }, [closing])
     
@@ -47,10 +43,24 @@ const AllPortfoliosModal = ({opened = false, close, openSpecificProject}: {opene
             setClosing(false)
         }
     }, [])
+
+    useEffect(() => {
+      if(opened){
+        setClosing(false)
+      }
+    }, [opened])
     
+
+
+    if(opened === false) return null;
+
+    const handleClose = () => {
+        setClosing(true)
+    }
     
-  return (
-    <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
+
+    return (
+        <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}}>
         <div className={`flex gap-10 max-lg:gap-6 py-6! flex-col h-[90%] w-[90%] relative animate-fadeInRight px-4 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] overflow-hidden! custom-shape before:skew-30! before:-top-30!`}>
 
             
