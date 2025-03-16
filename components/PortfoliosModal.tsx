@@ -59,6 +59,8 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
     if(opened === false || !object) return null;
     const {title, description, image, images, content, technologies} = object;
 
+    const technologiesImagesOnly = technologies.map((tech) => tech.image);
+
     const getNextObject = nextButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === nextButtonTitle) || null : null;
 
     const getBackObject = backButtonTitle ? PersonalPortfolioSlider.find((idx) => idx.title === backButtonTitle) || null : null;
@@ -80,11 +82,11 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
 
 
             {/* two part content */}
-            <div className="flex-1 flex h-full flex-col max-h-[calc(100%-70px)] max-md:max-h-full pb-6 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
+            <div className="flex-1 flex h-full flex-col max-h-[calc(100%-100px)] max-md:max-h-full pb-6 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
 
                 <div className="flex-1">
                     <div className="p-6 pb-5 flex items-center justify-center">
-                        <WordAnimation text={title} textClasses='font-normal! text-4xl! flex-wrap! flex! items-center! justify-center!'/>
+                        <WordAnimation text={title} textClasses='font-normal! text-3xl! max-lg:text-2xl! flex-wrap! flex! items-center! justify-center!'/>
                     </div>
                     <div
                         onMouseEnter={() => swiperRef.current?.autoplay.stop()}
@@ -103,8 +105,8 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                             {images.map((image, index) => (
                                 <SwiperSlide key={index}>
                                     <div className="w-fit relative mx-auto p-2 pb-4 cursor-pointer group transition-all"  onMouseEnter={() => swiperRef.current?.autoplay.stop()} onMouseLeave={() => swiperRef.current?.autoplay.start()}>
-                                        <ImageFullscreen images={images}/>
-                                        <Image src={image} alt={title + "-" + index} className="object-cover mx-auto shadow-[0_0_10px] shadow-gray-400 max-h-[300px] max-md:max-h-[200px]"/>
+                                        <ImageFullscreen images={images} imageIndex={index}/>
+                                        <Image src={image} alt={title + "-" + index} className="object-cover mx-auto shadow-[0_0_10px] shadow-gray-400 h-full max-h-[300px] max-lg:max-h-[150px]! max-md:max-h-[250px]!"/>
                                     </div>
                                 </SwiperSlide>
                             ))}
@@ -134,8 +136,8 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                             >
                                 {technologies.map((item, index) => (
                                     <SwiperSlide key={index}>
-                                        <div className="group cursor-pointer border">
-                                            <ImageFullscreen images={technologies}/>
+                                        <div className="group relative cursor-pointer border">
+                                            <ImageFullscreen images={technologiesImagesOnly} imageIndex={index}/>
                                             <Image src={item.image} alt={item.name} className="object-contain min-h-[120px] max-h-[120px] p-4 shadow-[0_0_10px] shadow-gray-400"/>
                                         </div>
                                         <div>
@@ -147,7 +149,7 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                         </div>
                 </div>
             </div>
-            <div className="flex-1 h-full max-h-[calc(100%-70px)] max-md:max-h-full shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden min-md:overflow-y-auto">
+            <div className="flex-1 h-full max-h-[calc(100%-100px)] max-md:max-h-full shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden min-md:overflow-y-auto">
                 <div className="max-md:h-full max-md:max-h-[calc(100%-100px)] max-md:overflow-y-auto">
                     <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
                     <p className="text-gray-500 text-base portfolio-content" dangerouslySetInnerHTML={{__html: content}}></p>

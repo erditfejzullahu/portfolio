@@ -366,6 +366,19 @@ b {
   opacity: 1;
 }
 
+.swiper-button-prev::after {
+  display:none!important;
+}
+
+.swiper-button-next::after {
+  display:none!important;
+  content: " "!important;
+}
+
+.swiper-button-next:nth-child(2), .swiper-button-prev svg {
+  /* fill: red; */
+}
+
 .portfolio-swiper {
   /* position: relative; */
   /* display: inline-block; */

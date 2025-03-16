@@ -1,6 +1,7 @@
 import About from '@/components/About'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import FullscreenImageModal from '@/components/FullscreenImageModal'
 import Hero from '@/components/Hero'
 import PortfolioSlider from '@/components/PortfolioSlider'
 import ScrollToTop from '@/components/ScrollToTop'
@@ -10,6 +11,7 @@ import React from 'react'
 const page = () => {
   return (
     <>
+    <FullscreenImageModal />
     <section>
       <Hero />
     </section>

@@ -3,12 +3,14 @@ import overflowReducer from "./overflowSlice";
 import topbarReducer from "./topbarSlice";
 import { useDispatch } from "react-redux";
 import triggerReducer from "./triggerModalSlice"
+import fullscreenImageReducer from "./imageFullscreenSlice"
 
 export const store = configureStore({
     reducer: {
         overflow: overflowReducer,
         topbar: topbarReducer,
-        trigger: triggerReducer
+        trigger: triggerReducer,
+        fullscreenImage: fullscreenImageReducer
     }
 })
 
