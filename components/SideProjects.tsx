@@ -123,7 +123,7 @@ const SideProjects = () => {
 
   return (
     <>
-    { removeProjects && <div className={`fixed bg-gray-100 shadow-lg shadow-gray-500 z-[9999] left-4 cursor-pointer animate-pulse ${(isTopbarVisible && removeProjects) ? "top-[100px]" : (!isTopbarVisible && removeProjects) ? "top-[20px]" : ""} transition-all ease-in-out rounded-lg p-2`} onClick={() => {setProjectsCloser(false), setRemoveProjects(false)}}>
+    { removeProjects && <div className={`fixed min-[1820px]:hidden bg-gray-100 shadow-lg shadow-gray-500 z-[9999] left-4 cursor-pointer animate-pulse ${(isTopbarVisible && removeProjects) ? "top-[100px]" : (!isTopbarVisible && removeProjects) ? "top-[20px]" : ""} transition-all ease-in-out rounded-lg p-2`} onClick={() => {setProjectsCloser(false), setRemoveProjects(false)}}>
       <ArrowDownRight />
     </div>}
       {!projectsCloser && <div style={{transform: screenWidth > 1024 ? transformStyle : ""}} onMouseMove={handleMouseMove} ref={itemRef} className={`max-sm:hidden! will-change-transform fixed z-[90] left-4 top-0 bottom-0 max-h-[40%] overflow-y-auto my-auto rounded-xl shadow-lg shadow-gray-500 p-3 bg-white flex flex-col gap-4 items-center   max-[1820px]:bottom-auto ${isTopbarVisible ? "max-[1820]:top-[100px]" : "max-[1820px]:top-[20px]"} transition-all ease-out duration-500 max-[1820]:left-0 max-[1820]:right-0 max-[1820]:flex-row max-[1820px]:max-w-[600px] max-[1820px]:mx-auto max-[1820px]:overflow-x-auto`}>
@@ -133,7 +133,7 @@ const SideProjects = () => {
           </div>
         ))}
         {!removeProjects && <div 
-          className="absolute top-0 rounded-lg p-2 right-0 mx-auto w-fit bg-gray-100 animate-pulse z-10 cursor-pointer shadow-lg shadow-gray-500"
+          className="absolute min-[1820px]:hidden top-0 rounded-lg p-2 right-0 mx-auto w-fit bg-gray-100 animate-pulse z-10 cursor-pointer shadow-lg shadow-gray-500"
           onClick={() => setRemoveProjects(true)}
         >
           <GoMoveToTop />
