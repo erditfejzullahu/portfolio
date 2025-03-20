@@ -42,18 +42,18 @@ export interface PortfolioSliderInterface {
 }
 
 export const menu: Link[] = [
-    {label: "Home", url: "/"},
-    {label: "Projects", url: "/projects"},
-    {label: "Contact", url: "/contact-me"},
-    {label: "Ideas", url: "/ideas"}
+    {label: "Home", url: "#hero"},
+    {label: "About", url: "#about"},
+    {label: "Projects", url: "#projects"},
+    {label: "Contact", url: "#contact-me"}
 ]
 
 export const social: Link[] = [
-    {label: "LinkedIn", url: "/"},
-    {label: "Instagram", url: "/"},
-    {label: "GitHub", url: "/"},
-    {label: "Meta", url: "/"},
-    {label: "Murrizi", url: "/"}
+    {label: "LinkedIn", url: "https://www.linkedin.com/in/erdit-fejzullahu-210bab268"},
+    {label: "GitHub", url: "https://github.com/erditfejzullahu"},
+    {label: "Meta", url: "https://www.facebook.com/erditf"},
+    {label: "Instagram", url: "https://www.instagram.com/erdit.fejzullahu/"},
+    {label: "Murrizi", url: "https://murrizi.org"}
 ]
 
 export const projects: Project[] = [

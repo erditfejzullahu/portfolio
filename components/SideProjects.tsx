@@ -117,6 +117,8 @@ const SideProjects = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [])
+
+  if(windowInnerWidth < 640) return;
   
 
   return (

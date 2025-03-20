@@ -4,42 +4,43 @@ import { useEffect, useRef } from "react";
 
 const Cursor = () => {
   const cursorDotRef = useRef<HTMLDivElement>(null);
-
+  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1025
   useEffect(() => {
     const cursorDot = cursorDotRef.current;
-
+    
     if (!cursorDot) return;
-
+    
     let mouseX = 0;
     let mouseY = 0;
     let dotX = 0;
     let dotY = 0;
     const ease = 0.5; // Smoothing factor
-
+    
     const animate = () => {
       const dx = mouseX - dotX;
       const dy = mouseY - dotY;
-
+      
       dotX += dx * ease;
       dotY += dy * ease;
-
+      
       cursorDot.style.left = `${dotX}px`;
       cursorDot.style.top = `${dotY}px`;
-
+      
       requestAnimationFrame(animate);
     };
-
+    
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
     };
-
+    
+    if(windowWidth < 1024) return;
     // Start the animation
     animate();
-
+    
     // Attach the mousemove event listener
     document.addEventListener("mousemove", handleMouseMove);
-
+    
     // Add hover effects for specific elements
     const interactiveElements = document.querySelectorAll(".interactive");
     const linksElements = document.querySelectorAll(".link-element")
