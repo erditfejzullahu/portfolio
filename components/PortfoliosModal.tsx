@@ -111,8 +111,8 @@ const PortfoliosModal = ({object, opened = false, hasBack, hasNext, close, handl
                                 </SwiperSlide>
                             ))}
                             <div className="swiper-pagination -bottom-1!"></div>
-                            <div className="swiper-button-prev after:hidden! text-black"><FaChevronLeft className="text-black!"/></div>
-                            <div className="swiper-button-next after:hidden! text-black"><FaChevronRight className="text-black!" /></div>
+                            <div className="swiper-button-prev after:hidden! text-black"><FaChevronLeft className="text-gray-400!"/></div>
+                            <div className="swiper-button-next after:hidden! text-black"><FaChevronRight className="text-gray-400!" /></div>
                         </Swiper>
                     </div>
                     <div className="mt-8">

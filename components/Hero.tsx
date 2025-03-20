@@ -123,7 +123,7 @@ const Hero = () => {
                 <div className="absolute animate-heroImg -top-6 -right-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.maintenance} alt='web developer' className="size-28"/>
                 </div>
-                <Image src={images.erditi} className="object-cover object-top max-lg:max-h-[400px] max-md:max-h-[300px] max-sm:max-h-[300px] max-sm:object-top max-[300px]:object-top! rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
+                <Image src={images.erditi} className="object-cover object-center saturate-10 max-h-[500px] max-lg:max-h-[400px] max-lg:object-[100%_30%]! max-md:max-h-[300px] max-sm:max-h-[300px] max-sm:object-[20%_40%]! max-[300px]:object-center! rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
             </div>
 
         </div>

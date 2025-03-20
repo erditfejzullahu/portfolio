@@ -50,8 +50,8 @@ const FullscreenImageModal = () => {
             </SwiperSlide>
           ))}
             <div className="swiper-pagination -bottom-1!"></div>
-            <div className="swiper-button-prev before:hidden! after:hidden! text-black"><FaChevronLeft className="text-black!"/></div>
-            <div className="swiper-button-next after:hidden! text-black"><FaChevronRight className="text-black!" /></div>
+            <div className="swiper-button-prev before:hidden! after:hidden! text-black"><FaChevronLeft className="text-gray-400!"/></div>
+            <div className="swiper-button-next after:hidden! text-black"><FaChevronRight className="text-gray-400!" /></div>
         </Swiper>
 
       </DialogContent>
