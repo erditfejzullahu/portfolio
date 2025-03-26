@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Topbar from "@/components/Topbar";
 import {Montserrat} from "next/font/google";
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     siteName: "Erdit Fejzullahu's Portfolio",
     images: [
       {
-        url: "https://your-website.com/images/og-image.jpg", // Replace with your image URL
+        url: "https://erditfejzullahu.com/images/erditi.webp", // Replace with your image URL
         width: 1200,
         height: 630,
         alt: "Erdit Fejzullahu - Software Engineer",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image", // Use "summary" for smaller images
     title: "Erdit Fejzullahu | Software Engineer",
     description: "Experienced software engineer specializing in building advanced applications and innovative technological solutions.",
-    images: "https://your-website.com/images/twitter-card.jpg", // Replace with your image URL
+    images: "https://erditfejzullahu.com/images/erditi.webp", // Replace with your image URL
     site: "@your_twitter_handle", // Replace with your actual Twitter handle
   },
 
@@ -38,11 +38,16 @@ export const metadata: Metadata = {
     icon: "/favicon.ico", // Favicon URL (Replace with your actual path)
     apple: "/apple-touch-icon.png", // Apple touch icon (Replace with your actual path)
   },
-
-  viewport: "width=device-width, initial-scale=1.0",
   robots: "index, follow",
   
 };
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+}
 
 const montserrat = Montserrat({subsets: ['latin']});
 
