@@ -38,7 +38,7 @@ const FullscreenMenu = ({isOpened = false, sendAction}: {isOpened: boolean, send
     if(!isVisible) return null;
   return (
     <div className={`fixed w-screen h-screen bg-black-light bottom-0 right-0 left-0 top-0 ${isOpened ? "animate-fadeIn" : "animate-fadeOut"} z-[100] `}>
-        <div ref={outsideClick} className={`relative overflow-y-auto w-[85%] sm:w-[80%] md:w-[70%] lg:w-[50%] bg-white ml-auto h-full shadow-[0_0_20px_rgba(0,0,0,0.4)] ${isOpened ? "animate-toLeft" : "animate-toRight"} flex items-center justify-center`}>
+        <div ref={outsideClick} className={`relative overflow-y-auto w-[85%] sm:w-[80%] md:w-[70%] lg:w-[50%] xl:w-[40%] bg-white ml-auto h-full shadow-[0_0_20px_rgba(0,0,0,0.4)] ${isOpened ? "animate-toLeft" : "animate-toRight"} flex items-center justify-center`}>
             <div className="absolute right-0 top-0 cursor-pointer hover:bg-gray-200 transition-all" onClick={() => sendAction(false)}>
                 <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">
                     <CgClose size={25}/>
