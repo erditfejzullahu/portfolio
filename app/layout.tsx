@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Erdit Fejzullahu | Software Engineer",
     description: "Experienced software engineer specializing in building advanced applications and innovative technological solutions.",
     images: "https://erditfejzullahu.com/images/erditi.webp", // Replace with your image URL
-    site: "@your_twitter_handle", // Replace with your actual Twitter handle
+    // site: "@your_twitter_handle", // Replace with your actual Twitter handle
   },
 
   icons: {
