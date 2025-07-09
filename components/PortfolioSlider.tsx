@@ -1,13 +1,13 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import WordAnimation from './WordAnimation'
 import { HiArrowTrendingDown } from 'react-icons/hi2'
 import { images } from '@/constants'
 import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination } from 'swiper/modules'
+import { Autoplay } from 'swiper/modules'
 import { PortfolioSliderInterface, PersonalPortfolioSlider } from '@/data/navigations'
-import {Swiper as SwiperType} from 'swiper'
+import { Swiper as SwiperType } from 'swiper'
 import { MdOpenInFull } from 'react-icons/md'
 import PortfoliosModal from './PortfoliosModal'
 import { RootState, useAppDispatch } from '@/store'
@@ -17,209 +17,206 @@ import AllPortfoliosModal from './AllPortfoliosModal'
 import { resetTrigger } from '@/store/triggerModalSlice'
 
 const PortfolioSlider = () => {
-
-    const {data, shouldTrigger} = useSelector((state: RootState) => state.trigger);
-    const dispatch = useAppDispatch();
+    const { data, shouldTrigger } = useSelector((state: RootState) => state.trigger)
+    const isOverflowHidden = useSelector((state: RootState) => state.overflow.isOverflowHidden)
+    const dispatch = useAppDispatch()
 
     const [showModal, setShowModal] = useState<boolean>(false)
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
-
     const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
         index: [],
         object: null
     })
+    const [navigationState, setNavigationState] = useState({
+        hasBack: false,
+        hasNext: false,
+        nextPortfolioApp: undefined as string | undefined,
+        backPortfolioApp: undefined as string | undefined
+    })
 
-    const [hasBack, setHasBack] = useState<boolean>(false)
-    const [hasNext, setHasNext] = useState<boolean>(false)
-    const [nextPortfolioApp, setNextPortfolioApp] = useState<string | undefined>(undefined)
-    const [backPortfolioApp, setBackPortfolioApp] = useState<string | undefined>(undefined)
+    const swiperRef = useRef<SwiperType | null>(null)
 
-    const isOverflowHidden = useSelector(
-     (state: RootState) => state.overflow.isOverflowHidden
-    )
+    // Memoize the portfolio items to prevent unnecessary re-renders
+    const portfolioItems = useMemo(() => PersonalPortfolioSlider, [])
 
+    // Handle overflow state changes
     useEffect(() => {
-      if(shouldTrigger && data) {
-        handleOpenModal(data, "Default");
-      }
-    }, [shouldTrigger, data, dispatch])
-    
+        dispatch(setOverflowHidden(showModal || showAllProjsModal))
+    }, [showModal, showAllProjsModal, dispatch])
 
+    // Handle trigger from external source
     useEffect(() => {
-      if(showModal || showAllProjsModal){
-        dispatch(setOverflowHidden(true))
-      }else{
-        dispatch(setOverflowHidden(false))
-      }
-    }, [showModal, showAllProjsModal])
-    
-    type ModalType = "Next" | "Back" | "Default";
+        if (shouldTrigger && data) {
+            handleOpenModal(data, "Default")
+        }
+    }, [shouldTrigger, data])
 
-    const handleOpenSpecificProject = (item: PortfolioSliderInterface) => {
-        setShowAllProjsModal(false);
-        setTimeout(() => {
-            handleOpenModal(item, "Default");
-        }, 50);
-    }
+    type ModalType = "Next" | "Back" | "Default"
 
-    const handleOpenModal = (item: PortfolioSliderInterface | null, type: ModalType) => {
-        if(!item) return;
-        const findItem = PersonalPortfolioSlider.findIndex((idx) => idx.title === item?.title);        
+    // Memoized handlers
+    const handleOpenSpecificProject = useCallback((item: PortfolioSliderInterface) => {
+        setShowAllProjsModal(false)
+        setTimeout(() => handleOpenModal(item, "Default"), 50)
+    }, [])
+
+    const handleOpenModal = useCallback((item: PortfolioSliderInterface | null, type: ModalType) => {
+        if (!item) return
         
-        if(findItem > 0 && (findItem < (PersonalPortfolioSlider.length - 1))){
-            setHasBack(true);
-            setHasNext(true);
-            setNextPortfolioApp(PersonalPortfolioSlider[findItem + 1].title);
-            setBackPortfolioApp(PersonalPortfolioSlider[findItem - 1].title);
-        }else if(findItem === 0){
-            setHasBack(false);
-            setHasNext(true);
-            setNextPortfolioApp(PersonalPortfolioSlider[findItem + 1].title);
-        }else if(findItem === PersonalPortfolioSlider.length - 1){
-            setHasBack(true);
-            setHasNext(false);
-            setBackPortfolioApp(PersonalPortfolioSlider[findItem - 1].title);
+        const findItem = portfolioItems.findIndex((idx) => idx.title === item.title)
+        const newState = {
+            hasBack: findItem > 0,
+            hasNext: findItem < portfolioItems.length - 1,
+            nextPortfolioApp: findItem < portfolioItems.length - 1 ? portfolioItems[findItem + 1].title : undefined,
+            backPortfolioApp: findItem > 0 ? portfolioItems[findItem - 1].title : undefined
         }
+        setNavigationState(newState)
 
-        if(type === "Next"){
-            handleClose();
-            setShowHoverDiv((prevValues) => ({
-                ...prevValues,
-                object: item
-            }))
-        }else if(type === "Back"){
-            handleClose();
-            setShowHoverDiv((prevValues) => ({
-                ...prevValues,
-                object: item
-            }))
-        }else if (type === "Default"){
-            setShowHoverDiv((prevValues) => ({
-                ...prevValues,
-                object: item
-            }))
+        if (type === "Default") {
+            setShowHoverDiv(prev => ({ ...prev, object: item }))
+        } else {
+            handleClose()
+            setShowHoverDiv(prev => ({ ...prev, object: item }))
         }
+    }, [portfolioItems])
 
-    }
-
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
         setShowModal(false)
-        setShowHoverDiv((prevValues) => ({
-            ...prevValues,
-            index: [],
-            object: null
-        }))
-        if(shouldTrigger && data){
+        setShowHoverDiv({ index: [], object: null })
+        if (shouldTrigger && data) {
             dispatch(resetTrigger())
         }
-    }
-    
+    }, [shouldTrigger, data, dispatch])
+
+    // Show modal when hoverDiv object is set
     useEffect(() => {
-        if(showHoverDiv.object !== null){
-            setShowModal(true);
+        if (showHoverDiv.object !== null) {
+            setShowModal(true)
         }
-    }, [showModal, showHoverDiv.object])
-    
+    }, [showHoverDiv.object])
 
-    
+    // Swiper mouse events
+    const handleMouseEnter = useCallback(() => swiperRef.current?.autoplay.stop(), [])
+    const handleMouseLeave = useCallback(() => swiperRef.current?.autoplay.start(), [])
 
-    const swiperRef = useRef<SwiperType | null>(null);
-  return (
-    <>
-    <div className="flex flex-row items-center border-t border-gray-200 border-b" id='projects'>
-        {/* First Column: Image */}
-        <div className="w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 relative border-r border-gray-200">
-            <div className="absolute -right-30 top-10 bottom-0 z-20">
-                <button className="hover:bg-gray-300 cursor-pointer font-normal text-sm flex flex-row items-center gap-1 -rotate-50 bg-white rounded-sm px-2 py-1 shadow-lg shadow-gray-300" onClick={() => setShowAllProjsModal(true)}>
-                    <WordAnimation text='Explore my expertise' textClasses='text-sm! font-normal!'/>
-                    <HiArrowTrendingDown size={30} className="rotate-16"/>
-                </button>
-            </div>
-            <Image src={images.portfolio} alt="team" className="size-44"/>
-        </div>
+    // Hover handlers
+    const handleMouseEnterItem = useCallback((index: number) => {
+        setShowHoverDiv(prev => ({ ...prev, index: [index] }))
+    }, [])
 
-        {/* Second Column: Swiper Carousel */}
-        <div className="w-full overflow-hidden shadow-[0_0_10px] shadow-gray-300"
-            onMouseEnter={() => swiperRef.current?.autoplay.stop()}
-            onMouseLeave={() => swiperRef.current?.autoplay.start()}
-        >
-            <Swiper
-            slidesPerView={3} // Adjust number of visible slides
-            spaceBetween={10}
-            autoplay={{ delay: 2000, disableOnInteraction: true }}
-            // pagination={{ clickable: true }}
-            breakpoints={{
-                220: { slidesPerView: 1 }, // 1 slide on small screens (mobile)
-                640: { slidesPerView: 2 }, // 2 slides on tablets
-                1024: { slidesPerView: 3 }, // 3 slides on desktops
-                1280: { slidesPerView: 4 } 
-            }}
-            onSwiper={(swiper) => swiperRef.current = swiper}
-            modules={[Autoplay]}
-            className="w-auto" // Ensuring controlled width
-            >
-            {PersonalPortfolioSlider.map((item, index) => (
-            <SwiperSlide key={`personal-portfolio-${index}`}>
-                    <div 
-                        className="portfolio-swiper p-2 h-full" 
-                        onMouseEnter={() => setShowHoverDiv(prevValues => ({
-                            ...prevValues,
-                            index: [index],
-                            // object: item
-                        }))}
-                        onMouseLeave={() => setShowHoverDiv(prevValues => ({
-                            ...prevValues,
-                            index: [],
-                            // object: null
-                        }))}
-                    >
-                        {!showHoverDiv.index.includes(index) && <div>
-                            <div>
-                                <Image src={item.image} alt={item.title} className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"/>
-                            </div>
-                            <div className="flex flex-col items-center gap-1 mt-2">
-                                <h3 className="text-medium text-xl text-black line-clamp-1">{item.title}</h3>
-                                <p className="text-light text-sm text-gray-500 line-clamp-2 text-center">{item.description}</p>
-                            </div>
-                        </div>}
+    const handleMouseLeaveItem = useCallback(() => {
+        setShowHoverDiv(prev => ({ ...prev, index: [] }))
+    }, [])
 
-                        {showHoverDiv.index.includes(index) && <div className="flex items-center justify-center h-[160px] flex-1 animate-fadeIn border-r border-l border-white">
-                            <div className="h-full flex items-center">
-                                <button 
-                                    className="hover:bg-gray-300 cursor-pointer font-normal flex flex-row items-center group gap-1 bg-white px-4 py-2 shadow-lg shadow-gray-400"
-                                    onClick={() => handleOpenModal(item, "Default")}
-                                >
-                                    <WordAnimation text='See details' textClasses='text-base! font-normal!'/>
-                                    <MdOpenInFull size={24} className="shadow-lg shadow-gray-400 bg-transparent group-hover:shadow-none ml-2"/>
-                                </button>
-                            </div>    
-                        </div>}
+    return (
+        <>
+            <div className="flex flex-row items-center border-t border-b border-gray-200" id="projects">
+                {/* First Column: Image */}
+                <div className="relative w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 border-r border-gray-200">
+                    <div className="absolute -right-30 top-10 bottom-0 z-20">
+                        <button 
+                            className="flex flex-row items-center gap-1 px-2 py-1 font-normal text-sm bg-white rounded-sm shadow-lg shadow-gray-300 hover:bg-gray-300 cursor-pointer -rotate-50"
+                            onClick={() => setShowAllProjsModal(true)}
+                            aria-label="Explore all projects"
+                        >
+                            <WordAnimation text="Explore my expertise" textClasses="text-sm! font-normal!"/>
+                            <HiArrowTrendingDown size={30} className="rotate-16"/>
+                        </button>
                     </div>
-                </SwiperSlide>
-            ))}
-            </Swiper>
-        </div>
-    </div>
+                    <Image 
+                        src={images.portfolio} 
+                        alt="Portfolio illustration" 
+                        className="size-44"
+                        width={176}
+                        height={176}
+                        quality={75}
+                        priority
+                    />
+                </div>
 
-    <PortfoliosModal 
-        object={showHoverDiv.object} 
-        opened={showModal} 
-        hasBack={hasBack} 
-        hasNext={hasNext} 
-        close={handleClose} 
-        nextButtonTitle={nextPortfolioApp} 
-        backButtonTitle={backPortfolioApp}
-        handleNextButton={(item) => handleOpenModal(item, "Next")}
-        handleBackButton={(item) => handleOpenModal(item, "Back")}
-    />
+                {/* Second Column: Swiper Carousel */}
+                <div 
+                    className="w-full overflow-hidden shadow-[0_0_10px] shadow-gray-300"
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                >
+                    <Swiper
+                        slidesPerView={3}
+                        spaceBetween={10}
+                        autoplay={{ delay: 2000, disableOnInteraction: true }}
+                        breakpoints={{
+                            220: { slidesPerView: 1 },
+                            640: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                            1280: { slidesPerView: 4 } 
+                        }}
+                        onSwiper={(swiper) => swiperRef.current = swiper}
+                        modules={[Autoplay]}
+                        className="w-auto"
+                    >
+                        {portfolioItems.map((item, index) => (
+                            <SwiperSlide key={`personal-portfolio-${item.title}-${index}`}>
+                                <div 
+                                    className="portfolio-swiper p-2 h-full" 
+                                    onMouseEnter={() => handleMouseEnterItem(index)}
+                                    onMouseLeave={handleMouseLeaveItem}
+                                >
+                                    {!showHoverDiv.index.includes(index) ? (
+                                        <div>
+                                            <div>
+                                                <Image 
+                                                    src={item.image} 
+                                                    alt={item.title} 
+                                                    className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"
+                                                    width={80}
+                                                    height={80}
+                                                    loading={index < 4 ? 'eager' : 'lazy'}
+                                                />
+                                            </div>
+                                            <div className="flex flex-col items-center gap-1 mt-2">
+                                                <h3 className="text-medium text-xl text-black line-clamp-1">{item.title}</h3>
+                                                <p className="text-light text-sm text-gray-500 line-clamp-2 text-center">{item.description}</p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center justify-center h-[160px] flex-1 animate-fadeIn border-r border-l border-white">
+                                            <div className="h-full flex items-center">
+                                                <button 
+                                                    className="flex flex-row items-center group gap-1 px-4 py-2 font-normal bg-white shadow-lg shadow-gray-400 hover:bg-gray-300 cursor-pointer"
+                                                    onClick={() => handleOpenModal(item, "Default")}
+                                                    aria-label={`View details of ${item.title}`}
+                                                >
+                                                    <WordAnimation text="See details" textClasses="text-base! font-normal!"/>
+                                                    <MdOpenInFull size={24} className="ml-2 shadow-lg shadow-gray-400 bg-transparent group-hover:shadow-none"/>
+                                                </button>
+                                            </div>    
+                                        </div>
+                                    )}
+                                </div>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+                </div>
+            </div>
 
-    <AllPortfoliosModal 
-        opened={showAllProjsModal}
-        close={() => setShowAllProjsModal(false)}
-        openSpecificProject={(item) => handleOpenSpecificProject(item)}
-    />
-    </>
-  )
+            <PortfoliosModal 
+                object={showHoverDiv.object} 
+                opened={showModal} 
+                hasBack={navigationState.hasBack} 
+                hasNext={navigationState.hasNext} 
+                close={handleClose} 
+                nextButtonTitle={navigationState.nextPortfolioApp} 
+                backButtonTitle={navigationState.backPortfolioApp}
+                handleNextButton={(item) => handleOpenModal(item, "Next")}
+                handleBackButton={(item) => handleOpenModal(item, "Back")}
+            />
+
+            <AllPortfoliosModal 
+                opened={showAllProjsModal}
+                close={() => setShowAllProjsModal(false)}
+                openSpecificProject={handleOpenSpecificProject}
+            />
+        </>
+    )
 }
 
-export default PortfolioSlider
+export default React.memo(PortfolioSlider)

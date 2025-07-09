@@ -1,19 +1,12 @@
-"use client"
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import WordAnimation from './WordAnimation'
 import Image from 'next/image'
 import { images } from '@/constants'
-import gsap from 'gsap'
-import { ScrollTrigger } from "gsap/all";
-import {useGSAP} from "@gsap/react"
-import { heroInformations } from '@/data/navigations'
-import { BsArrow90DegUp, BsArrowDown } from 'react-icons/bs'
-import { BiArrowFromTop, BiArrowToTop } from 'react-icons/bi'
-import { CgArrowBottomRight, CgArrowTopRight } from 'react-icons/cg'
+import { BsArrowDown } from 'react-icons/bs'
+import { CgArrowBottomRight } from 'react-icons/cg'
 import Link from 'next/link'
 import ScrollMouse from './ScrollMouse'
 
-gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
 
