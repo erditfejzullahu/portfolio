@@ -161,7 +161,7 @@ const PortfolioSlider = () => {
                                     onMouseLeave={handleMouseLeaveItem}
                                 >
                                     {!showHoverDiv.index.includes(index) ? (
-                                        <div>
+                                        <div onClick={() => handleOpenModal(item, "Default")}>
                                             <div>
                                                 <Image 
                                                     src={item.image} 

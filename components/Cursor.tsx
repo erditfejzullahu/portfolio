@@ -124,6 +124,7 @@ const Cursor = () => {
 
   return (
     <div
+      className="max-[768px]:hidden!"
       id="cursor-dot"
       ref={cursorDotRef}
       style={{

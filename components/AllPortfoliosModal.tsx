@@ -93,7 +93,7 @@ const AllPortfoliosModal = ({opened = false, close, openSpecificProject}: {opene
 
                 <div className="h-full flex-1 overflow-x-hidden overflow-y-auto grid grid-cols-3 max-lg:grid-cols-2 max-sm:gap-4 gap-10 max-[500px]:grid-cols-1!">
                     {showWorks.map((item, idx) => (
-                        <div key={idx} className="animate-fadeInRight group relative h-fit">
+                        <div key={idx} className="animate-fadeInRight group relative h-fit" onClick={() => openSpecificProject(item)}>
                             <div className="absolute group-hover:opacity-100 opacity-0 transition-all ease-in-out flex items-center justify-center w-full h-full left-0 top-0" style={{background: "rgba(0,0,0,0.7)"}}>
                                 <button 
                                     className="hover:bg-gray-300 cursor-pointer font-normal flex flex-row items-center justify-center group gap-1 bg-white px-4 py-2 shadow-lg shadow-gray-800"
