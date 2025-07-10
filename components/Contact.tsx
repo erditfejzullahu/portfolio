@@ -146,6 +146,7 @@ const Contact = () => {
         </div>
         <div>
           <Link 
+            aria-label='Request a Consultation'
             href={"#contact-form"} 
             className="flex group flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element relative z-10"
           >

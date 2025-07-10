@@ -6,7 +6,7 @@ import SideProjects from "@/components/SideProjects";
 import Cursor from "@/components/Cursor";
 import { Toaster } from "sonner";
 import ClientProviderWrapper from "@/components/ClientProviderWrapper";
-
+import Head from 'next/head';
 export const metadata: Metadata = {
   title: "Erdit Fejzullahu | Software Engineer",
   description: "Experienced software engineer specializing in building advanced applications and innovative technological solutions.",
@@ -33,7 +33,6 @@ export const metadata: Metadata = {
     images: "https://erditfejzullahu.com/images/erditi.webp", // Replace with your image URL
     // site: "@your_twitter_handle", // Replace with your actual Twitter handle
   },
-
   icons: {
     icon: "/favicon.ico", // Favicon URL (Replace with your actual path)
     apple: "/apple-touch-icon.png", // Apple touch icon (Replace with your actual path)
@@ -46,7 +45,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-  userScalable: false,
+  userScalable: true,
 }
 
 const montserrat = Montserrat({subsets: ['latin']});
@@ -59,6 +58,10 @@ export default function RootLayout({
   
   return (
     <html lang="en">
+      <Head>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="preload" href="/_next/static/chunks/swiper-bundle.min.js" as="script" />
+      </Head>
       <body
         className={`${montserrat.className} antialiased`}
         cz-shortcut-listen="true"

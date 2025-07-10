@@ -10,63 +10,6 @@ import ScrollMouse from './ScrollMouse'
 
 const Hero = () => {
 
-    // useGSAP(() => {
-    //     const section = gsap.timeline({
-    //         scrollTrigger: {
-    //             trigger: ".fullscreen-section",
-    //             start: "center center",
-    //             end: "+=800 enter",
-    //             scrub: 0.5,
-    //             pin: true,
-    //             pinSpacing: true,
-    //             markers: true
-    //         }
-    //     })
-
-    //     // section.to(".fullscreen-section", {
-    //     //     width: "100vw",
-    //     //     height: "100dvh",
-    //     //     // gridTemplateColumns: "repeat(1, minmax(0, 1fr))",
-    //     //     ease: "power2.out",
-    //     //     duration:1,
-    //     // })
-
-    //     heroInformations.forEach((item, index) => {
-    //         gsap.fromTo(
-    //             `.hero-info-${index}`,
-    //             { opacity: 0, zIndex: index + 1 },
-    //             {
-    //                 opacity: 1,
-    //                 height: "100vh",
-    //                 zIndex: heroInformations.length, // Bring to top
-    //                 scrollTrigger: {
-    //                     trigger: `.hero-info-${index}`,
-    //                     start: "top bottom",
-    //                     end: "top 100px",
-    //                     scrub: true,
-    //                     toggleActions: "play none none reverse"
-    //                 }
-    //             }
-    //         )
-
-    //         // Hide the previous div when the next one comes into view
-    //         if (index > 0) {
-    //             gsap.to(`.hero-info-${index - 1}`, {
-    //                 display: "none",
-    //                 zIndex: 0,
-    //                 scrollTrigger: {
-    //                     trigger: `.hero-info-${index}`,
-    //                     start: "top center",
-    //                     end: "top 100px",
-    //                     scrub: true,
-    //                     toggleActions: "play none none reverse"
-    //                 }
-    //             })
-    //         }
-    //     })
-    // })
-    
-
   return (
     <>
     <div className="h-[calc(100vh-80px)] max-lg:h-full w-screen border-black flex items-center justify-center relative" id='hero'>
@@ -83,7 +26,7 @@ const Hero = () => {
                     />
                 <div className="flex flex-row justify-between items-end flex-wrap max-sm:gap-6">
                     <WordAnimation text='Mobile Dev.' textClasses='text-2xl! xl:text-6xl! lg:text-4xl! max-lg:text-3xl! max-[400px]:text-xl! max-[400px]:mt-4!' stagger={1.5}/>
-                    <Link href={"#contact-me"} className="flex group max-[384px]:ml-auto flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
+                    <Link aria-label='Scroll to Contact' href={"#contact-me"} className="flex group max-[384px]:ml-auto flex-row animate-fadeIn items-center gap-2 cursor-pointer word-element">
                         <span className="text-xl font-bold text-black max-md:text-base flex group-hover:text-2xl transition-all max-sm:mr-auto">Get in touch.</span>
                         <CgArrowBottomRight size={30} className="border-2 group-hover:size-10 transition-all" />
                     </Link>
@@ -91,7 +34,7 @@ const Hero = () => {
 
                 <div className="mt-10 flex flex-row max-[360px]:flex-col-reverse gap-1 relative ml-auto text-right max-w-lg animate-fadeIn duration-1000">
                     <div className="-ml-1">
-                        <Link href='#skills' className="max-[360px]:w-full max-[360px]:flex max-[360px]:justify-center max-[360px]:py-3 border inline-block border-black rounded-2xl py-6 px-2 cursor-pointer word-element">
+                        <Link aria-label='Scroll to Skills' href='#skills' className="max-[360px]:w-full max-[360px]:flex max-[360px]:justify-center max-[360px]:py-3 border inline-block border-black rounded-2xl py-6 px-2 cursor-pointer word-element">
                             <BsArrowDown size={30}/>
                         </Link>
                     </div>
@@ -99,7 +42,7 @@ const Hero = () => {
                 </div>
                 <div className=" bottom-0 left-4 my-10 max-[500px]:my-6 max-[360px]:my-4">
                     <h2 className="text-black font-semibold text-xl">Email</h2>
-                    <Link className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</Link>
+                    <Link aria-label='Email me' className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</Link>
                 </div>
             </div>
             <div className="flex-[0.8] max-sm:flex-none relative h-fit rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.2)]" style={{background: "rgba(0,0,0,0.05)"}}>
@@ -116,7 +59,7 @@ const Hero = () => {
                 <div className="absolute animate-heroImg -top-6 -right-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.maintenance} alt='web developer' className="size-28"/>
                 </div>
-                <Image src={images.erditi} className="object-cover object-center saturate-10 max-h-[500px] max-lg:max-h-[400px] max-lg:object-[100%_30%]! max-md:max-h-[300px] max-sm:max-h-[300px] max-sm:object-[20%_40%]! max-[300px]:object-center! rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
+                <Image src={images.erditi} priority={true} fetchPriority="high" className="object-cover object-center saturate-10 max-h-[500px] max-lg:max-h-[400px] max-lg:object-[100%_30%]! max-md:max-h-[300px] max-sm:max-h-[300px] max-sm:object-[20%_40%]! max-[300px]:object-center! rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]  -skew-5" alt='erditi'/>
             </div>
 
         </div>

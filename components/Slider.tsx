@@ -20,8 +20,8 @@ const Slider = () => {
                     src={src.image} 
                     alt={`skill-${index}`} 
                     className="size-44 object-contain m-auto py-4" 
-                    width={176}  // Explicit dimensions for better performance
-                    height={176}
+                    // width={176}  // Explicit dimensions for better performance
+                    // height={176}
                     quality={75}
                     loading={index < 3 ? 'eager' : 'lazy'} // Lazy load images beyond first 3
                 />
@@ -36,6 +36,7 @@ const Slider = () => {
             <div className="relative w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 border-r border-gray-200">
                 <div className="absolute -right-30 top-10 bottom-0 z-20">
                     <Link 
+                        aria-label='Scroll to Contact Form'
                         href="#contact-me" 
                         className="flex flex-row items-center gap-1 px-2 py-1 font-normal text-sm bg-white rounded-sm shadow-lg shadow-gray-300 hover:bg-gray-300 cursor-pointer -rotate-50"
                         prefetch={false}  // Disable prefetch for this link

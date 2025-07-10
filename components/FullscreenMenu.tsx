@@ -50,7 +50,7 @@ const FullscreenMenu = ({isOpened = false, sendAction}: {isOpened: boolean, send
                     <ul className="flex flex-col gap-6 h-full max-[380px]:justify-end max-[380px]:gap-3 max-[380px]:flex-row max-[380px]:flex-wrap">
                         {social.map((link) => (
                            <li key={link.label} className="link-element">
-                                <Link target='_blank' rel="noopener noreferrer" href={link.url} className={`text-xl max-[500px]:text-base font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
+                                <Link aria-label='Social Links' target='_blank' rel="noopener noreferrer" href={link.url} className={`text-xl max-[500px]:text-base font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
                            </li> 
                         ))}
                     </ul>
@@ -60,7 +60,7 @@ const FullscreenMenu = ({isOpened = false, sendAction}: {isOpened: boolean, send
                     <ul className="flex flex-col gap-2 justify-between max-[380px]:justify-start h-full">
                         {menu.map((link) => (
                             <li key={link.label} className="text-right max-[380px]:text-left">
-                                <Link  href={link.url} className="text-6xl max-[500px]:text-4xl link-element font-light hover:text-8xl transition-all text-underline" onClick={() => sendAction(false)}>{link.label}</Link>
+                                <Link aria-label='Menu Links'  href={link.url} className="text-6xl max-[500px]:text-4xl link-element font-light hover:text-8xl transition-all text-underline" onClick={() => sendAction(false)}>{link.label}</Link>
                             </li>
                         ))}
                     </ul>

@@ -17,10 +17,6 @@ import AllPortfoliosModal from './AllPortfoliosModal'
 import { resetTrigger } from '@/store/triggerModalSlice'
 
 const PortfolioSlider = () => {
-    const { data, shouldTrigger } = useSelector((state: RootState) => state.trigger)
-    const isOverflowHidden = useSelector((state: RootState) => state.overflow.isOverflowHidden)
-    const dispatch = useAppDispatch()
-
     const [showModal, setShowModal] = useState<boolean>(false)
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
     const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
@@ -33,11 +29,15 @@ const PortfolioSlider = () => {
         nextPortfolioApp: undefined as string | undefined,
         backPortfolioApp: undefined as string | undefined
     })
-
+    
     const swiperRef = useRef<SwiperType | null>(null)
-
-    // Memoize the portfolio items to prevent unnecessary re-renders
     const portfolioItems = useMemo(() => PersonalPortfolioSlider, [])
+    
+    const { data, shouldTrigger } = useSelector((state: RootState) => state.trigger)
+    const isOverflowHidden = useSelector((state: RootState) => state.overflow.isOverflowHidden)
+    const dispatch = useAppDispatch()
+    
+    // Memoize the portfolio items to prevent unnecessary re-renders
 
     // Handle overflow state changes
     useEffect(() => {
@@ -167,8 +167,8 @@ const PortfolioSlider = () => {
                                                     src={item.image} 
                                                     alt={item.title} 
                                                     className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"
-                                                    width={80}
-                                                    height={80}
+                                                    // width={80}
+                                                    // height={80}
                                                     loading={index < 4 ? 'eager' : 'lazy'}
                                                 />
                                             </div>

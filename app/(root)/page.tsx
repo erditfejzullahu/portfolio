@@ -1,31 +1,27 @@
-import About from '@/components/About'
-import Contact from '@/components/Contact'
+import { DynamicAbout, DynamicContactForm, DynamicFullscreenImageModal, DynamicPortfolioSlider, DynamicSlider } from '@/components/DynamicClientComponents'
 import Footer from '@/components/Footer'
-import FullscreenImageModal from '@/components/FullscreenImageModal'
 import Hero from '@/components/Hero'
-import PortfolioSlider from '@/components/PortfolioSlider'
 import ScrollToTop from '@/components/ScrollToTop'
-import Slider from '@/components/Slider'
 import React from 'react'
 
-const page = () => {
+const page = async () => {
   return (
     <>
-    <FullscreenImageModal />
+    <DynamicFullscreenImageModal />
     <section>
       <Hero />
     </section>
     <section>
-      <Slider />
+      <DynamicSlider />
     </section>
     <section>
-      <About />
+      <DynamicAbout />
     </section>
     <section>
-      <PortfolioSlider />
+      <DynamicPortfolioSlider />
     </section>
     <section>
-      <Contact />
+      <DynamicContactForm />
     </section>
     <ScrollToTop />
     <Footer />

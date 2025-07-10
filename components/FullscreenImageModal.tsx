@@ -26,8 +26,8 @@ const FullscreenImageModal = () => {
                       src={image}
                       alt={`fullscreen-${index}`}
                       className="object-contain size-fit! m-auto max-h-full! max-w-full! shadow-md"
-                      width={1200}  // Added for better performance
-                      height={800}  // Added for better performance
+                      // width={1200}  // Added for better performance
+                      // height={800}  // Added for better performance
                       priority={index === imageIndex} // Only prioritize the initial slide
                   />
               </div>
@@ -59,7 +59,7 @@ const FullscreenImageModal = () => {
           className="w-full"
         >
           {swiperSlides}
-          <div className="swiper-pagination -bottom-1!"></div>
+          <div className="swiper-pagination sm:bottom-0! bottom-1!"></div>
           <div className="swiper-button-prev before:hidden! after:hidden! text-black"><FaChevronLeft className="text-gray-400!"/></div>
           <div className="swiper-button-next after:hidden! text-black"><FaChevronRight className="text-gray-400!" /></div>
         </Swiper>
