@@ -6,6 +6,11 @@ import nike from "@/constants/nike";
 import sda from "@/constants/sda";
 import shokumesimit from "@/constants/shokumesimit";
 import university from "@/constants/university";
+import type { StaticImageData } from "next/image";
+import { AiOutlineOpenAI } from "react-icons/ai";
+import type { IconType } from "react-icons";
+
+export type ImageSource = string | StaticImageData;
 interface Link {
     label: string;
     url: string;
@@ -13,30 +18,30 @@ interface Link {
 
 interface Project {
     id: number;
-    image: any;
+    image: ImageSource;
     title: string;
     description: string;
 }
 
 interface HeroInformation {
-    image: any;
+    image: ImageSource;
     description: string;
     title: string;
 }
 
-interface Slider {
-    image: any;
-}
+type Slider =
+    | { image: ImageSource; name: string }
+    | { Icon: IconType; name: string };
 
 export interface PortfolioSliderInterface {
     title: string;
     description: string;
     content: string;
-    images: any[];
-    image: any;
+    images: ImageSource[];
+    image: ImageSource;
     type: "Web" | "Mobile";
     technologies: {
-        image: any;
+        image: ImageSource;
         name: string;
     }[];
 }
@@ -80,38 +85,49 @@ export const footer: Link[] = [
 ]
 
 export const professionalSlider: Slider[] = [
-    {image: images.docker},
-    {image: images.figma},
-    {image: images.jquery},
-    {image: images.microsoftsql},
-    {image: images.mongodb},
-    {image: images.mysql},
-    {image: images.nestjs},
-    {image: images.net},
-    {image: images.nextjs},
-    {image: images.nodejsexpress},
-    {image: images.php},
-    {image: images.pinia},
-    {image: images.postgresql},
-    {image: images.react},
-    {image: images.reactnative},
-    {image: images.redis},
-    {image: images.redux},
-    {image: images.shopify},
-    {image: images.seo},
-    {image: images.tailwind},
-    {image: images.vuejs},
-    {image: images.wordpress},
-    {image: images.phpmyadmin},
-    {image: images.prisma},
-    {image: images.ajax},
-    {image: images.sanity},
-    {image: images.appwrite},
-    {image: images.gsap},
-    {image: images.elementor},
-    {image: images.vanillajs},
-    {image: images.expo},
-    {image: images.efcore}
+    {image: images.docker, name: "Docker"},
+    {image: images.linux, name: "Linux"},
+    {image: images.cloudflare, name: "Cloudflare"},
+    {image: images.figma, name: "Figma"},
+    {image: images.jquery, name: "jQuery"},
+    {image: images.microsoftsql, name: "Microsoft SQL Server"},
+    {image: images.mongodb, name: "MongoDB"},
+    {image: images.mysql, name: "MySQL"},
+    {image: images.nestjs, name: "NestJS"},
+    {image: images.net, name: ".NET"},
+    {image: images.nextjs, name: "Next.js"},
+    {image: images.nodejsexpress, name: "Node.js"},
+    {image: images.express, name: "Express.js"},
+    {image: images.php, name: "PHP"},
+    {image: images.pinia, name: "Pinia"},
+    {image: images.postgresql, name: "PostgreSQL"},
+    {image: images.react, name: "React"},
+    {image: images.reactnative, name: "React Native"},
+    {image: images.redis, name: "Redis"},
+    {image: images.firebase, name: "Firebase"},
+    {image: images.supabase, name: "Supabase"},
+    {image: images.socketio, name: "Socket.IO"},
+    {image: images.redux, name: "Redux"},
+    {image: images.shopify, name: "Shopify"},
+    {image: images.seo, name: "SEO"},
+    {image: images.tailwind, name: "Tailwind CSS"},
+    {image: images.vuejs, name: "Vue.js"},
+    {image: images.wordpress, name: "WordPress"},
+    {image: images.phpmyadmin, name: "phpMyAdmin"},
+    {image: images.prisma, name: "Prisma"},
+    {image: images.ajax, name: "AJAX"},
+    {image: images.sanity, name: "Sanity"},
+    {image: images.appwrite, name: "Appwrite"},
+    {image: images.gsap, name: "GSAP"},
+    {image: images.elementor, name: "Elementor"},
+    {image: images.vanillajs, name: "JavaScript"},
+    {image: images.typescript, name: "TypeScript"},
+    {image: images.expo, name: "Expo"},
+    {image: images.efcore, name: "Entity Framework Core"},
+    {image: images.python, name: "Python"},
+    {image: images.elasticsearch, name: "Elasticsearch"},
+    {image: images.githubActions, name: "GitHub Actions"},
+    {Icon: AiOutlineOpenAI, name: "OpenAI"}
 ]
 
 export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [

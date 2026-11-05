@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { ImageSource } from "@/data/navigations";
 
 type FullscreenState = {
     isOpened: boolean;
-    images: any[];
+    images: ImageSource[];
     imageIndex?: number;
 }
 
@@ -16,7 +17,7 @@ const fullscreenSlice = createSlice({
     name: "fullscreenImage",
     initialState,
     reducers: {
-        setImageOpen: (state, action: PayloadAction<{images: any[]; imageIndex?: number}>) => {
+        setImageOpen: (state, action: PayloadAction<{images: ImageSource[]; imageIndex?: number}>) => {
             state.isOpened = true;
             state.images = action.payload.images;
             state.imageIndex = action.payload.imageIndex || 0;

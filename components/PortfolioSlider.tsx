@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import WordAnimation from './WordAnimation'
 import { HiArrowTrendingDown } from 'react-icons/hi2'
 import { images } from '@/constants'
@@ -17,82 +17,60 @@ import AllPortfoliosModal from './AllPortfoliosModal'
 import { resetTrigger } from '@/store/triggerModalSlice'
 
 const PortfolioSlider = () => {
-    const [showModal, setShowModal] = useState<boolean>(false)
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
     const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
         index: [],
         object: null
     })
-    const [navigationState, setNavigationState] = useState({
-        hasBack: false,
-        hasNext: false,
-        nextPortfolioApp: undefined as string | undefined,
-        backPortfolioApp: undefined as string | undefined
-    })
-    
     const swiperRef = useRef<SwiperType | null>(null)
-    const portfolioItems = useMemo(() => PersonalPortfolioSlider, [])
+    const portfolioItems = PersonalPortfolioSlider
     
     const { data, shouldTrigger } = useSelector((state: RootState) => state.trigger)
-    const isOverflowHidden = useSelector((state: RootState) => state.overflow.isOverflowHidden)
     const dispatch = useAppDispatch()
-    
-    // Memoize the portfolio items to prevent unnecessary re-renders
-
-    // Handle overflow state changes
-    useEffect(() => {
-        dispatch(setOverflowHidden(showModal || showAllProjsModal))
-    }, [showModal, showAllProjsModal, dispatch])
-
-    // Handle trigger from external source
-    useEffect(() => {
-        if (shouldTrigger && data) {
-            handleOpenModal(data, "Default")
-        }
-    }, [shouldTrigger, data])
+    const activeProject = showHoverDiv.object ?? (shouldTrigger ? data : null)
+    const showModal = activeProject !== null
+    const activeProjectIndex = activeProject
+        ? portfolioItems.findIndex((item) => item.title === activeProject.title)
+        : -1
+    const navigationState = {
+        hasBack: activeProjectIndex > 0,
+        hasNext: activeProjectIndex >= 0 && activeProjectIndex < portfolioItems.length - 1,
+        nextPortfolioApp: activeProjectIndex >= 0 && activeProjectIndex < portfolioItems.length - 1
+            ? portfolioItems[activeProjectIndex + 1].title
+            : undefined,
+        backPortfolioApp: activeProjectIndex > 0
+            ? portfolioItems[activeProjectIndex - 1].title
+            : undefined
+    }
 
     type ModalType = "Next" | "Back" | "Default"
 
-    // Memoized handlers
-    const handleOpenSpecificProject = useCallback((item: PortfolioSliderInterface) => {
-        setShowAllProjsModal(false)
-        setTimeout(() => handleOpenModal(item, "Default"), 50)
-    }, [])
-
-    const handleOpenModal = useCallback((item: PortfolioSliderInterface | null, type: ModalType) => {
-        if (!item) return
-        
-        const findItem = portfolioItems.findIndex((idx) => idx.title === item.title)
-        const newState = {
-            hasBack: findItem > 0,
-            hasNext: findItem < portfolioItems.length - 1,
-            nextPortfolioApp: findItem < portfolioItems.length - 1 ? portfolioItems[findItem + 1].title : undefined,
-            backPortfolioApp: findItem > 0 ? portfolioItems[findItem - 1].title : undefined
-        }
-        setNavigationState(newState)
-
-        if (type === "Default") {
-            setShowHoverDiv(prev => ({ ...prev, object: item }))
-        } else {
-            handleClose()
-            setShowHoverDiv(prev => ({ ...prev, object: item }))
-        }
-    }, [portfolioItems])
-
     const handleClose = useCallback(() => {
-        setShowModal(false)
         setShowHoverDiv({ index: [], object: null })
         if (shouldTrigger && data) {
             dispatch(resetTrigger())
         }
     }, [shouldTrigger, data, dispatch])
 
-    // Show modal when hoverDiv object is set
-    useEffect(() => {
-        if (showHoverDiv.object !== null) {
-            setShowModal(true)
+    const handleOpenModal = useCallback((item: PortfolioSliderInterface | null, type: ModalType) => {
+        if (!item) return
+        
+        if (type === "Default") {
+            setShowHoverDiv(prev => ({ ...prev, object: item }))
+        } else {
+            handleClose()
+            setShowHoverDiv(prev => ({ ...prev, object: item }))
         }
-    }, [showHoverDiv.object])
+    }, [handleClose])
+
+    const handleOpenSpecificProject = useCallback((item: PortfolioSliderInterface) => {
+        setShowAllProjsModal(false)
+        setTimeout(() => handleOpenModal(item, "Default"), 50)
+    }, [handleOpenModal])
+
+    useEffect(() => {
+        dispatch(setOverflowHidden(showModal || showAllProjsModal))
+    }, [showModal, showAllProjsModal, dispatch])
 
     // Swiper mouse events
     const handleMouseEnter = useCallback(() => swiperRef.current?.autoplay.stop(), [])
@@ -110,6 +88,7 @@ const PortfolioSlider = () => {
     return (
         <>
             <div className="flex flex-row items-center border-t border-b border-gray-200" id="projects">
+                <h2 className="sr-only">Selected full-stack software projects</h2>
                 {/* First Column: Image */}
                 <div className="relative w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 border-r border-gray-200">
                     <div className="absolute -right-30 top-10 bottom-0 z-20">
@@ -199,7 +178,7 @@ const PortfolioSlider = () => {
             </div>
 
             <PortfoliosModal 
-                object={showHoverDiv.object} 
+                object={activeProject}
                 opened={showModal} 
                 hasBack={navigationState.hasBack} 
                 hasNext={navigationState.hasNext} 

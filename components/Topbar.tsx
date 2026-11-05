@@ -2,7 +2,6 @@
 import Hamburger from "hamburger-react"
 import { useEffect, useRef, useState, useCallback } from "react"
 import FullscreenMenu from "./FullscreenMenu"
-import { useWindowScroll } from "react-use"
 import gsap from "gsap"
 import { useAppDispatch } from "@/store"
 import { setTopbarVisible } from "@/store/topbarSlice"
@@ -11,42 +10,66 @@ import { setOverflowHidden } from "@/store/overflowSlice"
 const Topbar = () => {
     const dispatch = useAppDispatch();
     const [isOpened, setIsOpened] = useState(false);
-    const [hamburgerVisibility, setHamburgerVisibility] = useState(true);
+    const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isTopbarVisible, setIsTopbarVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
 
     const topbarContainerRef = useRef<HTMLDivElement>(null);
     const navBar = useRef<HTMLDivElement>(null);
-    const { y: currentScrollY } = useWindowScroll();
+    const lastScrollY = useRef(0);
+    const menuCloseTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    // Memoized toggle function for Hamburger
-    const toggleMenu = useCallback(() => {
-        setIsOpened(prev => !prev);
+    const closeMenu = useCallback(() => {
+        setIsOpened(false);
+        if (menuCloseTimeout.current) {
+            clearTimeout(menuCloseTimeout.current);
+        }
+        menuCloseTimeout.current = setTimeout(() => {
+            setIsMenuVisible(false);
+            menuCloseTimeout.current = null;
+        }, 1000);
     }, []);
 
-    // Handle menu open/close effects
+    const toggleMenu = useCallback(() => {
+        if (menuCloseTimeout.current) {
+            clearTimeout(menuCloseTimeout.current);
+            menuCloseTimeout.current = null;
+        }
+        setIsMenuVisible(true);
+        setIsOpened(true);
+    }, []);
+
     useEffect(() => {
         dispatch(setOverflowHidden(isOpened));
-        setHamburgerVisibility(!isOpened);
     }, [isOpened, dispatch]);
 
-    // Handle scroll behavior
     useEffect(() => {
-        if (currentScrollY === 0) {
-            setIsTopbarVisible(true);
-            topbarContainerRef.current?.classList.remove('fixed', 'floating-nav');
-            navBar.current?.classList.remove("floating-neccessary");
-        } else if (currentScrollY > lastScrollY) {
-            setIsTopbarVisible(false);
-            topbarContainerRef.current?.classList.add('fixed', 'floating-nav');
-            navBar.current?.classList.remove("floating-neccessary");
-        } else if (currentScrollY < lastScrollY) {
-            setIsTopbarVisible(true);
-            topbarContainerRef.current?.classList.add('fixed', 'floating-nav');
-            navBar.current?.classList.remove("floating-neccessary");
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY === 0) {
+                setIsTopbarVisible(true);
+                topbarContainerRef.current?.classList.remove("fixed", "floating-nav");
+                navBar.current?.classList.remove("floating-neccessary");
+            } else if (currentScrollY > lastScrollY.current) {
+                setIsTopbarVisible(false);
+                topbarContainerRef.current?.classList.add("fixed", "floating-nav");
+                navBar.current?.classList.remove("floating-neccessary");
+            } else if (currentScrollY < lastScrollY.current) {
+                setIsTopbarVisible(true);
+                topbarContainerRef.current?.classList.add("fixed", "floating-nav");
+                navBar.current?.classList.remove("floating-neccessary");
+            }
+            lastScrollY.current = currentScrollY;
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    useEffect(() => () => {
+        if (menuCloseTimeout.current) {
+            clearTimeout(menuCloseTimeout.current);
         }
-        setLastScrollY(currentScrollY);
-    }, [currentScrollY, lastScrollY]);
+    }, []);
 
     // GSAP animation for topbar visibility
     useEffect(() => {
@@ -70,11 +93,11 @@ const Topbar = () => {
                                 </h2>
                             </li>
                             <li className="cursor-pointer">
-                                {hamburgerVisibility && (
+                                {!isOpened && (
                                     <Hamburger 
                                       label="Hamburger Menu"
-                                        toggled={isOpened} 
-                                        toggle={toggleMenu} 
+                                        toggled={false}
+                                        toggle={toggleMenu}
                                         size={20}
                                     />
                                 )}
@@ -83,7 +106,7 @@ const Topbar = () => {
                     </div>
                 </nav>
             </header>
-            <FullscreenMenu isOpened={isOpened} sendAction={setIsOpened} />
+            {isMenuVisible && <FullscreenMenu isOpened={isOpened} onClose={closeMenu} />}
         </>
     );
 };

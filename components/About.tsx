@@ -38,24 +38,25 @@ const About = () => {
           </Link>
         </div>
       </div>
+      <h2 className="sr-only">Full-stack software engineering services</h2>
       <AboutText />
 
       <div className="grid grid-cols-2 max-md:grid-cols-1 gap-6 my-8">
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsRocketTakeoff color='#850E35' className="float-left mr-2 mt-1" size={24}/> 100% Project Delivery On Time</h3>
-          <p className="text-gray-600 max-[500px]:text-sm text-base">Successfully delivered over 30 production-ready web and mobile applications on schedule, ensuring client satisfaction and meeting tight deadlines.</p>
+          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsRocketTakeoff color='#850E35' className="float-left mr-2 mt-1" size={24}/> Web Product Development</h3>
+          <p className="text-gray-600 max-[500px]:text-sm text-base">Build responsive web applications and product experiences with React, Next.js, Vue.js, or WordPress.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsPersonWorkspace color='#850E35' className="float-left mr-2 mt-1" size={24}/> Cross-Platform Expertise</h3>
-          <p className="text-gray-600 max-[500px]:text-sm text-base">Developed applications for multiple platforms, including web, iOS, and Android, using <b>React Native</b>, <b>Next.js</b>, and <b>Vue.js</b>.</p>
+          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsPersonWorkspace color='#850E35' className="float-left mr-2 mt-1" size={24}/> Mobile App Development</h3>
+          <p className="text-gray-600 max-[500px]:text-sm text-base">Create cross-platform mobile experiences with React Native and Expo, connected to the services your product needs.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><CgPerformance color='#850E35' className="float-left mr-2 mt-1" size={24}/> High-Performance Solutions</h3>
-          <p className="text-gray-600 max-[500px]:text-sm text-base">Optimized applications for speed and scalability, resulting in improved user engagement and performance metrics for clients in diverse industries.</p>
+          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><CgPerformance color='#850E35' className="float-left mr-2 mt-1" size={24}/> Backend & AI Integrations</h3>
+          <p className="text-gray-600 max-[500px]:text-sm text-base">Build APIs and data integrations, RAG systems, and LLM-powered features for web products.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><FaHandHoldingHeart color='#850E35' className="float-left mr-2 mt-1" size={24}/> Client-Centric Approach</h3>
-          <p className="text-gray-600 max-[500px]:text-sm text-base">Collaborated closely with startups and enterprises to create tailored digital products, with a focus on excellent user experience and custom solutions.</p>
+          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><FaHandHoldingHeart color='#850E35' className="float-left mr-2 mt-1" size={24}/> Delivery & Operations</h3>
+          <p className="text-gray-600 max-[500px]:text-sm text-base">Ship with GitHub Actions CI/CD and Docker Swarm, then host and maintain live applications on bare-metal Linux servers.</p>
         </div>
       </div>
     </div>

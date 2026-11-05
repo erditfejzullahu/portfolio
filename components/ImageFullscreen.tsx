@@ -3,9 +3,10 @@ import React, { useCallback, memo } from "react";
 import { BsArrowsFullscreen } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { setImageOpen } from "@/store/imageFullscreenSlice";
+import type { ImageSource } from "@/data/navigations";
 
 interface ImageFullscreenProps {
-  images: string[];
+  images: ImageSource[];
   imageIndex?: number;
   additionalStyles?: string;
 }
@@ -25,11 +26,12 @@ const ImageFullscreen = memo(({
     <div 
       className={`absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center shadow-lg shadow-black m-auto ${additionalStyles}`} 
       style={{ background: "rgba(0,0,0,0.3)" }}
-      onClick={handleOpenFullscreen}
     >
       <button 
+        type="button"
         className="hover:bg-gray-400 cursor-pointer transition-all ease-in-out p-2 hover:p-2.5 bg-white rounded"
         aria-label="View image in fullscreen"
+        onClick={handleOpenFullscreen}
       >
         <BsArrowsFullscreen size={16} />
       </button>

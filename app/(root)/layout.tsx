@@ -10,7 +10,7 @@ const OverflowControl = () => {
 
     useEffect(() => {      
         document.body.style.overflowY = isOverflowHidden ? "hidden" : "auto";
-        var html = document.getElementsByTagName('html')[0]
+        const html = document.getElementsByTagName('html')[0]
         if(isOverflowHidden){
           html.classList.add("overflowHide")
         }else{

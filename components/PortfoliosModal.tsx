@@ -47,7 +47,7 @@ const PortfoliosModal = React.memo(({
             close()
             setClosing(false)
         }, 500);
-    }, [])
+    }, [close])
     
     
     const technologiesImagesOnly = useMemo(() => 
@@ -128,9 +128,8 @@ const PortfoliosModal = React.memo(({
                         src={item.image} 
                         alt={item.name} 
                         className="object-contain min-h-[120px] max-h-[120px] p-4 shadow-[0_0_10px] shadow-gray-400"
-                        // width={120}
-                        // height={120}
-                        // quality={20}
+                        width={120}
+                        height={120}
                     />
                 </div>
                 <div>
@@ -145,22 +144,26 @@ const PortfoliosModal = React.memo(({
     const navButtons = useMemo(() => (
         <div className="absolute flex flex-row flex-wrap justify-between bottom-3 left-0 right-0 mx-4">
             {hasBack && (
-                <div 
-                    className="flex flex-row items-center cursor-pointer mr-auto" 
+                <button
+                    type="button"
+                    aria-label={`Previous project: ${backButtonTitle}`}
+                    className="flex flex-row items-center cursor-pointer mr-auto border-0 bg-transparent p-0"
                     onClick={() => handleBackButton(getBackObject)}
                 >
                     <GoChevronLeft className="size-10"/>
                     <span className="font-normal text-lg max-md:text-base line-clamp-1">{backButtonTitle}</span>
-                </div>
+                </button>
             )}
             {hasNext && (
-                <div 
-                    className="flex flex-row items-center cursor-pointer ml-auto" 
+                <button
+                    type="button"
+                    aria-label={`Next project: ${nextButtonTitle}`}
+                    className="flex flex-row items-center cursor-pointer ml-auto border-0 bg-transparent p-0"
                     onClick={() => handleNextButton(getNextObject)}
                 >
                     <span className="font-normal text-lg max-md:text-base line-clamp-1">{nextButtonTitle}</span>
                     <GoChevronRight className="size-10"/>
-                </div>
+                </button>
             )}
         </div>
     ), [hasBack, hasNext, backButtonTitle, nextButtonTitle, getBackObject, getNextObject, handleBackButton, handleNextButton])
@@ -169,30 +172,31 @@ const PortfoliosModal = React.memo(({
     if (!opened || !object) return null
 
     // Destructure object properties
-    const { title, description, images, content, technologies } = object
-
-    // Memoize technology slides
+    const { title, description, content } = object
 
     return (
         <div 
             className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} 
             style={{ background: "rgba(0,0,0,0.5)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="portfolio-dialog-title"
         >
             <div className="flex flex-row max-md:flex-col justify-between max-lg:gap-6 gap-10 max-md:gap-4 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] custom-shape overflow-hidden before:skew-30! before:-top-30!">
 
-                <div 
-                    className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all" 
+                <button
+                    type="button"
+                    aria-label="Close project details"
+                    className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all shadow-lg shadow-gray-500 p-2"
                     onClick={handleClose}
                 >
-                    <div className="sticky h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">
-                        <CgClose size={25}/>
-                    </div>
-                </div>
+                    <CgClose size={25}/>
+                </button>
 
                 {/* Left Content */}
                 <div className="flex-1 flex h-full flex-col max-h-[calc(100%-100px)] max-md:max-h-full pb-6 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
                     <div className="flex-1">
-                        <div className="p-6 pb-5 flex items-center justify-center">
+                        <div id="portfolio-dialog-title" className="p-6 pb-5 flex items-center justify-center">
                             <WordAnimation 
                                 text={title} 
                                 textClasses='font-normal! text-3xl! max-lg:text-2xl! flex-wrap! flex! items-center! justify-center!'
@@ -272,5 +276,7 @@ const PortfoliosModal = React.memo(({
         </div>
     )
 })
+
+PortfoliosModal.displayName = "PortfoliosModal"
 
 export default PortfoliosModal

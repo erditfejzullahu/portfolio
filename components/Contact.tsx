@@ -71,7 +71,6 @@ const Contact = () => {
         body: JSON.stringify(data)
       });
 
-      const result = await response.json();
       if (response.ok) {
         toast.success("Email sent successfully", {
           description: "I will contact you ASAP!"
@@ -165,7 +164,7 @@ const Contact = () => {
           </div>
         ))}
         <p className={`animate-fadeInRight text-base text-gray-600 ${readMore ? "max-md:line-clamp-3" : ""}`}>
-          Looking to build a cutting-edge website, a high-performance mobile app, or a custom software solution tailored to your needs? <br /> <br /> I'm here to turn your vision into reality with innovative development, seamless functionality, and expert guidance every step of the way. Reach out today and let's collaborate on creating something truly exceptional!
+          Have a product idea, a web or mobile platform to build, or an existing system that needs new features? Tell me what you&apos;re aiming for. I can help shape the technical approach and build the frontend, backend, and integrations to support it. Share your goals, timeline, and constraints in the form, and I&apos;ll follow up to discuss next steps.
         </p>
         <button 
           onClick={toggleReadMore} 
@@ -193,7 +192,7 @@ const Contact = () => {
                     />
                   </FormControl>
                   <FormDescription className='max-md:text-sm'>
-                    Here's how you'll be introduced to me.
+                    Here&apos;s how you&apos;ll be introduced to me.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -213,7 +212,7 @@ const Contact = () => {
                     />
                   </FormControl>
                   <FormDescription className='max-md:text-sm'>
-                    From this email you'll hear from me.
+                    From this email you&apos;ll hear from me.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -256,7 +255,10 @@ const Contact = () => {
                         type="tel" 
                         placeholder='Enter your full phone number' 
                         {...field} 
-                        onInput={handlePhoneChange}
+                        onChange={(event) => {
+                          field.onChange(event);
+                          handlePhoneChange(event);
+                        }}
                       />
                     </FormControl>
                   </div>
@@ -273,7 +275,7 @@ const Contact = () => {
             name="contactReason"
             render={({field}) => (
               <FormItem>
-                <FormLabel>Select the Service You're Interested In</FormLabel>
+                <FormLabel>Select the Service You&apos;re Interested In</FormLabel>
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}

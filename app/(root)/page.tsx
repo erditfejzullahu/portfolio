@@ -8,6 +8,7 @@ const page = async () => {
   return (
     <>
     <DynamicFullscreenImageModal />
+    <main>
     <section>
       <Hero />
     </section>
@@ -23,6 +24,7 @@ const page = async () => {
     <section>
       <DynamicContactForm />
     </section>
+    </main>
     <ScrollToTop />
     <Footer />
     </>

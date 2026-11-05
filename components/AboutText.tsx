@@ -29,11 +29,15 @@ const AboutText = () => {
 
             {/* Content */}
             <p className={`animate-fadeInRight text-base text-gray-600 max-[400px]:text-sm ${readMore ? "max-md:line-clamp-5" : ""}`}>
-                Senior Full-Stack Developer with extensive experience building high-performance web and mobile applications. I specialize in React, React Native, Next.js, Vue.js, .NET, PHP, Node.js/Express.js, Tailwind CSS, and WordPress, crafting scalable and efficient solutions for diverse industries.
+                I&apos;m Erdit Fejzullahu, a full-stack software engineer who takes digital products from concept through launch and ongoing operation. I work across frontend, backend, and data to build reliable, maintainable software.
                 <br /><br />
-                With a proven track record of delivering production-ready applications, I have developed and optimized platforms for Fintech, E-commerce, SaaS, Productivity, and Enterprise solutions. My passion lies in creating beautiful, fast, and user-friendly experiences while ensuring maintainability and performance.
+                I build with TypeScript and JavaScript across React, Next.js, Vue.js, React Native, and Expo. My backend work includes Node.js, Express.js, NestJS, .NET, PHP, and WordPress, with data and realtime systems such as PostgreSQL, SQL Server, MySQL, MongoDB, Redis, Firebase, Supabase, and Socket.IO.
                 <br /><br />
-                I have collaborated with startups, enterprises, and direct clients, helping them transform ideas into fully functional digital products. Whether it's mobile apps, web platforms, APIs, or full-stack solutions, I bring a strategic and hands-on approach to every project.
+                I build retrieval-augmented generation (RAG) systems with pgvector and OpenAI, and integrate large language models (LLMs) into useful web-product workflows.
+                <br /><br />
+                I take products through CI/CD with GitHub Actions and Python deployment tooling, package and deploy with Docker and Docker Swarm, then host and maintain them on bare-metal Linux servers with Cloudflare Tunnel for secure public access.
+                <br /><br />
+                My portfolio includes learning and community products, SaaS platforms, e-commerce, and fintech experiences. Explore the selected projects to see how I pair product thinking with hands-on engineering.
             </p>
 
             {/* Read More Button */}

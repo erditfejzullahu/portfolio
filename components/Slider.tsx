@@ -15,16 +15,22 @@ const Slider = () => {
     // Memoize the slider items to prevent unnecessary re-renders
     const sliderItems = useMemo(() => 
         professionalSlider.map((src, index) => (
-            <SwiperSlide key={`${src.image}-${index}`}>
-                <Image 
-                    src={src.image} 
-                    alt={`skill-${index}`} 
-                    className="size-44 object-contain m-auto py-4" 
-                    // width={176}  // Explicit dimensions for better performance
-                    // height={176}
-                    quality={75}
-                    loading={index < 3 ? 'eager' : 'lazy'} // Lazy load images beyond first 3
-                />
+            <SwiperSlide key={src.name}>
+                {"image" in src ? (
+                    <Image
+                        src={src.image}
+                        alt={src.name}
+                        className="size-44 object-contain m-auto py-4"
+                        quality={75}
+                        loading={index < 3 ? 'eager' : 'lazy'}
+                    />
+                ) : (
+                    <src.Icon
+                        role="img"
+                        aria-label={src.name}
+                        className="size-44 object-contain m-auto py-4"
+                    />
+                )}
             </SwiperSlide>
         )), 
         []
@@ -32,6 +38,7 @@ const Slider = () => {
 
     return (
         <div className="flex flex-row items-center border-t border-b border-gray-200" id="skills">
+            <h2 className="sr-only">Technologies and tools</h2>
             {/* First Column: Image */}
             <div className="relative w-fit bg-gray-200 shadow-[0_0_10px_5px] shadow-gray-300 px-14 max-[430px]:px-4 border-r border-gray-200">
                 <div className="absolute -right-30 top-10 bottom-0 z-20">

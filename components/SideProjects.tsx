@@ -25,7 +25,6 @@ const SideProjects = React.memo(() => {
     typeof window !== "undefined" ? window.innerWidth : 1821
   );
 
-  const top = useRef<HTMLDivElement>(null);
   const bottom = useRef<HTMLDivElement>(null);
   const itemRef = useRef<HTMLDivElement>(null);
 
@@ -118,9 +117,6 @@ const SideProjects = React.memo(() => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [handleClickOutside]);
 
-  // Early return for mobile
-  if (isMobile) return null;
-
   // Memoize project items
   const projectItems = useMemo(() => 
     PersonalPortfolioSlider.map((item) => (
@@ -141,6 +137,8 @@ const SideProjects = React.memo(() => {
     )),
     [mouseEnter]
   );
+
+  if (isMobile) return null;
 
   return (
     <>
@@ -225,5 +223,7 @@ const SideProjects = React.memo(() => {
     </>
   );
 });
+
+SideProjects.displayName = "SideProjects";
 
 export default SideProjects;

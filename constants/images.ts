@@ -45,8 +45,28 @@ import elementor from "../public/images/elementor-logo-freelogovectors.net_.png"
 import vanillajs from "../public/images/javascript.webp"
 import expo from "../public/images/expo.webp"
 import efcore from "../public/images/efcore.png"
+import cloudflare from "../public/images/cloudflare.svg"
+import elasticsearch from "../public/images/elasticsearch.svg"
+import express from "../public/images/express.svg"
+import githubActions from "../public/images/github-actions.svg"
+import python from "../public/images/python.svg"
+import typescript from "../public/images/typescript.svg"
+import firebase from "../public/images/firebase.svg"
+import supabase from "../public/images/supabase.svg"
+import socketio from "../public/images/socketio.svg"
+import linux from "../public/images/linux.svg"
 
 export default {
+    firebase,
+    supabase,
+    socketio,
+    linux,
+    cloudflare,
+    elasticsearch,
+    express,
+    githubActions,
+    python,
+    typescript,
     efcore,
     expo,
     vanillajs,
