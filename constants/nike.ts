@@ -1,9 +1,9 @@
-import nike1 from "../public/nike/nike1.png"
-import nike2 from "../public/nike/nike2.png"
-import nike3 from "../public/nike/nike3.png"
-import nike4 from "../public/nike/nike4.png"
-import nike5 from "../public/nike/nike5.png"
-import nike6 from "../public/nike/nike6.png"
+import nike1 from "../public/nike/nike1.webp"
+import nike2 from "../public/nike/nike2.webp"
+import nike3 from "../public/nike/nike3.webp"
+import nike4 from "../public/nike/nike4.webp"
+import nike5 from "../public/nike/nike5.webp"
+import nike6 from "../public/nike/nike6.webp"
 
 export default {
     nike1,

@@ -1,6 +1,6 @@
-import studaflix1 from "../public/studaflix/studaflix1.png"
-import studaflix2 from "../public/studaflix/studaflix2.png"
-import studaflix3 from "../public/studaflix/studaflix3.png"
+import studaflix1 from "../public/studaflix/studaflix1.webp"
+import studaflix2 from "../public/studaflix/studaflix2.webp"
+import studaflix3 from "../public/studaflix/studaflix3.webp"
 
 export default {
     studaflix1,
