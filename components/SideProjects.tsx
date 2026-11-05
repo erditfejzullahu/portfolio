@@ -131,6 +131,7 @@ const SideProjects = React.memo(() => {
           alt={item.title}
           width={96}
           height={96}
+          sizes="96px"
           className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 border transition-all max-[1820px]:min-w-[80px] max-[1820px]:max-h-[80px]`} 
         />
       </div>

@@ -2,7 +2,6 @@
 import Hamburger from "hamburger-react"
 import { useEffect, useRef, useState, useCallback } from "react"
 import FullscreenMenu from "./FullscreenMenu"
-import gsap from "gsap"
 import { RootState, useAppDispatch } from "@/store"
 import { setTopbarVisible } from "@/store/topbarSlice"
 import { setOverflowHidden } from "@/store/overflowSlice"
@@ -73,19 +72,23 @@ const Topbar = () => {
         }
     }, []);
 
-    // GSAP animation for topbar visibility
     useEffect(() => {
-        gsap.to(topbarContainerRef.current, {
-            y: isTopbarVisible && !hasOpenDialog ? 0 : -100,
-            opacity: isTopbarVisible && !hasOpenDialog ? 1 : 0,
-            duration: 0.2
-        });
         dispatch(setTopbarVisible(isTopbarVisible));
     }, [isTopbarVisible, hasOpenDialog, dispatch]);
 
+    const shouldShowTopbar = isTopbarVisible && !hasOpenDialog;
+
     return (
         <>
-            <header ref={topbarContainerRef} className="shadow-lg fixed h-20 top-0 w-full z-[100]">
+            <header
+                ref={topbarContainerRef}
+                className="shadow-lg fixed h-20 top-0 w-full z-[100]"
+                style={{
+                    transform: shouldShowTopbar ? "translateY(0)" : "translateY(-100px)",
+                    opacity: shouldShowTopbar ? 1 : 0,
+                    transition: "transform 200ms ease, opacity 200ms ease",
+                }}
+            >
                 <nav ref={navBar} className="topbar-bg before:shadow-xl before:shadow-black h-20 relative overflow-hidden">
                     <div className="mx-auto h-full px-6 max-md:px-4">
                         <ul className="flex flex-row items-center justify-between relative z-20 h-full">

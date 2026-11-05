@@ -4,119 +4,95 @@ import { useEffect, useRef } from "react";
 
 const Cursor = () => {
   const cursorDotRef = useRef<HTMLDivElement>(null);
-  const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1025
+
   useEffect(() => {
     const cursorDot = cursorDotRef.current;
-    
     if (!cursorDot) return;
-    
+
     let mouseX = 0;
     let mouseY = 0;
     let dotX = 0;
     let dotY = 0;
-    const ease = 0.85;
-    
+    let frameId = 0;
+
     const animate = () => {
-      const dx = mouseX - dotX;
-      const dy = mouseY - dotY;
-      
-      dotX += dx * ease;
-      dotY += dy * ease;
-      
+      dotX += (mouseX - dotX) * 0.85;
+      dotY += (mouseY - dotY) * 0.85;
       cursorDot.style.left = `${dotX}px`;
       cursorDot.style.top = `${dotY}px`;
-      
-      requestAnimationFrame(animate);
+
+      if (Math.abs(mouseX - dotX) > 0.1 || Math.abs(mouseY - dotY) > 0.1) {
+        frameId = requestAnimationFrame(animate);
+      } else {
+        frameId = 0;
+      }
     };
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const setDefaultStyle = () => {
+      cursorDot.style.backgroundColor = "black";
+      cursorDot.style.border = "none";
+      cursorDot.style.boxShadow = "none";
     };
-    
-    if(windowWidth < 1024) return;
-    // Start the animation
-    animate();
-    
-    // Attach the mousemove event listener
-    document.addEventListener("mousemove", handleMouseMove);
-    
-    // Add hover effects for specific elements
-    const interactiveElements = document.querySelectorAll(".interactive");
-    const linksElements = document.querySelectorAll(".link-element")
-    const wordElements = document.querySelectorAll(".word-element")
 
-    wordElements.forEach((element) => {
-        element.addEventListener("mouseenter", () => {
-          if (cursorDot) {
-            cursorDot.style.width = "15px"; // Increase size
-            cursorDot.style.height = "15px";
-            cursorDot.style.backgroundColor = "#fff";
-            cursorDot.style.border = "1px solid #fff";
-            cursorDot.style.boxShadow = "0 0 20px #000"
-            // cursorDot.style.border = "2px solid black"; // Add border
-          }
-        });
-  
-        element.addEventListener("mouseleave", () => {
-          if (cursorDot) {
-            cursorDot.style.width = "15px"; // Reset size
-            cursorDot.style.height = "15px";
-            cursorDot.style.backgroundColor = "black"; // Reset color
-            cursorDot.style.border = "none"; // Remove border
-            cursorDot.style.boxShadow = "none";
-          }
-        });
-      });
+    const handlePointerMove = (event: PointerEvent) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      if (!frameId) frameId = requestAnimationFrame(animate);
+    };
 
-    linksElements.forEach((element) => {
-        element.addEventListener("mouseenter", () => {
-          if (cursorDot) {
-            cursorDot.style.width = "15px"; // Increase size
-            cursorDot.style.height = "15px";
-            cursorDot.style.backgroundColor = "white"; // Change color
-            // cursorDot.style.border = "2px solid black"; // Add border
-          }
-        });
-  
-        element.addEventListener("mouseleave", () => {
-          if (cursorDot) {
-            cursorDot.style.width = "15px"; // Reset size
-            cursorDot.style.height = "15px";
-            cursorDot.style.backgroundColor = "black"; // Reset color
-            cursorDot.style.border = "none"; // Remove border
-          }
-        });
-      });
+    const handlePointerOver = (event: PointerEvent) => {
+      if (!(event.target instanceof Element)) return;
+      const target = event.target.closest(".interactive, .link-element, .word-element");
+      if (!target) return;
 
-    interactiveElements.forEach((element) => {
-      element.addEventListener("mouseenter", () => {
-        if (cursorDot) {
-          cursorDot.style.width = "15px"; // Increase size
-          cursorDot.style.height = "15px";
-          cursorDot.style.backgroundColor = "white"; // Change color
-          cursorDot.style.border = "2px solid white"; // Add border
-        }
-      });
+      cursorDot.style.backgroundColor = "white";
+      cursorDot.style.border = target.classList.contains("interactive")
+        ? "2px solid white"
+        : target.classList.contains("word-element")
+          ? "1px solid white"
+          : "none";
+      cursorDot.style.boxShadow = target.classList.contains("word-element")
+        ? "0 0 20px black"
+        : "none";
+    };
 
-      element.addEventListener("mouseleave", () => {
-        if (cursorDot) {
-          cursorDot.style.width = "15px"; // Reset size
-          cursorDot.style.height = "15px";
-          cursorDot.style.backgroundColor = "black"; // Reset color
-          cursorDot.style.border = "none"; // Remove border
-        }
-      });
-    });
+    const handlePointerOut = (event: PointerEvent) => {
+      if (!(event.target instanceof Element)) return;
+      const target = event.target.closest(".interactive, .link-element, .word-element");
+      if (!target || (event.relatedTarget instanceof Node && target.contains(event.relatedTarget))) {
+        return;
+      }
+      setDefaultStyle();
+    };
 
-    // Cleanup event listeners on unmount
+    const enableCursor = () => {
+      if (!mediaQuery.matches) return;
+      document.addEventListener("pointermove", handlePointerMove, { passive: true });
+      document.addEventListener("pointerover", handlePointerOver);
+      document.addEventListener("pointerout", handlePointerOut);
+    };
+
+    const disableCursor = () => {
+      document.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerover", handlePointerOver);
+      document.removeEventListener("pointerout", handlePointerOut);
+      if (frameId) cancelAnimationFrame(frameId);
+      frameId = 0;
+      setDefaultStyle();
+    };
+
+    enableCursor();
+    const handleMediaChange = () => {
+      if (mediaQuery.matches) enableCursor();
+      else disableCursor();
+    };
+    mediaQuery.addEventListener("change", handleMediaChange);
+
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-
-      interactiveElements.forEach((element) => {
-        element.removeEventListener("mouseenter", () => {});
-        element.removeEventListener("mouseleave", () => {});
-      });
+      mediaQuery.removeEventListener("change", enableCursor);
+      mediaQuery.removeEventListener("change", handleMediaChange);
+      disableCursor();
     };
   }, []);
 

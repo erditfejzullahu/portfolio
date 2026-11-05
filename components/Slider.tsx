@@ -14,7 +14,7 @@ import Link from 'next/link';
 const Slider = () => {
     // Memoize the slider items to prevent unnecessary re-renders
     const sliderItems = useMemo(() => 
-        professionalSlider.map((src, index) => (
+        professionalSlider.map((src) => (
             <SwiperSlide key={src.name}>
                 {"image" in src ? (
                     <Image
@@ -22,7 +22,7 @@ const Slider = () => {
                         alt={src.name}
                         className="size-44 object-contain m-auto py-4"
                         quality={75}
-                        loading={index < 3 ? 'eager' : 'lazy'}
+                        sizes="176px"
                     />
                 ) : (
                     <src.Icon
@@ -63,7 +63,7 @@ const Slider = () => {
                     width={176}
                     height={176}
                     quality={75}
-                    priority  // Important above-the-fold image
+                    sizes="176px"
                 />
             </div>
 

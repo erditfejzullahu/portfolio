@@ -1,100 +1,33 @@
 "use client"
-import React, { useState, useCallback, useMemo } from 'react'
+import dynamic from 'next/dynamic'
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import WordAnimation from './WordAnimation'
 import Link from 'next/link'
 import { CgArrowBottomLeft } from 'react-icons/cg'
 import Image from 'next/image'
 import { images } from '@/constants'
-import { useForm } from "react-hook-form"
-import { contactFormSchema } from '@/lib/validations'
-import {zodResolver} from "@hookform/resolvers/zod";
-import * as z from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { RadioGroup, RadioGroupItem } from './ui/radio-group'
-import { toast } from 'sonner'
-import { countryPhoneCodes } from '@/utils/countryCodes'
-import { Textarea } from './ui/textarea'
 
-// Memoize the radio options to prevent unnecessary re-renders
-const RADIO_OPTIONS = [
-  "Custom Software Development", 
-  "SaaS Development", 
-  "Web Application Development", 
-  "Mobile App Development", 
-  "UX/UI Design", 
-  "Legacy Software Modernization", 
-  "Maintenance and Support", 
-  "Consulting and Strategy"
-];
+const ContactForm = dynamic(() => import('./ContactForm'), { ssr: false })
 
 const Contact = () => {
-  const [flagEmoji, setFlagEmoji] = useState<string | null>(null);
   const [readMore, setReadMore] = useState<boolean>(true);
+  const [shouldLoadForm, setShouldLoadForm] = useState(false);
+  const formContainerRef = useRef<HTMLDivElement>(null);
 
-  // Memoize the flag emoji function
-  const getFlagEmoji = useCallback((countryCode: string | null) => {
-    if (!countryCode) return null;
-    return [...countryCode]
-      .map(char => String.fromCodePoint(char.charCodeAt(0) + 127397))
-      .join('');
-  }, []);
+  useEffect(() => {
+    const container = formContainerRef.current;
+    if (!container) return;
 
-  const form = useForm<z.infer<typeof contactFormSchema>>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      fullName: "",
-      email: "",
-      phoneNumber: "",
-      subject: "",
-      message: "",
-      contactReason: "Custom Software Development"
-    }
-  });
-
-  // Memoize the phone change handler
-  const handlePhoneChange = useCallback((input: string) => {
-    const foundCode = Object.keys(countryPhoneCodes).find(code => input.startsWith(code));
-    const countryCode = foundCode ? countryPhoneCodes[foundCode] : null;
-    setFlagEmoji(countryCode ? getFlagEmoji(countryCode) : null);
-  }, [getFlagEmoji]);
-
-  // Memoize the form submission handler
-  const onSubmit = useCallback(async (data: z.infer<typeof contactFormSchema>) => {
-    try {
-      const response = await fetch("/api/email", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        form.reset();
-        setFlagEmoji(null);
-        toast.success("Email sent successfully", {
-          description: "I will contact you ASAP!"
-        });
-      } else if (response.status === 429) {
-        toast.error("Please wait before submitting again", {
-          description: "Try again in a few minutes.",
-        });
-      } else if (response.status === 503) {
-        toast.error("Contact form temporarily unavailable", {
-          description: "Please try again later.",
-        });
-      } else {
-        toast.error("Something went wrong", {
-          description: "Please check your details and try again.",
-        });
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShouldLoadForm(true);
+        observer.disconnect();
       }
-    } catch (error) {
-      console.error(error);
-      toast.error("Network error", {
-        description: "Please check your connection and try again.",
-      });
-    }  
-  }, [form]);
+    }, { rootMargin: "900px 0px" });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
 
   // Memoize the read more toggle handler
   const toggleReadMore = useCallback(() => {
@@ -194,163 +127,24 @@ const Contact = () => {
         </button>
       </div>
 
-      {/* Form */}
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10" id='contact-form' noValidate>
-          <div className="flex flex-row gap-2 max-md:flex-col max-md:gap-4">
-            <FormField 
-              control={form.control}
-              name="fullName"
-              render={({field}) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Full Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      autoComplete="name"
-                      maxLength={100}
-                      className="max-md:placeholder:text-sm max-md:text-sm" 
-                      placeholder='Enter your full name' 
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className='max-md:text-sm'>
-                    Here&apos;s how you&apos;ll be introduced to me.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({field}) => (
-                <FormItem className='flex-1'>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input 
-                      autoComplete="email"
-                      className='max-md:placeholder:text-sm max-md:text-sm' 
-                      type="email"
-                      maxLength={254}
-                      placeholder='Enter your email' 
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className='max-md:text-sm'>
-                    From this email you&apos;ll hear from me.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <div ref={formContainerRef} id="contact-form" className="min-h-[700px]" aria-busy={!shouldLoadForm}>
+        {shouldLoadForm ? (
+          <ContactForm />
+        ) : (
+          <div aria-hidden="true" className="mt-10 min-h-[700px] animate-pulse space-y-6">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="h-24 rounded bg-gray-100" />
+              <div className="h-24 rounded bg-gray-100" />
+            </div>
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="h-24 rounded bg-gray-100" />
+              <div className="h-24 rounded bg-gray-100" />
+            </div>
+            <div className="h-36 rounded bg-gray-100" />
+            <div className="h-40 rounded bg-gray-100" />
           </div>
-
-          <div className="flex flex-row gap-2 max-md:flex-col max-md:gap-4">
-            <FormField 
-              control={form.control}
-              name="subject"
-              render={({field}) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Subject</FormLabel>
-                  <FormControl>
-                    <Input 
-                      className="max-md:placeholder:text-sm max-md:text-sm" 
-                      maxLength={150}
-                      placeholder='Enter your subject' 
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className='max-md:text-sm'>
-                    Briefly describe the reason for your contact.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField 
-              control={form.control}
-              name="phoneNumber"
-              render={({field}) => (
-                <FormItem className='flex-1'>
-                  <FormLabel>Phone Number</FormLabel>
-                  <div className="relative flex items-center">
-                    {flagEmoji && <div className="absolute left-2 text-2xl">{flagEmoji}</div>}
-                    <FormControl>
-                      <Input 
-                        className={`${flagEmoji ? "pl-9" : ""} transition-all duration-100 max-md:placeholder:text-sm max-md:text-sm`} 
-                        type="tel" 
-                        placeholder='Enter your full phone number' 
-                        {...field} 
-                        onChange={(event) => {
-                          field.onChange(event);
-                          handlePhoneChange(event.target.value);
-                        }}
-                      />
-                    </FormControl>
-                  </div>
-                  <FormDescription className='max-md:text-sm'>
-                    Enter full number with prefix. (eg. +383)
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField 
-            control={form.control}
-            name="contactReason"
-            render={({field}) => (
-              <FormItem>
-                <FormLabel>Select the Service You&apos;re Interested In</FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    className="grid grid-cols-2 items-center mt-2 max-[558px]:grid-cols-1"
-                  >
-                    {RADIO_OPTIONS.map((option) => (
-                      <FormItem key={option} className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value={option}/>
-                        </FormControl>
-                        <FormLabel className="font-normal text-base max-md:text-sm">
-                          {option}
-                        </FormLabel>
-                      </FormItem>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField 
-            control={form.control}
-            name="message"
-            render={({field}) => (
-              <FormItem>
-                <FormLabel>Message</FormLabel>
-                <FormControl>
-                  <Textarea 
-                    className="max-md:placeholder:text-sm max-md:text-sm" 
-                    rows={5} 
-                    maxLength={5000}
-                    placeholder='Tell me about your project, goals, and any specific requirements you have.' 
-                    {...field}
-                  />
-                </FormControl>
-                <FormDescription className='max-md:text-sm'>
-                  Provide as many details as possible about your project, timeline, and expectations. This helps me understand your needs better and offer the best possible solution.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type='submit' disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? "Sending..." : "Submit"}
-          </Button>
-        </form>
-      </Form>
+        )}
+      </div>
     </div>
   );
 };

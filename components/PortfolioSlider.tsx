@@ -1,4 +1,5 @@
 "use client"
+import dynamic from 'next/dynamic'
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import WordAnimation from './WordAnimation'
 import { HiArrowTrendingDown } from 'react-icons/hi2'
@@ -9,15 +10,17 @@ import { Autoplay } from 'swiper/modules'
 import { PortfolioSliderInterface, PersonalPortfolioSlider } from '@/data/navigations'
 import { Swiper as SwiperType } from 'swiper'
 import { MdOpenInFull } from 'react-icons/md'
-import PortfoliosModal from './PortfoliosModal'
 import { RootState, useAppDispatch } from '@/store'
 import { setOverflowHidden } from '@/store/overflowSlice'
 import { useSelector } from 'react-redux'
-import AllPortfoliosModal from './AllPortfoliosModal'
 import { resetTrigger } from '@/store/triggerModalSlice'
+
+const PortfoliosModal = dynamic(() => import('./PortfoliosModal'), { ssr: false })
+const AllPortfoliosModal = dynamic(() => import('./AllPortfoliosModal'), { ssr: false })
 
 const PortfolioSlider = () => {
     const [showAllProjsModal, setShowAllProjsModal] = useState<boolean>(false)
+    const [hasOpenedAllProjects, setHasOpenedAllProjects] = useState(false)
     const [showHoverDiv, setShowHoverDiv] = useState<{index: number[], object: PortfolioSliderInterface | null}>({
         index: [],
         object: null
@@ -94,7 +97,10 @@ const PortfolioSlider = () => {
                     <div className="absolute -right-30 top-10 bottom-0 z-20">
                         <button 
                             className="flex flex-row items-center gap-1 px-2 py-1 font-normal text-sm bg-white rounded-sm shadow-lg shadow-gray-300 hover:bg-gray-300 cursor-pointer -rotate-50"
-                            onClick={() => setShowAllProjsModal(true)}
+                            onClick={() => {
+                                setHasOpenedAllProjects(true)
+                                setShowAllProjsModal(true)
+                            }}
                             aria-label="Explore all projects"
                         >
                             <WordAnimation text="Explore my expertise" textClasses="text-sm! font-normal!"/>
@@ -108,7 +114,7 @@ const PortfolioSlider = () => {
                         width={176}
                         height={176}
                         quality={75}
-                        priority
+                        sizes="176px"
                     />
                 </div>
 
@@ -148,7 +154,7 @@ const PortfolioSlider = () => {
                                                     className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"
                                                     width={80}
                                                     height={80}
-                                                    loading={index < 4 ? 'eager' : 'lazy'}
+                                                    sizes="80px"
                                                 />
                                             </div>
                                             <div className="flex flex-col items-center gap-1 mt-2">
@@ -177,23 +183,27 @@ const PortfolioSlider = () => {
                 </div>
             </div>
 
-            <PortfoliosModal 
-                object={activeProject}
-                opened={showModal} 
-                hasBack={navigationState.hasBack} 
-                hasNext={navigationState.hasNext} 
-                close={handleClose} 
-                nextButtonTitle={navigationState.nextPortfolioApp} 
-                backButtonTitle={navigationState.backPortfolioApp}
-                handleNextButton={(item) => handleOpenModal(item, "Next")}
-                handleBackButton={(item) => handleOpenModal(item, "Back")}
-            />
+            {showModal && (
+                <PortfoliosModal
+                    object={activeProject}
+                    opened={showModal}
+                    hasBack={navigationState.hasBack}
+                    hasNext={navigationState.hasNext}
+                    close={handleClose}
+                    nextButtonTitle={navigationState.nextPortfolioApp}
+                    backButtonTitle={navigationState.backPortfolioApp}
+                    handleNextButton={(item) => handleOpenModal(item, "Next")}
+                    handleBackButton={(item) => handleOpenModal(item, "Back")}
+                />
+            )}
 
-            <AllPortfoliosModal 
-                opened={showAllProjsModal}
-                close={() => setShowAllProjsModal(false)}
-                openSpecificProject={handleOpenSpecificProject}
-            />
+            {hasOpenedAllProjects && (
+                <AllPortfoliosModal
+                    opened={showAllProjsModal}
+                    close={() => setShowAllProjsModal(false)}
+                    openSpecificProject={handleOpenSpecificProject}
+                />
+            )}
         </>
     )
 }

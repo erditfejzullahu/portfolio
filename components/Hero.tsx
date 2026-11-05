@@ -59,7 +59,7 @@ const Hero = () => {
                 <div className="absolute animate-heroImg -top-6 -right-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.maintenance} alt='web developer' className="size-28"/>
                 </div>
-                <Image src={images.erditi} priority={true} fetchPriority="high" className="object-contain object-center max-h-[500px] max-lg:max-h-[340px] max-md:max-h-[260px] translate-y-4 rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]" alt="Erdit Fejzullahu, full-stack software engineer" style={{background: "#f9f9f9"}}/>
+                <Image src={images.erditi} preload sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 40vw" className="object-contain object-center max-h-[500px] max-lg:max-h-[340px] max-md:max-h-[260px] translate-y-4 rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]" alt="Erdit Fejzullahu, full-stack software engineer" style={{background: "#f9f9f9"}}/>
             </div>
 
         </div>
