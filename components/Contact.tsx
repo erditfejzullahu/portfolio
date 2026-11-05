@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState, useCallback, useMemo, useEffect } from 'react'
 import WordAnimation from './WordAnimation'
 import Link from 'next/link'
 import { CgArrowBottomLeft } from 'react-icons/cg'
@@ -32,6 +32,31 @@ const RADIO_OPTIONS = [
 const Contact = () => {
   const [flagEmoji, setFlagEmoji] = useState<string | null>(null);
   const [readMore, setReadMore] = useState<boolean>(true);
+
+  useEffect(() => {
+    const contactSection = document.getElementById('contact-me');
+    if (!contactSection) return;
+
+    let hasEnteredContact = false;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        hasEnteredContact = true;
+        return;
+      }
+
+      if (hasEnteredContact && window.location.hash === '#contact-me') {
+        window.history.replaceState(
+          window.history.state,
+          '',
+          `${window.location.pathname}${window.location.search}`
+        );
+        hasEnteredContact = false;
+      }
+    });
+
+    observer.observe(contactSection);
+    return () => observer.disconnect();
+  }, []);
 
   // Memoize the flag emoji function
   const getFlagEmoji = useCallback((countryCode: string | null) => {

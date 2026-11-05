@@ -1,13 +1,18 @@
 "use client"
-import React, { useEffect, useState } from 'react'
-import WordAnimation from './WordAnimation'
-import { BsStarFill } from 'react-icons/bs'
-import { TbWorldBolt } from 'react-icons/tb'
-import { FaMobile } from 'react-icons/fa'
-import { PersonalPortfolioSlider, PortfolioSliderInterface } from '@/data/navigations'
-import Image from 'next/image'
-import { MdOpenInFull } from 'react-icons/md'
-import { CgClose } from 'react-icons/cg'
+
+import React, { useEffect, useState } from "react"
+import Image from "next/image"
+import { ArrowUpRight, Globe2, Layers3, Smartphone } from "lucide-react"
+import { PersonalPortfolioSlider, PortfolioSliderInterface } from "@/data/navigations"
+import { useAppDispatch } from "@/store"
+import { setDialogOpen } from "@/store/topbarSlice"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
 
 interface AllPortfoliosModalProps {
     opened: boolean;
@@ -15,92 +20,121 @@ interface AllPortfoliosModalProps {
     openSpecificProject: (item: PortfolioSliderInterface) => void;
 }
 
-const AllPortfoliosModal = ({opened, close, openSpecificProject}: AllPortfoliosModalProps) => (
-    opened ? <AllPortfoliosModalContent close={close} openSpecificProject={openSpecificProject} /> : null
-);
+type ProjectType = "All" | "Web" | "Mobile"
 
-const AllPortfoliosModalContent = ({close, openSpecificProject}: Omit<AllPortfoliosModalProps, "opened">) => {
+const filters: { label: ProjectType; icon: typeof Layers3 }[] = [
+    { label: "All", icon: Layers3 },
+    { label: "Web", icon: Globe2 },
+    { label: "Mobile", icon: Smartphone },
+]
 
-    type Selected = "All" | "Web" | "Mobile"
-    const [typeSelected, setTypeSelected] = useState<Selected>("All")
-    const [closing, setClosing] = useState<boolean>(false)
-
-    const showWorks = typeSelected === "All"
+const AllPortfoliosModal = ({ opened, close, openSpecificProject }: AllPortfoliosModalProps) => {
+    const dispatch = useAppDispatch()
+    const [typeSelected, setTypeSelected] = useState<ProjectType>("All")
+    const visibleProjects = typeSelected === "All"
         ? PersonalPortfolioSlider
         : PersonalPortfolioSlider.filter((item) => item.type === typeSelected)
 
     useEffect(() => {
-        if(closing){
-            const timeout = setTimeout(() => {
-                close();
-            }, 400);
-            return () => clearTimeout(timeout);
-      }
-    }, [closing, close])
-
-    const handleClose = () => {
-        setClosing(true)
-    }
-    
+        dispatch(setDialogOpen({ id: "all-portfolios", isOpen: opened }))
+        return () => {
+            dispatch(setDialogOpen({ id: "all-portfolios", isOpen: false }))
+        }
+    }, [dispatch, opened])
 
     return (
-        <div className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} style={{background: "rgba(0,0,0,0.5)"}} role="dialog" aria-modal="true" aria-labelledby="all-portfolios-dialog-title">
-        <div className={`flex gap-10 max-lg:gap-6 py-6! flex-col h-[90%] w-[90%] relative animate-fadeInRight px-4 bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] overflow-hidden! custom-shape before:skew-30! before:-top-30!`}>
-
-            
-            <button type="button" aria-label="Close projects" className="absolute right-0 top-0 z-[999] cursor-pointer hover:bg-gray-200 transition-all shadow-lg shadow-gray-500 p-2" onClick={handleClose}>
-                <CgClose size={25}/>
-            </button>
-
-            {/* <div className="h-full space-y-6 overflow-hidden!"> */}
-                <div className="flex-none">
-                    <div id="all-portfolios-dialog-title" className="mx-auto flex items-center justify-center">
-                        <WordAnimation text={"Client Work"} textClasses='font-normal! text-4xl! max-sm:text-2xl!'/>
-                    </div>
-                    <div className="mt-4 max-lg:mt-0 flex flex-row gap-4 items-center justify-center flex-wrap">
-                        <button type="button" aria-pressed={typeSelected === "All"} className={`portfolio-switch_border border-b max-[500px]:text-sm border-transparent cursor-pointer items-center ${typeSelected === "All" ? "font-semibold border-black! after:hidden!" : "font-normal"} transition-all flex flex-row gap-1`} onClick={() => setTypeSelected("All")}>
-                            All
-                            <BsStarFill color='#850E35' className="mb-0.5" size={20}/>
-                        </button>
-                        <button type="button" aria-pressed={typeSelected === "Web"} className={`portfolio-switch_border border-b max-[500px]:text-sm border-transparent cursor-pointer items-center ${typeSelected === "Web" ? "font-semibold border-black! after:hidden!" : "font-normal"} transition-all flex flex-row gap-1`} onClick={() => setTypeSelected("Web")}>
-                            Web
-                            <TbWorldBolt color='#850E35' size={20}/>
-                        </button>
-                        <button type="button" aria-pressed={typeSelected === "Mobile"} className={`portfolio-switch_border border-b max-[500px]:text-sm border-transparent cursor-pointer items-center ${typeSelected === "Mobile" ? "font-semibold border-black! after:hidden!" : "font-normal"} transition-all flex flex-row gap-1`} onClick={() => setTypeSelected("Mobile")}>
-                            Mobile
-                            <FaMobile color='#850E35' size={20}/>
-                        </button>
-                    </div>
-                </div>
-
-                <div className="h-full flex-1 overflow-x-hidden overflow-y-auto grid grid-cols-3 max-lg:grid-cols-2 max-sm:gap-4 gap-10 max-[500px]:grid-cols-1!">
-                    {showWorks.map((item, idx) => (
-                        <div key={idx} className="animate-fadeInRight group relative h-fit">
-                            <div className="absolute group-hover:opacity-100 group-focus-within:opacity-100 opacity-0 transition-all ease-in-out flex items-center justify-center w-full h-full left-0 top-0" style={{background: "rgba(0,0,0,0.7)"}}>
-                                <button 
-                                    className="hover:bg-gray-300 cursor-pointer font-normal flex flex-row items-center justify-center group gap-1 bg-white px-4 py-2 shadow-lg shadow-gray-800"
-                                    onClick={() => openSpecificProject(item)}
-                                >
-                                    <p className='text-base! font-normal!'>See details</p>
-                                    <MdOpenInFull size={24} className="shadow-lg shadow-gray-400 bg-transparent group-hover:shadow-none ml-2"/>
-                                </button>
-                            </div>
-                            <div className="shadow-lg shadow-gray-500 h-fit">
-                                <div>
-                                    <Image src={item.image} alt={item.title} className="size-full max-h-[250px] h-full object-cover"/>
-                                </div>
-                            </div>  
-                            <div className="mt-2">
-                                <h4 className="text-xl text-center font-normal">{item.title}</h4>
-                            </div>
+        <Dialog open={opened} onOpenChange={(isOpen) => !isOpen && close()}>
+            <DialogContent className="flex h-[min(88vh,900px)] w-[calc(100%-1.5rem)] max-w-6xl flex-col gap-0 overflow-hidden rounded-3xl border-0 bg-[#faf9f7] p-0 shadow-[0_24px_100px_rgba(0,0,0,0.28)] sm:max-w-6xl">
+                <DialogHeader className="shrink-0 border-b border-black/[0.07] px-6 pb-5 pt-7 text-left sm:px-9 sm:pb-6 sm:pt-8">
+                    <div className="flex flex-col gap-5 pr-8 sm:flex-row sm:items-end sm:justify-between sm:gap-8">
+                        <div>
+                            <p className="mb-2 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-[#850e35]">
+                                Selected projects
+                            </p>
+                            <DialogTitle className="text-3xl font-semibold tracking-[-0.045em] text-[#171717] sm:text-4xl">
+                                Client Work
+                            </DialogTitle>
+                            <DialogDescription className="mt-2 max-w-lg text-sm leading-6 text-neutral-500">
+                                A selection of digital products built for real people and ambitious teams.
+                            </DialogDescription>
                         </div>
-                    ))}
-                </div>
-            {/* </div> */}
 
-        </div>
-    </div>
-  )
+                        <div role="group" aria-label="Filter projects" className="flex w-fit items-center gap-1 rounded-full border border-black/[0.07] bg-white p-1 shadow-sm">
+                            {filters.map(({ label, icon: Icon }) => {
+                                const isSelected = typeSelected === label
+
+                                return (
+                                    <button
+                                        key={label}
+                                        type="button"
+                                        aria-pressed={isSelected}
+                                        onClick={() => setTypeSelected(label)}
+                                        className={`inline-flex min-h-10 items-center gap-2 rounded-full px-3.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#850e35] focus-visible:ring-offset-2 ${
+                                            isSelected
+                                                ? "bg-[#171717] text-white"
+                                                : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+                                        }`}
+                                    >
+                                        <Icon aria-hidden="true" size={15} strokeWidth={1.8} />
+                                        {label}
+                                    </button>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <p className="mt-5 text-xs font-medium text-neutral-400" aria-live="polite">
+                        {visibleProjects.length} {visibleProjects.length === 1 ? "project" : "projects"}
+                    </p>
+                </DialogHeader>
+
+                <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-6 py-6 sm:px-9 sm:py-8">
+                    <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-3">
+                        {visibleProjects.map((item) => {
+                            const TypeIcon = item.type === "Web" ? Globe2 : Smartphone
+
+                            return (
+                                <button
+                                    key={item.title}
+                                    type="button"
+                                    onClick={() => openSpecificProject(item)}
+                                    aria-label={`View ${item.title} project details`}
+                                    className="group min-w-0 rounded-2xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#850e35] focus-visible:ring-offset-4"
+                                >
+                                    <span className="relative block aspect-[1.55] overflow-hidden rounded-2xl bg-neutral-200">
+                                        <Image
+                                            src={item.image}
+                                            alt=""
+                                            fill
+                                            sizes="(max-width: 639px) 90vw, (max-width: 1023px) 44vw, 29vw"
+                                            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04] group-focus-visible:scale-[1.04]"
+                                        />
+                                        <span className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/5 opacity-70 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
+                                        <span className="absolute left-3.5 top-3.5 inline-flex items-center gap-1.5 rounded-full border border-white/30 bg-black/35 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md">
+                                            <TypeIcon aria-hidden="true" size={13} strokeWidth={1.8} />
+                                            {item.type}
+                                        </span>
+                                        <span className="absolute bottom-3.5 right-3.5 flex size-10 translate-y-1 items-center justify-center rounded-full bg-white text-neutral-900 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+                                            <ArrowUpRight aria-hidden="true" size={18} strokeWidth={1.8} />
+                                        </span>
+                                    </span>
+                                    <span className="mt-3.5 flex items-start justify-between gap-3">
+                                        <span className="line-clamp-2 text-[0.98rem] font-semibold leading-6 tracking-[-0.02em] text-neutral-900 transition-colors group-hover:text-[#850e35]">
+                                            {item.title}
+                                        </span>
+                                        <ArrowUpRight
+                                            aria-hidden="true"
+                                            size={17}
+                                            className="mt-1 shrink-0 text-neutral-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#850e35]"
+                                        />
+                                    </span>
+                                </button>
+                            )
+                        })}
+                    </div>
+                </div>
+            </DialogContent>
+        </Dialog>
+    )
 }
 
 export default AllPortfoliosModal

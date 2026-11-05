@@ -324,24 +324,85 @@ b {
 }
 
 .portfolio-content {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .portfolio-content strong {
-  color:#000;
+  color: #111827;
+  font-weight: 600;
 }
 
-.portfolio-content h2, .portfolio-content h3 {
-  margin-bottom: 5px;
-  margin-top:15px;
-  font-weight:700;
-  color:#000;
-  font-size:20px;
+.portfolio-content p {
+  margin: 0 0 1.15rem;
+  line-height: 1.8;
+}
+
+.portfolio-content h2,
+.portfolio-content h3,
+.portfolio-content h4 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  color: #111827;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.portfolio-content h2 {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.portfolio-content h3 {
+  font-size: 1.1rem;
 }
 
 .portfolio-content h4 {
-  font-weight:500;
-  color:#000;
+  font-size: 1rem;
+}
+
+.portfolio-content ul,
+.portfolio-content ol {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio-content li {
+  position: relative;
+  margin-top: 0.55rem;
+  padding-left: 1.1rem;
+  line-height: 1.75;
+}
+
+.portfolio-content li::before {
+  position: absolute;
+  top: 0.78em;
+  left: 0.1rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 9999px;
+  background: #9ca3af;
+  content: "";
+}
+
+.portfolio-content li > ul,
+.portfolio-content li > ol {
+  margin-top: 0.4rem;
+  margin-bottom: 0.65rem;
+  padding-left: 0.5rem;
+}
+
+.portfolio-content li > ul li::before,
+.portfolio-content li > ol li::before {
+  width: 0.25rem;
+  height: 0.25rem;
+  background: #d1d5db;
+}
+
+.portfolio-content hr {
+  margin: 1.75rem 0;
+  border-color: #e5e7eb;
 }
 
 .custom-shape::before {

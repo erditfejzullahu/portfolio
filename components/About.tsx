@@ -1,12 +1,11 @@
 import React from 'react'
 import WordAnimation from './WordAnimation'
-import { CgArrowBottomLeft, CgPerformance } from 'react-icons/cg'
+import { CgArrowBottomLeft } from 'react-icons/cg'
 import Link from 'next/link'
 import Image from 'next/image'
 import { images } from '@/constants'
-import { BsPersonWorkspace, BsRocketTakeoff } from 'react-icons/bs'
-import { FaHandHoldingHeart } from 'react-icons/fa'
 import AboutText from './AboutText'
+import { BrainCircuit, Code2, ServerCog, Smartphone } from 'lucide-react'
 
 const About = () => {
   return (
@@ -43,19 +42,39 @@ const About = () => {
 
       <div className="grid grid-cols-2 max-md:grid-cols-1 gap-6 my-8">
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsRocketTakeoff color='#850E35' className="float-left mr-2 mt-1" size={24}/> Web Product Development</h3>
+          <h3 className="flex items-center gap-3 text-2xl max-md:text-xl font-normal text-black mb-1">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#850E35]/10 text-[#850E35]" aria-hidden="true">
+              <Code2 size={22} />
+            </span>
+            Web Product Development
+          </h3>
           <p className="text-gray-600 max-[500px]:text-sm text-base">Build responsive web applications and product experiences with React, Next.js, Vue.js, or WordPress.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><BsPersonWorkspace color='#850E35' className="float-left mr-2 mt-1" size={24}/> Mobile App Development</h3>
+          <h3 className="flex items-center gap-3 text-2xl max-md:text-xl font-normal text-black mb-1">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#850E35]/10 text-[#850E35]" aria-hidden="true">
+              <Smartphone size={22} />
+            </span>
+            Mobile App Development
+          </h3>
           <p className="text-gray-600 max-[500px]:text-sm text-base">Create cross-platform mobile experiences with React Native and Expo, connected to the services your product needs.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><CgPerformance color='#850E35' className="float-left mr-2 mt-1" size={24}/> Backend & AI Integrations</h3>
+          <h3 className="flex items-center gap-3 text-2xl max-md:text-xl font-normal text-black mb-1">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#850E35]/10 text-[#850E35]" aria-hidden="true">
+              <BrainCircuit size={22} />
+            </span>
+            Backend & AI Integrations
+          </h3>
           <p className="text-gray-600 max-[500px]:text-sm text-base">Build APIs and data integrations, RAG systems, and LLM-powered features for web products.</p>
         </div>
         <div className="shadow-lg shadow-[rgba(0,0,0,0.15)] p-4">
-          <h3 className="text-2xl max-md:text-xl font-normal text-black mb-1"><FaHandHoldingHeart color='#850E35' className="float-left mr-2 mt-1" size={24}/> Delivery & Operations</h3>
+          <h3 className="flex items-center gap-3 text-2xl max-md:text-xl font-normal text-black mb-1">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#850E35]/10 text-[#850E35]" aria-hidden="true">
+              <ServerCog size={22} />
+            </span>
+            Delivery & Operations
+          </h3>
           <p className="text-gray-600 max-[500px]:text-sm text-base">Ship with GitHub Actions CI/CD and Docker Swarm, then host and maintain live applications on bare-metal Linux servers.</p>
         </div>
       </div>

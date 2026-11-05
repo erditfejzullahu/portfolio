@@ -690,7 +690,6 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         images: [awwards.awwards1, awwards.awwards2, awwards.awwards3, awwards.awwards4, awwards.awwards5, awwards.awwards6, awwards.awwards7],
         content: `
 
-        <a target="_blank" href="https://awwwards.hajt24.xyz/">Click here for better experience of animations</a>
         <h3>Key Features</h3>
 <ul>
     <li>✅ <strong>GSAP-Powered Animations:</strong> Showcases advanced motion effects, transitions, and interactions.</li>
@@ -838,7 +837,6 @@ export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
         image: shokufluturimit.shoku1,
         images: [shokufluturimit.shoku1, shokufluturimit.shoku2, shokufluturimit.shoku3, shokufluturimit.shoku4, shokufluturimit.shoku5, shokufluturimit.shoku6, shokufluturimit.shoku7, shokufluturimit.shoku8, shokufluturimit.shoku9, shokufluturimit.shoku10, shokufluturimit.shoku11, shokufluturimit.shoku12, shokufluturimit.shoku13, shokufluturimit.shoku14, shokufluturimit.shoku15, shokufluturimit.shoku16, shokufluturimit.shoku17, shokufluturimit.shoku18, shokufluturimit.shoku19, shokufluturimit.shoku20, ],
         content: `
-        <a target="_blank" href="https://shokufluturimit.com">Click here to view the page in production</a>
             <h3>Key Features</h3>
 <ul>
     <li>✅ <strong>Claim Submission:</strong> Users can easily file a compensation claim for delayed or canceled flights.</li>

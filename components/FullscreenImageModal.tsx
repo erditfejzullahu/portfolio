@@ -1,5 +1,5 @@
 "use client"
-import React, { memo, useCallback, useMemo } from 'react'
+import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import { Dialog, DialogClose, DialogContent, DialogTitle } from './ui/dialog'
 import { CgClose } from 'react-icons/cg'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,6 +9,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { setImageClose } from '@/store/imageFullscreenSlice';
+import { setDialogOpen } from '@/store/topbarSlice';
 
 
 const FullscreenImageModal = () => {
@@ -17,6 +18,14 @@ const FullscreenImageModal = () => {
     const handleClose = useCallback(() => {
       dispatch(setImageClose())
     }, [dispatch])
+
+    useEffect(() => {
+      const isDialogOpen = isOpened && images.length > 0
+      dispatch(setDialogOpen({ id: "fullscreen-image", isOpen: isDialogOpen }))
+      return () => {
+        dispatch(setDialogOpen({ id: "fullscreen-image", isOpen: false }))
+      }
+    }, [dispatch, images.length, isOpened])
 
     const swiperSlides = useMemo(() => (
       images.map((image, index) => (
@@ -37,10 +46,10 @@ const FullscreenImageModal = () => {
 
     if(isOpened === false || images.length === 0) return null;
   return (
-    <Dialog open={isOpened}>
+    <Dialog open={isOpened} onOpenChange={(open) => !open && handleClose()}>
       <DialogContent style={{ zIndex: 999999 }} className="h-[90%] min-w-[90%] [&>button]:hidden">
         <DialogClose asChild>
-            <div className="absolute right-0 top-0 z-[999] cursor-pointer rounded-tr-lg bg-white hover:bg-gray-200 transition-all" onClick={handleClose}>
+            <div className="absolute right-0 top-0 z-[999] cursor-pointer rounded-tr-lg bg-white hover:bg-gray-200 transition-all">
                 <div className="sticky bg-transparent h-fit w-fit mx-auto shadow-lg shadow-gray-500 p-2">
                     <CgClose size={25}/>
                 </div>

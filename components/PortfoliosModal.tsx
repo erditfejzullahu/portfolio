@@ -10,6 +10,8 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import ImageFullscreen from './ImageFullscreen'
 import { CgClose } from 'react-icons/cg'
 import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import { useAppDispatch } from '@/store'
+import { setDialogOpen } from '@/store/topbarSlice'
 import "swiper/css"
 import "swiper/css/pagination"
 import "swiper/css/navigation"
@@ -38,6 +40,7 @@ const PortfoliosModal = React.memo(({
     backButtonTitle
 }: Props) => {
     
+    const dispatch = useAppDispatch()
     const [closing, setClosing] = useState(false)
     const swiperRef = useRef<SwiperType | null>(null)
     // Memoized handlers
@@ -50,9 +53,9 @@ const PortfoliosModal = React.memo(({
     }, [close])
     
     
-    const technologiesImagesOnly = useMemo(() => 
-        object?.technologies.map((tech) => tech.image), 
-        [object?.technologies]
+    const caseStudyContent = useMemo(
+        () => object?.content.replace(/[\p{Extended_Pictographic}\p{Emoji_Modifier}\p{Regional_Indicator}\uFE0F\u200D\u20E3]/gu, "") ?? "",
+        [object?.content]
     )
 
     const getNextObject = useMemo(() => 
@@ -96,11 +99,19 @@ const PortfoliosModal = React.memo(({
         swiperRef.current?.autoplay.start()
     }, [])
 
+    useEffect(() => {
+        const isDialogOpen = opened && object !== null
+        dispatch(setDialogOpen({ id: "portfolio-details", isOpen: isDialogOpen }))
+        return () => {
+            dispatch(setDialogOpen({ id: "portfolio-details", isOpen: false }))
+        }
+    }, [dispatch, object, opened])
+
     // Memoize main image slides
     const imageSlides = useMemo(() => 
         object?.images.map((image, index) => (
             <SwiperSlide key={index}>
-                <div 
+                <div
                     className="w-fit relative mx-auto p-2 pb-4 cursor-pointer group transition-all" 
                     onMouseEnter={pauseAutoplay} 
                     onMouseLeave={startAutoplay}
@@ -122,47 +133,44 @@ const PortfoliosModal = React.memo(({
     const techSlides = useMemo(() => 
         object?.technologies.map((item, index) => (
             <SwiperSlide key={index}>
-                <div className="group relative cursor-pointer border">
-                    <ImageFullscreen images={technologiesImagesOnly!} imageIndex={index}/>
+                <div className="flex h-32 items-center justify-center rounded-xl border border-gray-200 bg-white p-4 transition-colors hover:border-gray-400">
                     <Image 
                         src={item.image} 
                         alt={item.name} 
-                        className="object-contain min-h-[120px] max-h-[120px] p-4 shadow-[0_0_10px] shadow-gray-400"
-                        width={120}
-                        height={120}
+                        className="max-h-16 max-w-16 object-contain"
+                        width={64}
+                        height={64}
                     />
                 </div>
-                <div>
-                    <p className="text-center font-semibold mt-2">{item.name}</p>
-                </div>
+                <p className="mt-3 min-h-10 text-center text-sm font-medium leading-5 text-gray-700">{item.name}</p>
             </SwiperSlide>
         )),
-        [object?.technologies, technologiesImagesOnly]
+        [object?.technologies]
     )
 
     // Memoize navigation buttons
     const navButtons = useMemo(() => (
-        <div className="absolute flex flex-row flex-wrap justify-between bottom-3 left-0 right-0 mx-4">
+        <div className="flex min-h-14 shrink-0 items-center justify-between gap-4 border-t border-gray-200 bg-white px-6 py-2 max-md:px-4">
             {hasBack && (
                 <button
                     type="button"
                     aria-label={`Previous project: ${backButtonTitle}`}
-                    className="flex flex-row items-center cursor-pointer mr-auto border-0 bg-transparent p-0"
+                    className="mr-auto flex min-h-11 min-w-0 max-w-[48%] cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-left hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
                     onClick={() => handleBackButton(getBackObject)}
                 >
-                    <GoChevronLeft className="size-10"/>
-                    <span className="font-normal text-lg max-md:text-base line-clamp-1">{backButtonTitle}</span>
+                    <GoChevronLeft className="size-8 shrink-0"/>
+                    <span className="min-w-0 truncate text-base font-normal max-md:text-sm">{backButtonTitle}</span>
                 </button>
             )}
             {hasNext && (
                 <button
                     type="button"
                     aria-label={`Next project: ${nextButtonTitle}`}
-                    className="flex flex-row items-center cursor-pointer ml-auto border-0 bg-transparent p-0"
+                    className="ml-auto flex min-h-11 min-w-0 max-w-[48%] cursor-pointer items-center gap-1 border-0 bg-transparent p-0 text-right hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-700"
                     onClick={() => handleNextButton(getNextObject)}
                 >
-                    <span className="font-normal text-lg max-md:text-base line-clamp-1">{nextButtonTitle}</span>
-                    <GoChevronRight className="size-10"/>
+                    <span className="min-w-0 truncate text-base font-normal max-md:text-sm">{nextButtonTitle}</span>
+                    <GoChevronRight className="size-8 shrink-0"/>
                 </button>
             )}
         </div>
@@ -172,17 +180,22 @@ const PortfoliosModal = React.memo(({
     if (!opened || !object) return null
 
     // Destructure object properties
-    const { title, description, content } = object
+    const { title, description } = object
 
     return (
         <div 
-            className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`} 
+            className={`fixed h-screen w-screen left-0 flex items-center justify-center top-0 z-[9999] overscroll-none ${closing ? "animate-fadeOutLeft" : "animate-fadeIn"}`}
             style={{ background: "rgba(0,0,0,0.5)" }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="portfolio-dialog-title"
+            onClick={(event) => {
+                if (event.target === event.currentTarget) {
+                    handleClose()
+                }
+            }}
         >
-            <div className="flex flex-row max-md:flex-col justify-between max-lg:gap-6 gap-10 max-md:gap-4 h-[90%] w-[90%] relative animate-fadeInRight bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] custom-shape overflow-hidden before:skew-30! before:-top-30!">
+            <div className="relative flex h-[min(92dvh,1000px)] w-[min(94vw,1440px)] flex-col overflow-hidden bg-white shadow-[0_0_10px_rgba(0,0,0,0.4)] animate-fadeInRight custom-shape before:skew-30! before:-top-30!">
 
                 <button
                     type="button"
@@ -193,8 +206,9 @@ const PortfoliosModal = React.memo(({
                     <CgClose size={25}/>
                 </button>
 
-                {/* Left Content */}
-                <div className="flex-1 flex h-full flex-col max-h-[calc(100%-100px)] max-md:max-h-full pb-6 justify-between px-4 overflow-hidden overflow-y-auto shadow-[0_0_10px] shadow-gray-400">
+                <div className="flex min-h-0 min-w-0 flex-1 flex-row gap-8 max-md:flex-col max-md:gap-4">
+                    {/* Left Content */}
+                    <div className="flex min-h-0 min-w-0 flex-1 flex-col justify-between overflow-x-hidden overflow-y-auto overscroll-contain px-5 shadow-[0_0_10px] shadow-gray-300 max-md:max-h-[56%] max-md:flex-none">
                     <div className="flex-1">
                         <div id="portfolio-dialog-title" className="p-6 pb-5 flex items-center justify-center">
                             <WordAnimation 
@@ -229,29 +243,29 @@ const PortfoliosModal = React.memo(({
                                 </div>
                             </Swiper>
                         </div>
-                        <div className="mt-8">
-                            <h4 className="text-lg font-medium text-gray-600">Short description:</h4>
-                            <p className="text-gray-500 text-base">{description}</p>
+                        <div className="mt-7 rounded-xl border border-gray-200 bg-gray-50 p-5">
+                            <h4 className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">Short description</h4>
+                            <p className="text-base leading-7 text-gray-700">{description}</p>
                         </div>
                     </div>
                     <div className="mt-8">
-                        <h4 className="text-xl font-medium text-gray-600 w-fit mb-2">Technologies used:</h4>
+                        <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">Technologies used</h4>
                         <div
                             onMouseEnter={pauseAutoplay}
                             onMouseLeave={startAutoplay}
                         >
                             <Swiper
                                 slidesPerView={2}
-                                spaceBetween={10}
+                                spaceBetween={12}
                                 autoplay={{ delay: 3000, disableOnInteraction: true }}
                                 onSwiper={handleSwiperInit}
                                 modules={[Autoplay]}
                                 breakpoints={{
                                     768: {
-                                        slidesPerView: 3
+                                        slidesPerView: 3,
                                     }
                                 }}
-                                className="w-auto"
+                                className="w-full"
                             >
                                 {techSlides}
                             </Swiper>
@@ -259,14 +273,18 @@ const PortfoliosModal = React.memo(({
                     </div>
                 </div>
 
-                {/* Right Content */}
-                <div className="flex-1 h-full max-h-[calc(100%-100px)] max-md:max-h-full shadow-[0_0_10px] shadow-gray-400 px-4 overflow-hidden min-md:overflow-y-auto">
-                    <div className="max-md:h-full max-md:max-h-[calc(100%-100px)] max-md:overflow-y-auto">
-                        <h4 className="text-xl font-medium text-gray-600 w-fit mb-2 mt-4">Case Study:</h4>
-                        <div 
-                            className="text-gray-500 text-base portfolio-content" 
-                            dangerouslySetInnerHTML={{ __html: content }}
-                        />
+                    {/* Right Content */}
+                    <div className="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain px-6 shadow-[0_0_10px] shadow-gray-300 max-md:flex-1 max-md:px-5">
+                        <div className="mx-auto max-w-3xl py-7">
+                            <div className="mb-6 flex items-center justify-between gap-4 border-b border-gray-200 pb-4">
+                                <h4 className="text-xs font-semibold uppercase tracking-[0.16em] text-gray-500">Case study</h4>
+                                <span className="rounded-full border border-gray-200 px-3 py-1 text-xs font-medium text-gray-600">{object.type} project</span>
+                            </div>
+                            <div
+                                className="portfolio-content text-base leading-7 text-gray-600"
+                                dangerouslySetInnerHTML={{ __html: caseStudyContent }}
+                            />
+                        </div>
                     </div>
                 </div>
 

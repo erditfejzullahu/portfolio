@@ -3,15 +3,17 @@ import Hamburger from "hamburger-react"
 import { useEffect, useRef, useState, useCallback } from "react"
 import FullscreenMenu from "./FullscreenMenu"
 import gsap from "gsap"
-import { useAppDispatch } from "@/store"
+import { RootState, useAppDispatch } from "@/store"
 import { setTopbarVisible } from "@/store/topbarSlice"
 import { setOverflowHidden } from "@/store/overflowSlice"
+import { useSelector } from "react-redux"
 
 const Topbar = () => {
     const dispatch = useAppDispatch();
     const [isOpened, setIsOpened] = useState(false);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isTopbarVisible, setIsTopbarVisible] = useState(true);
+    const hasOpenDialog = useSelector((state: RootState) => state.topbar.activeDialogs.length > 0);
 
     const topbarContainerRef = useRef<HTMLDivElement>(null);
     const navBar = useRef<HTMLDivElement>(null);
@@ -74,12 +76,12 @@ const Topbar = () => {
     // GSAP animation for topbar visibility
     useEffect(() => {
         gsap.to(topbarContainerRef.current, {
-            y: isTopbarVisible ? 0 : -100,
-            opacity: isTopbarVisible ? 1 : 0,
+            y: isTopbarVisible && !hasOpenDialog ? 0 : -100,
+            opacity: isTopbarVisible && !hasOpenDialog ? 1 : 0,
             duration: 0.2
         });
         dispatch(setTopbarVisible(isTopbarVisible));
-    }, [isTopbarVisible, dispatch]);
+    }, [isTopbarVisible, hasOpenDialog, dispatch]);
 
     return (
         <>
