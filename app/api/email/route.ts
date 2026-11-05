@@ -8,13 +8,15 @@ import { contactFormSchema } from "@/lib/validations";
 
 const MAX_BODY_BYTES = 12 * 1024;
 const SENDER_EMAIL = "murrizisolutions@gmail.com";
+const redisUrl = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
+const redisToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const rateLimiter =
   process.env.NODE_ENV === "production" &&
-  process.env.UPSTASH_REDIS_REST_URL &&
-  process.env.UPSTASH_REDIS_REST_TOKEN
+  redisUrl &&
+  redisToken
     ? new Ratelimit({
-        redis: Redis.fromEnv(),
+        redis: new Redis({ url: redisUrl, token: redisToken }),
         limiter: Ratelimit.slidingWindow(5, "10 m"),
         analytics: false,
         prefix: "portfolio:contact",

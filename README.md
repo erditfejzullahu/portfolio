@@ -22,11 +22,11 @@ The email endpoint uses Brevo SMTP and a Redis-backed Upstash rate limit. Config
 
 ```env
 BREVO_SECRET_KEY=your-brevo-smtp-key
-UPSTASH_REDIS_REST_URL=https://your-database.upstash.io
-UPSTASH_REDIS_REST_TOKEN=your-upstash-token
+KV_REST_API_URL=https://your-database.upstash.io
+KV_REST_API_TOKEN=your-upstash-token
 ```
 
-The contact endpoint allows five submissions per IP address every ten minutes. In production, it fails closed if the Upstash credentials are missing or the rate-limit service is unavailable. The production reverse proxy must overwrite `x-real-ip` or `x-forwarded-for` with the visitor's actual IP address.
+The contact endpoint allows five submissions per IP address every ten minutes. `KV_REST_API_TOKEN` must be a writable token; the read-only token cannot update rate-limit counters. The endpoint also accepts `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` for local or existing deployments. In production, it fails closed if the Upstash credentials are missing or the rate-limit service is unavailable. The production reverse proxy must overwrite `x-real-ip` or `x-forwarded-for` with the visitor's actual IP address.
 
 ## Checks and production
 
