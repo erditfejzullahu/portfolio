@@ -54,13 +54,11 @@ const Contact = () => {
   });
 
   // Memoize the phone change handler
-  const handlePhoneChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
+  const handlePhoneChange = useCallback((input: string) => {
     const foundCode = Object.keys(countryPhoneCodes).find(code => input.startsWith(code));
     const countryCode = foundCode ? countryPhoneCodes[foundCode] : null;
     setFlagEmoji(countryCode ? getFlagEmoji(countryCode) : null);
-    form.setValue("phoneNumber", input);
-  }, [form, getFlagEmoji]);
+  }, [getFlagEmoji]);
 
   // Memoize the form submission handler
   const onSubmit = useCallback(async (data: z.infer<typeof contactFormSchema>) => {
@@ -72,12 +70,22 @@ const Contact = () => {
       });
 
       if (response.ok) {
+        form.reset();
+        setFlagEmoji(null);
         toast.success("Email sent successfully", {
           description: "I will contact you ASAP!"
         });
+      } else if (response.status === 429) {
+        toast.error("Please wait before submitting again", {
+          description: "Try again in a few minutes.",
+        });
+      } else if (response.status === 503) {
+        toast.error("Contact form temporarily unavailable", {
+          description: "Please try again later.",
+        });
       } else {
         toast.error("Something went wrong", {
-          description: "Please try again!",
+          description: "Please check your details and try again.",
         });
       }
     } catch (error) {
@@ -86,7 +94,7 @@ const Contact = () => {
         description: "Please check your connection and try again.",
       });
     }  
-  }, []);
+  }, [form]);
 
   // Memoize the read more toggle handler
   const toggleReadMore = useCallback(() => {
@@ -188,7 +196,7 @@ const Contact = () => {
 
       {/* Form */}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10" id='contact-form'>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mt-10" id='contact-form' noValidate>
           <div className="flex flex-row gap-2 max-md:flex-col max-md:gap-4">
             <FormField 
               control={form.control}
@@ -197,7 +205,9 @@ const Contact = () => {
                 <FormItem className="flex-1">
                   <FormLabel>Full Name</FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input
+                      autoComplete="name"
+                      maxLength={100}
                       className="max-md:placeholder:text-sm max-md:text-sm" 
                       placeholder='Enter your full name' 
                       {...field}
@@ -218,7 +228,10 @@ const Contact = () => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input 
+                      autoComplete="email"
                       className='max-md:placeholder:text-sm max-md:text-sm' 
+                      type="email"
+                      maxLength={254}
                       placeholder='Enter your email' 
                       {...field}
                     />
@@ -242,6 +255,7 @@ const Contact = () => {
                   <FormControl>
                     <Input 
                       className="max-md:placeholder:text-sm max-md:text-sm" 
+                      maxLength={150}
                       placeholder='Enter your subject' 
                       {...field}
                     />
@@ -269,7 +283,7 @@ const Contact = () => {
                         {...field} 
                         onChange={(event) => {
                           field.onChange(event);
-                          handlePhoneChange(event);
+                          handlePhoneChange(event.target.value);
                         }}
                       />
                     </FormControl>
@@ -291,7 +305,7 @@ const Contact = () => {
                 <FormControl>
                   <RadioGroup
                     onValueChange={field.onChange}
-                    defaultValue={field.value}
+                    value={field.value}
                     className="grid grid-cols-2 items-center mt-2 max-[558px]:grid-cols-1"
                   >
                     {RADIO_OPTIONS.map((option) => (
@@ -320,6 +334,7 @@ const Contact = () => {
                   <Textarea 
                     className="max-md:placeholder:text-sm max-md:text-sm" 
                     rows={5} 
+                    maxLength={5000}
                     placeholder='Tell me about your project, goals, and any specific requirements you have.' 
                     {...field}
                   />
@@ -327,10 +342,13 @@ const Contact = () => {
                 <FormDescription className='max-md:text-sm'>
                   Provide as many details as possible about your project, timeline, and expectations. This helps me understand your needs better and offer the best possible solution.
                 </FormDescription>
+                <FormMessage />
               </FormItem>
             )}
           />
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' disabled={form.formState.isSubmitting}>
+            {form.formState.isSubmitting ? "Sending..." : "Submit"}
+          </Button>
         </form>
       </Form>
     </div>

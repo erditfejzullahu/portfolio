@@ -16,6 +16,18 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## Contact form configuration
+
+The email endpoint uses Brevo SMTP and a Redis-backed Upstash rate limit. Configure these variables in `.env.local` for local development and in the production environment:
+
+```env
+BREVO_SECRET_KEY=your-brevo-smtp-key
+UPSTASH_REDIS_REST_URL=https://your-database.upstash.io
+UPSTASH_REDIS_REST_TOKEN=your-upstash-token
+```
+
+The contact endpoint allows five submissions per IP address every ten minutes. In production, it fails closed if the Upstash credentials are missing or the rate-limit service is unavailable. The production reverse proxy must overwrite `x-real-ip` or `x-forwarded-for` with the visitor's actual IP address.
+
 ## Checks and production
 
 ```bash
