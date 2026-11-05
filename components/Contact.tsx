@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useCallback, useMemo, useEffect } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import WordAnimation from './WordAnimation'
 import Link from 'next/link'
 import { CgArrowBottomLeft } from 'react-icons/cg'
@@ -32,31 +32,6 @@ const RADIO_OPTIONS = [
 const Contact = () => {
   const [flagEmoji, setFlagEmoji] = useState<string | null>(null);
   const [readMore, setReadMore] = useState<boolean>(true);
-
-  useEffect(() => {
-    const contactSection = document.getElementById('contact-me');
-    if (!contactSection) return;
-
-    let hasEnteredContact = false;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        hasEnteredContact = true;
-        return;
-      }
-
-      if (hasEnteredContact && window.location.hash === '#contact-me') {
-        window.history.replaceState(
-          window.history.state,
-          '',
-          `${window.location.pathname}${window.location.search}`
-        );
-        hasEnteredContact = false;
-      }
-    });
-
-    observer.observe(contactSection);
-    return () => observer.disconnect();
-  }, []);
 
   // Memoize the flag emoji function
   const getFlagEmoji = useCallback((countryCode: string | null) => {
@@ -190,6 +165,18 @@ const Contact = () => {
         ))}
         <p className={`animate-fadeInRight text-base text-gray-600 ${readMore ? "max-md:line-clamp-3" : ""}`}>
           Have a product idea, a web or mobile platform to build, or an existing system that needs new features? Tell me what you&apos;re aiming for. I can help shape the technical approach and build the frontend, backend, and integrations to support it. Share your goals, timeline, and constraints in the form, and I&apos;ll follow up to discuss next steps.
+        </p>
+        <p className="mt-4 text-base text-gray-600">
+          Want to build something fast? Try the{" "}
+          <Link
+            href="https://nismacloud.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-[#850E35] underline underline-offset-2"
+          >
+            NismaCloud Builder
+          </Link>
+          .
         </p>
         <button 
           onClick={toggleReadMore} 

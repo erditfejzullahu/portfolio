@@ -146,8 +146,8 @@ const PortfolioSlider = () => {
                                                     src={item.image} 
                                                     alt={item.title} 
                                                     className="size-20 object-cover rounded-lg mx-auto shadow-lg shadow-[rgba(0,0,0,0.2)]"
-                                                    // width={80}
-                                                    // height={80}
+                                                    width={80}
+                                                    height={80}
                                                     loading={index < 4 ? 'eager' : 'lazy'}
                                                 />
                                             </div>

@@ -1,6 +1,7 @@
 "use client"
 import { images } from '@/constants'
 import Image from 'next/image'
+import Link from 'next/link'
 import React, { memo, useState, useCallback } from 'react'
 
 const AboutText = () => {
@@ -34,6 +35,8 @@ const AboutText = () => {
                 I build with TypeScript and JavaScript across React, Next.js, Vue.js, React Native, and Expo. My backend work includes Node.js, Express.js, NestJS, .NET, PHP, and WordPress, with data and realtime systems such as PostgreSQL, SQL Server, MySQL, MongoDB, Redis, Firebase, Supabase, and Socket.IO.
                 <br /><br />
                 I build retrieval-augmented generation (RAG) systems with pgvector and OpenAI, and integrate large language models (LLMs) into useful web-product workflows.
+                <br /><br />
+                I&apos;m also the creator of <Link href="https://nismacloud.com" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#850E35] underline underline-offset-2">NismaCloud</Link>, a cloud platform with a builder for creating projects quickly.
                 <br /><br />
                 I take products through CI/CD with GitHub Actions and Python deployment tooling, package and deploy with Docker and Docker Swarm, then host and maintain them on bare-metal Linux servers with Cloudflare Tunnel for secure public access.
                 <br /><br />

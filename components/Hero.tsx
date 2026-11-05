@@ -45,7 +45,7 @@ const Hero = () => {
                     <Link aria-label='Email me' className="text-black font-normal link-element" href="mailto:erditfejzullahu45@gmail.com">erditfejzullahu45@gmail.com</Link>
                 </div>
             </div>
-            <div className="flex-[0.8] max-sm:flex-none relative h-fit rounded-2xl shadow-[0_0_20px_rgba(0,0,0,0.2)]" style={{background: "rgba(0,0,0,0.05)"}}>
+            <div className="flex-[0.8] max-sm:flex-none relative h-fit">
                 <div className="absolute animate-heroImg top-0 left-0 z-20 rounded-lg rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.broCoding} alt='web developer' className="size-28"/>
                 </div>
@@ -59,7 +59,7 @@ const Hero = () => {
                 <div className="absolute animate-heroImg -top-6 -right-12 z-20 rounded-lg -rotate-20 shadow-xl hover:translate-x-6 transition-all px-8 py-2" style={{background: "rgba(0,0,0,0.05)"}}>     
                     <Image src={images.maintenance} alt='web developer' className="size-28"/>
                 </div>
-                <Image src={images.erditi} priority={true} fetchPriority="high" className="object-cover object-center max-h-[500px] max-lg:max-h-[400px] max-lg:object-[100%_30%]! max-md:max-h-[300px] max-sm:max-h-[300px] max-sm:object-[20%_40%]! max-[300px]:object-center! translate-y-2 rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]" alt="Erdit Fejzullahu, full-stack software engineer" />
+                <Image src={images.erditi} priority={true} fetchPriority="high" className="object-contain object-center max-h-[500px] max-lg:max-h-[340px] max-md:max-h-[260px] translate-y-4 rounded-lg shadow-[2px_2px_10px_rgba(0,0,0,0.4)]" alt="Erdit Fejzullahu, full-stack software engineer" style={{background: "#f9f9f9"}}/>
             </div>
 
         </div>

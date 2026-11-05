@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" fill="none">
+  <defs>
+    <linearGradient id="background" x1="120" y1="80" x2="1090" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111A53"/>
+      <stop offset="1" stop-color="#5145E8"/>
+    </linearGradient>
+    <linearGradient id="route" x1="520" y1="265" x2="950" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#B9F2FF"/>
+      <stop offset="1" stop-color="#72D6FF"/>
+    </linearGradient>
+    <filter id="shadow" x="581" y="185" width="558" height="476" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="780" rx="38" fill="url(#background)"/>
+  <circle cx="1018" cy="93" r="205" fill="#7970FF" fill-opacity=".26"/>
+  <circle cx="142" cy="746" r="305" fill="#08B6C5" fill-opacity=".13"/>
+  <path d="M75 598C224 473 294 535 403 400c97-120 147-173 248-106 102 68 135 183 261 153 89-21 124-96 214-75" stroke="#fff" stroke-opacity=".08" stroke-width="2"/>
+  <path d="M78 647c143-83 216-4 322-120 102-112 151-173 251-107 100 67 139 174 258 145 94-23 131-93 213-77" stroke="#fff" stroke-opacity=".07" stroke-width="2"/>
+  <text x="84" y="125" fill="#BDEFFF" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" letter-spacing="5">MOBILITY, CONNECTED</text>
+  <text x="80" y="247" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="104" font-weight="700" letter-spacing="-5">niso</text>
+  <text x="86" y="296" fill="#D6DCFF" font-family="Arial, Helvetica, sans-serif" font-size="25">A smarter way to move around Kosovo.</text>
+  <rect x="84" y="352" width="220" height="56" rx="28" fill="#fff" fill-opacity=".13" stroke="#fff" stroke-opacity=".22"/>
+  <circle cx="112" cy="380" r="6" fill="#8CE9FF"/>
+  <text x="132" y="388" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="600">Rider + driver app</text>
+  <ellipse cx="861" cy="647" rx="227" ry="30" fill="#090D35" fill-opacity=".5" filter="url(#shadow)"/>
+  <rect x="704" y="148" width="308" height="516" rx="45" fill="#111425" stroke="#fff" stroke-opacity=".45" stroke-width="3"/>
+  <rect x="719" y="165" width="278" height="482" rx="34" fill="#F8FAFF"/>
+  <rect x="805" y="178" width="106" height="17" rx="8.5" fill="#111425"/>
+  <text x="746" y="232" fill="#171B36" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Where to?</text>
+  <rect x="741" y="252" width="234" height="54" rx="15" fill="#EEF1FF"/>
+  <circle cx="765" cy="279" r="7" fill="#5145E8"/>
+  <text x="784" y="285" fill="#555A77" font-family="Arial, Helvetica, sans-serif" font-size="14">Prishtina, Kosovo</text>
+  <path d="M735 342h246v248H735z" fill="#E8F0F0"/>
+  <path d="M750 356l84 29 48-23 99 40M741 444l76-19 35 44 117-30M754 561l67-74 62 22 92-82M794 351v237M884 349v243M955 355v229M740 408h241M738 510h244" stroke="#C9D7D9" stroke-width="5" stroke-linecap="round"/>
+  <path d="M774 528c54-21 27-93 92-94 44-1 35 48 81 36 25-7 32-37 47-51" stroke="url(#route)" stroke-width="9" stroke-linecap="round" stroke-dasharray="1 1"/>
+  <circle cx="774" cy="528" r="13" fill="#5145E8" stroke="#fff" stroke-width="5"/>
+  <circle cx="994" cy="419" r="13" fill="#12B8C2" stroke="#fff" stroke-width="5"/>
+  <rect x="756" y="561" width="206" height="62" rx="18" fill="#fff"/>
+  <circle cx="782" cy="592" r="14" fill="#5145E8"/>
+  <path d="M774 596h16l-2-8h-12l-2 8Z" fill="#fff"/>
+  <text x="807" y="588" fill="#171B36" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">Your ride is on its way</text>
+  <text x="807" y="608" fill="#73788E" font-family="Arial, Helvetica, sans-serif" font-size="12">Live trip updates</text>
+</svg>

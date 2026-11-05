@@ -129,8 +129,8 @@ const SideProjects = React.memo(() => {
         <Image 
           src={item.image} 
           alt={item.title}
-          // width={96}
-          // height={96}
+          width={96}
+          height={96}
           className={`object-cover rounded-lg shadow-xl shadow-gray-500 size-24 border transition-all max-[1820px]:min-w-[80px] max-[1820px]:max-h-[80px]`} 
         />
       </div>

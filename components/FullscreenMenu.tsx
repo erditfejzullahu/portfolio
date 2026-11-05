@@ -33,7 +33,7 @@ const FullscreenMenu = ({isOpened = false, onClose}: {isOpened: boolean, onClose
                     <ul className="flex flex-col gap-6 h-full max-[380px]:justify-end max-[380px]:gap-3 max-[380px]:flex-row max-[380px]:flex-wrap">
                         {social.map((link) => (
                            <li key={link.label} className="link-element">
-                                <Link aria-label='Social Links' target='_blank' rel="noopener noreferrer" href={link.url} className={`text-xl max-[500px]:text-base font-light hover:text-2xl transition-all text-underline ${link.label === "Murrizi" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
+                                <Link aria-label={link.label} target='_blank' rel="noopener noreferrer" href={link.url} className={`text-xl max-[500px]:text-base font-light hover:text-2xl transition-all text-underline ${link.label === "NismaCloud" ? "text-[#850E35]! font-semibold" : ""}`}>{link.label}</Link>
                            </li> 
                         ))}
                     </ul>

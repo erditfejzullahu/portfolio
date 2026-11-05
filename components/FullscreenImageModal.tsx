@@ -35,8 +35,8 @@ const FullscreenImageModal = () => {
                       src={image}
                       alt={`fullscreen-${index}`}
                       className="object-contain size-fit! m-auto max-h-full! max-w-full! shadow-md"
-                      // width={1200}  // Added for better performance
-                      // height={800}  // Added for better performance
+                      width={1200}
+                      height={780}
                       priority={index === imageIndex} // Only prioritize the initial slide
                   />
               </div>

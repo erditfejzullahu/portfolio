@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" fill="none">
+  <defs>
+    <linearGradient id="background" x1="90" y1="0" x2="1100" y2="780" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071A3B"/>
+      <stop offset=".58" stop-color="#174A88"/>
+      <stop offset="1" stop-color="#3D8ED1"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="712" y1="150" x2="1024" y2="433" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F9FDFF"/>
+      <stop offset="1" stop-color="#BFE6FF"/>
+    </linearGradient>
+    <filter id="shadow" x="481" y="160" width="675" height="569" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="780" rx="38" fill="url(#background)"/>
+  <circle cx="1040" cy="89" r="205" fill="#71C3FF" fill-opacity=".14"/>
+  <circle cx="73" cy="743" r="290" fill="#1AC7D2" fill-opacity=".11"/>
+  <path d="M0 594c155-116 246-38 363-101 134-72 206-24 304 19s190 67 304-13c81-57 142-59 229-22v303H0V594Z" fill="#fff" fill-opacity=".035"/>
+  <text x="82" y="116" fill="#A7DAFF" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="5">YOUR BUSINESS, ONLINE</text>
+  <path d="M105 235c3-30 28-53 58-53 18 0 34 8 45 22 11-27 37-45 68-45 42 0 76 33 77 75 28 1 50 24 50 52 0 29-24 53-53 53H156c-31 0-56-25-56-56 0-23 14-42 34-50Z" fill="url(#cloud)" fill-opacity=".94"/>
+  <path d="m193 264 23 23 49-54m-49 54h124" stroke="#1D62A5" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="83" y="400" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="69" font-weight="700" letter-spacing="-3">NismaCloud</text>
+  <text x="86" y="451" fill="#D5EBFF" font-family="Arial, Helvetica, sans-serif" font-size="23">One platform to build and grow business websites.</text>
+  <rect x="84" y="501" width="214" height="54" rx="27" fill="#fff" fill-opacity=".13" stroke="#fff" stroke-opacity=".25"/>
+  <circle cx="111" cy="528" r="6" fill="#82E8F0"/>
+  <text x="132" y="536" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600">Multi-tenant SaaS</text>
+  <ellipse cx="829" cy="682" rx="251" ry="31" fill="#00102C" fill-opacity=".5" filter="url(#shadow)"/>
+  <rect x="556" y="190" width="552" height="463" rx="24" fill="#101D35" stroke="#fff" stroke-opacity=".4" stroke-width="3"/>
+  <rect x="573" y="207" width="518" height="427" rx="15" fill="#F5F7FB"/>
+  <path d="M573 222a15 15 0 0 1 15-15h488a15 15 0 0 1 15 15v31H573v-31Z" fill="#fff"/>
+  <circle cx="594" cy="231" r="5" fill="#F38181"/>
+  <circle cx="612" cy="231" r="5" fill="#F5C367"/>
+  <circle cx="630" cy="231" r="5" fill="#6BCB91"/>
+  <rect x="664" y="221" width="259" height="17" rx="8.5" fill="#EDF1F7"/>
+  <rect x="593" y="274" width="124" height="338" rx="12" fill="#fff"/>
+  <rect x="610" y="291" width="76" height="11" rx="5.5" fill="#DCE5F0"/>
+  <rect x="610" y="324" width="91" height="35" rx="9" fill="#E8F1FF"/>
+  <rect x="621" y="336" width="61" height="10" rx="5" fill="#5086CC"/>
+  <rect x="610" y="376" width="71" height="10" rx="5" fill="#E4EAF2"/>
+  <rect x="610" y="401" width="82" height="10" rx="5" fill="#E4EAF2"/>
+  <rect x="610" y="426" width="58" height="10" rx="5" fill="#E4EAF2"/>
+  <rect x="610" y="470" width="74" height="10" rx="5" fill="#E4EAF2"/>
+  <rect x="610" y="495" width="89" height="10" rx="5" fill="#E4EAF2"/>
+  <text x="743" y="299" fill="#223149" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">Website editor</text>
+  <rect x="742" y="319" width="325" height="151" rx="11" fill="#E5F0F6"/>
+  <rect x="742" y="319" width="325" height="151" rx="11" fill="#1C4772" fill-opacity=".12"/>
+  <circle cx="1003" cy="354" r="31" fill="#F1C985"/>
+  <path d="M763 446c27-57 49-79 85-65 38 15 57 42 93 29 37-14 65-48 103-37 8 2 15 6 23 11v86H763v-24Z" fill="#73A99D"/>
+  <rect x="768" y="341" width="150" height="17" rx="8.5" fill="#fff"/>
+  <rect x="768" y="368" width="116" height="10" rx="5" fill="#fff" fill-opacity=".72"/>
+  <rect x="768" y="393" width="83" height="28" rx="14" fill="#fff"/>
+  <rect x="742" y="489" width="153" height="111" rx="11" fill="#fff"/>
+  <rect x="910" y="489" width="157" height="111" rx="11" fill="#fff"/>
+  <rect x="755" y="501" width="127" height="58" rx="7" fill="#DDECE9"/>
+  <rect x="923" y="501" width="131" height="58" rx="7" fill="#E8E7F5"/>
+  <rect x="755" y="570" width="87" height="9" rx="4.5" fill="#D7DEE8"/>
+  <rect x="923" y="570" width="102" height="9" rx="4.5" fill="#D7DEE8"/>
+  <rect x="1008" y="272" width="59" height="24" rx="12" fill="#176FC0"/>
+  <text x="1021" y="288" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700">PUBLISH</text>
+</svg>

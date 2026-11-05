@@ -2,6 +2,7 @@ import { DynamicAbout, DynamicContactForm, DynamicFullscreenImageModal, DynamicP
 import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import ScrollToTop from '@/components/ScrollToTop'
+import SectionHashCleanup from '@/components/SectionHashCleanup'
 import React from 'react'
 
 const page = async () => {
@@ -26,6 +27,7 @@ const page = async () => {
     </section>
     </main>
     <ScrollToTop />
+    <SectionHashCleanup />
     <Footer />
     </>
   )

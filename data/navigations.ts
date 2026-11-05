@@ -58,7 +58,7 @@ export const social: Link[] = [
     {label: "GitHub", url: "https://github.com/erditfejzullahu"},
     {label: "Meta", url: "https://www.facebook.com/erditf"},
     {label: "Instagram", url: "https://www.instagram.com/erdit.fejzullahu/"},
-    {label: "Murrizi", url: "https://murrizi.org"}
+    {label: "NismaCloud", url: "https://nismacloud.com"}
 ]
 
 export const projects: Project[] = [
@@ -131,6 +131,106 @@ export const professionalSlider: Slider[] = [
 ]
 
 export const PersonalPortfolioSlider: PortfolioSliderInterface[] = [
+    {
+        title: "Niso — Mobility & Ride-Hailing Platform",
+        description: "A connected mobility platform for Kosovo, with dedicated rider and driver apps, live ride coordination, location-aware navigation, and an operations dashboard. I worked across the mobile experience, backend services, and public web presence.",
+        image: "/projects/niso-cover.svg",
+        images: ["/projects/niso-cover.svg"],
+        content: `
+            <h3>Building a complete ride experience</h3>
+            <p>I helped build Niso as more than a booking screen: it connects passengers, drivers, real-time trip information, and the operational tools needed to run a mobility service. I developed the product across its mobile app, API, and public website.</p>
+
+            <h4>Passenger and driver mobile experiences</h4>
+            <ul>
+                <li>Built separate passenger and driver journeys, including sign-in, profiles, ride requests, ride history, driver tools, and reviews.</li>
+                <li>Implemented connected-ride flows with live location sharing, navigation, trip status, and route visualization.</li>
+                <li>Added driver availability, active routes, regular clients, fixed fares, statistics, and passenger ride-request management.</li>
+                <li>Integrated device location, push notifications, secure local storage, biometric authentication, and media handling.</li>
+            </ul>
+
+            <h4>Real-time services and platform operations</h4>
+            <ul>
+                <li>Built NestJS API modules for authentication, passengers, drivers, rides, payments, finances, reviews, notifications, and administration.</li>
+                <li>Added Socket.IO communication for live ride and conversation updates, with Redis-backed coordination.</li>
+                <li>Implemented background processing for notifications, driver ratings, ride-route data, and media scanning.</li>
+                <li>Created web-based administrative tools for platform statistics, users, finances, ride operations, and content management.</li>
+                <li>Built the public Niso site with product storytelling, app information, reviews, contact forms, SEO metadata, and rate-limited form submissions.</li>
+            </ul>
+
+            <h4>Technology stack</h4>
+            <ul>
+                <li><strong>Mobile:</strong> React Native, Expo, Expo Router, TypeScript, NativeWind, React Query, Zustand.</li>
+                <li><strong>Mapping and device capabilities:</strong> MapLibre, device geolocation, OSRM routing, Nominatim place lookup, Expo Location and Notifications.</li>
+                <li><strong>Backend:</strong> NestJS, Node.js, TypeScript, Prisma, PostgreSQL, Redis, BullMQ, Socket.IO.</li>
+                <li><strong>Web:</strong> Next.js, React, Tailwind CSS, Supabase, Upstash Redis, GSAP.</li>
+                <li><strong>Infrastructure and supporting services:</strong> AWS S3-compatible object storage, Nodemailer, Zod, and Axios.</li>
+            </ul>
+        `,
+        type: "Mobile",
+        technologies: [
+            { image: images.reactnative, name: "React Native" },
+            { image: images.expo, name: "Expo" },
+            { image: images.typescript, name: "TypeScript" },
+            { image: images.nestjs, name: "NestJS" },
+            { image: images.nextjs, name: "Next.js" },
+            { image: images.postgresql, name: "PostgreSQL" },
+            { image: images.prisma, name: "Prisma" },
+            { image: images.redis, name: "Redis" },
+            { image: images.socketio, name: "Socket.IO" },
+            { image: images.supabase, name: "Supabase" },
+            { image: images.tailwind, name: "Tailwind CSS / NativeWind" },
+            { image: images.gsap, name: "GSAP" },
+        ],
+    },
+    {
+        title: "NismaCloud — Multi-Tenant Website Builder",
+        description: "A SaaS platform that lets businesses create, publish, and manage localized websites from one workspace. I built across the visual editor, reusable template system, business modules, tenant platform, and production infrastructure.",
+        image: "/projects/nismacloud-cover.svg",
+        images: ["/projects/nismacloud-cover.svg"],
+        content: `
+            <h3>Turning a website builder into a business platform</h3>
+            <p>I developed NismaCloud as a multi-tenant website-building platform: each business can create and manage its own public site, while the platform provides reusable templates, configurable business features, billing, and centralized administration.</p>
+
+            <h4>What I built</h4>
+            <ul>
+                <li>Created workspace and project flows for configuring sites, pages, sections, themes, navigation, SEO, previews, publishing, and custom domains.</li>
+                <li>Built a visual editing experience and a reusable template system with contracts, plugins, provisioning, rendering, and collections for different business needs.</li>
+                <li>Implemented localized public websites and content tools, including CMS collections, blogs, forms, newsletters, notifications, email settings, and QR codes.</li>
+                <li>Developed optional business workflows for product catalogs and orders, bookings and scheduling, fleet reservations, property inquiries, invoicing, and data exports.</li>
+                <li>Integrated AI-assisted content and localization features, documentation answers backed by vector search, and Elasticsearch catalog search.</li>
+                <li>Built tenant membership, platform administration, Clerk authentication, Paddle subscriptions, billing transactions, plan entitlements, and usage quotas.</li>
+                <li>Added administration for users, tenants, projects, domains, support tickets, audit activity, email logs, analytics, storage, and system status.</li>
+                <li>Set up a production-oriented deployment workflow using containers, signed releases, monitoring, backups, validation, and recovery tooling.</li>
+            </ul>
+
+            <h4>Technology stack</h4>
+            <ul>
+                <li><strong>Monorepo and language:</strong> npm workspaces, Turborepo, TypeScript.</li>
+                <li><strong>Frontend:</strong> Next.js, React, Tailwind CSS, shadcn/ui, TanStack Query, Zustand, Tiptap.</li>
+                <li><strong>API and data:</strong> NestJS, REST, PostgreSQL, pgvector, Prisma, PgBouncer.</li>
+                <li><strong>Queues, cache, search, and realtime:</strong> Redis, BullMQ, Elasticsearch, Socket.IO.</li>
+                <li><strong>Integrations:</strong> Clerk, Paddle, OpenRouter, Cloudflare R2, SMTP, Cap CAPTCHA, ClamAV.</li>
+                <li><strong>Deployment and quality:</strong> Docker Compose, Docker Swarm, Cloudflare Tunnel, GitHub Actions, Prometheus, Grafana, pgBackRest, restic, ESLint, Prettier, Jest, Testing Library, Node.js test runner, and Python deployment tests.</li>
+            </ul>
+        `,
+        type: "Web",
+        technologies: [
+            { image: images.nextjs, name: "Next.js" },
+            { image: images.react, name: "React" },
+            { image: images.typescript, name: "TypeScript" },
+            { image: images.tailwind, name: "Tailwind CSS" },
+            { image: images.nestjs, name: "NestJS" },
+            { image: images.postgresql, name: "PostgreSQL + pgvector" },
+            { image: images.prisma, name: "Prisma" },
+            { image: images.redis, name: "Redis / BullMQ" },
+            { image: images.elasticsearch, name: "Elasticsearch" },
+            { image: images.socketio, name: "Socket.IO" },
+            { image: images.docker, name: "Docker" },
+            { image: images.cloudflare, name: "Cloudflare" },
+            { image: images.githubActions, name: "GitHub Actions" },
+            { image: images.python, name: "Python" },
+        ],
+    },
     {
         title: "ShokuMesimit – Advanced Learning & Social Platform",
         description: "ShokuMesimit is a powerful learning and social engagement platform designed to provide an immersive educational experience for users. Built using Expo (React Native) for mobile, Vue.js for CMS management, and .NET for backend",

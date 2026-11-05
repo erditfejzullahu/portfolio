@@ -192,7 +192,12 @@ body {
 
 html {
   scroll-behavior: smooth;
-  overflow-x:hidden;
+  overflow-x: hidden;
+}
+
+#skills,
+#about {
+  scroll-margin-top: -2rem;
 }
 
 .topbar-bg::after {
