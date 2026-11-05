@@ -310,7 +310,15 @@ html {
   pointer-events: none;
   transform: translate(-50%, -50%);
   transition: transform 0.1s ease-out;
-  z-index: 100;
+  z-index: 2147483647 !important;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
 }
 
 .custom-shape {
